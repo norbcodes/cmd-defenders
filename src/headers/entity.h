@@ -1,5 +1,6 @@
 #pragma once
 #include "node.h"
+#include "tower.h"
 
 /*
 This file contains the Enemy class and functions for entity handling from entity.cpp.
@@ -20,3 +21,5 @@ struct Enemy
         */
     }
 };
+
+void HurtEntity(Tower* attacker, Enemy* target);
