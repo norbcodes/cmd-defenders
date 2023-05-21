@@ -17,5 +17,3 @@ struct RNG
             return generator() % limit;
         }
 };
-
-RNG Global_RNG = RNG();  // Global RNG engine

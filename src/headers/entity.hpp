@@ -1,6 +1,5 @@
 #pragma once
 #include "node.hpp"
-#include "tower.hpp"
 
 /*
 This file contains the Enemy class and functions for entity handling from entity.cpp.
@@ -40,14 +39,12 @@ struct Enemy
         if (this->x - this->move_to->x == 0)
         {
             // Enemy and Node X is same: vertical movement
-            this->y = this->y + this->speed;
+            this->y += (this->y - this->move_to->y < 0) ? this->speed : -this->speed;
         }
         if (this->y - this->move_to->y == 0)
         {
             // Enemy and Node Y is same: horizontal movement
-            this->x = this->x + this->speed;
+            this->x += (this->x - this->move_to->x < 0) ? this->speed : -this->speed;
         }
     }
 };
-
-void HurtEntity(Tower* attacker, Enemy* target);

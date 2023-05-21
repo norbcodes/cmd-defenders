@@ -2,6 +2,8 @@
 #include "headers/entity.hpp"
 #include "headers/rng.hpp"
 
+extern RNG Global_RNG;
+
 void HurtEntity(Tower* attacker, Enemy* target)
 {
     int total_dmg = attacker->dmg;

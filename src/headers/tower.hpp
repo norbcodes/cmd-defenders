@@ -32,3 +32,5 @@ struct Tower
         /*Not yet implemented*/
     }
 };
+
+void HurtEntity(Tower* attacker, Enemy* target);
