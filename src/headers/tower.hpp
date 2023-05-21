@@ -1,5 +1,5 @@
 #pragma once
-#include "entity.h"
+#include "entity.hpp"
 
 /*
 This file contains the Tower class and functions from tower.cpp.

@@ -1,6 +1,6 @@
 #pragma once
-#include "node.h"
-#include "tower.h"
+#include "node.hpp"
+#include "tower.hpp"
 
 /*
 This file contains the Enemy class and functions for entity handling from entity.cpp.

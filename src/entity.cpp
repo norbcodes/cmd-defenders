@@ -1,5 +1,5 @@
-#include "headers/tower.h"
-#include "headers/entity.h"
+#include "headers/tower.hpp"
+#include "headers/entity.hpp"
 
 void HurtEntity(Tower* attacker, Enemy* target)
 {
