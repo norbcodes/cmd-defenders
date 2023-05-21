@@ -17,4 +17,9 @@ struct Node
         this->link = next_node;
     }
 
+    Node* GetNext()
+    {
+        return link;
+    }
+
 };

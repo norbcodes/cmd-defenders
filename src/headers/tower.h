@@ -1,4 +1,5 @@
 #pragma once
+#include "entity.h"
 
 /*
 This file contains the Tower class and functions from tower.cpp.
@@ -24,5 +25,10 @@ struct Tower
         /*
         Still gotta type out the Tower types..
         */
+    }
+
+    void PointAt(Enemy* target)
+    {
+        /*Not yet implemented*/
     }
 };

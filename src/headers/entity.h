@@ -10,6 +10,7 @@ struct Enemy
 {
     char x;
     char y;
+    Node* move_to;  // The current node the entity is walking to.
     float speed;
     int health;
     char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser
@@ -19,6 +20,12 @@ struct Enemy
         /*
         Still gotta write out all the enemy types...
         */
+    }
+
+    void UpdateNode()
+    {
+        // ONLY RUN THIS when we are standing directly on top of the move_to node!!
+        this->move_to = this->move_to->GetNext();
     }
 };
 
