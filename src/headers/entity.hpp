@@ -8,10 +8,10 @@ This file contains the Enemy class and functions for entity handling from entity
 
 struct Enemy
 {
-    char x;
-    char y;
+    float x;
+    float y;
     Node* move_to;  // The current node the entity is walking to.
-    float speed;
+    float speed;  // Map units to move after each second.
     int health;
     char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser
 
@@ -26,6 +26,27 @@ struct Enemy
     {
         // ONLY RUN THIS when we are standing directly on top of the move_to node!!
         this->move_to = this->move_to->GetNext();
+    }
+
+    void Move()
+    {
+        // check if not standing on move_to node
+        if (this->x == this->move_to->x && this->y == this->move_to->y)
+        {
+            this->UpdateNode();
+        }
+
+        // moving vertically or horizontally?
+        if (this->x - this->move_to->x == 0)
+        {
+            // Enemy and Node X is same: vertical movement
+            this->y = this->y + this->speed;
+        }
+        if (this->y - this->move_to->y == 0)
+        {
+            // Enemy and Node Y is same: horizontal movement
+            this->x = this->x + this->speed;
+        }
     }
 };
 

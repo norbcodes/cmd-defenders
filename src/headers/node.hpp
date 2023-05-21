@@ -21,5 +21,4 @@ struct Node
     {
         return this->link;
     }
-
 };

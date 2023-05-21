@@ -1,8 +1,15 @@
 #include "headers/tower.hpp"
 #include "headers/entity.hpp"
+#include "headers/rng.hpp"
 
 void HurtEntity(Tower* attacker, Enemy* target)
 {
     int total_dmg = attacker->dmg;
-    target->health = target->health - total_dmg;
+    
+    if (Global_RNG.Get(255) < attacker->crit_att_change)
+    {
+        total_dmg += Global_RNG.Get(5);
+    }
+
+    target->health -= total_dmg;
 }
