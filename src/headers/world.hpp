@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "node.hpp"
 #include "entity.hpp"
 #include "tower.hpp"
@@ -26,4 +27,4 @@ struct WorldClass
     }
 };
 
-WorldClass* Initialize();
+WorldClass* Initialize(std::string mapname);
