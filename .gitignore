@@ -1,3 +1,7 @@
 *.exe
 .vscode
 src/*.json
+map_designs
+map_designs/*
+
+# map_designs contains, well... designs of maps.
