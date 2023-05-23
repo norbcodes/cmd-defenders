@@ -1,6 +1,7 @@
 #include "headers/tower.hpp"
 #include "headers/entity.hpp"
 #include "headers/rng.hpp"
+#include "headers/projectile.hpp"
 
 extern RNG Global_RNG;
 
@@ -14,4 +15,9 @@ void HurtEntity(Tower* attacker, Enemy* target)
     }
 
     target->health -= total_dmg;
+}
+
+void ProjectileHurt(Projectile* attacker, Enemy* target)
+{
+    target->health -= attacker->dmg;
 }

@@ -6,12 +6,12 @@ A small class for decorations.
 
 struct Deco
 {
-    short x;
-    short y;
-    //char color;
-    char skin;  // an actuall ASCII char
+    char x;
+    char y;
+    //char color; ... errrrr probably not
+    char skin;  // an actual ASCII char
 
-    Deco(char skin, short X, short Y)
+    Deco(char skin, char X, char Y)
     {
         this->x = X;
         this->y = Y;
