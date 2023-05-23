@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "entity.hpp"
 
 /*
@@ -29,7 +30,9 @@ struct Tower
 
     void PointAt(Enemy* target)
     {
-        /*Not yet implemented*/
+        // listel i do not know much about trigonometry
+        // when playtesting comes i will fix this (if it even doesn't work in the first place)
+        this->angle = atan2(target->y, target->x);
     }
 };
 

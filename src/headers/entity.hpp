@@ -39,12 +39,12 @@ struct Enemy
         if (this->x - this->move_to->x == 0)
         {
             // Enemy and Node X is same: vertical movement
-            this->y += (this->y - this->move_to->y < 0) ? this->speed : -this->speed;
+            this->y += (this->y - this->move_to->y < 0) ? this->speed : -(this->speed);
         }
         if (this->y - this->move_to->y == 0)
         {
             // Enemy and Node Y is same: horizontal movement
-            this->x += (this->x - this->move_to->x < 0) ? this->speed : -this->speed;
+            this->x += (this->x - this->move_to->x < 0) ? this->speed : -(this->speed);
         }
     }
 };

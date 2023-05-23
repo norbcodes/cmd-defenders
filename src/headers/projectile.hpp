@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 #include "entity.hpp"
 #include "tower.hpp"
 
@@ -21,6 +22,19 @@ struct Projectile
         this->angle = angle;
         this->speed = speed;
         this->dmg = dmg + spawner->dmg;
+    }
+
+    void Advance()
+    {
+        /*
+        Despite the X,Y coords being float, they are rounded down and the
+        rounded versions are used to draw them on screen.
+        */
+
+        // FUTURE NORB: CHECK THIS BECAUSE IT MIGHT NOT FUCKING WORK.
+        // Also, does not account for collision checking, YET.
+        this->x += cosf(this->angle) * this->speed;
+        this->y += sinf(this->angle) * this->speed;
     }
 };
 

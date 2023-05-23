@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "headers/rng.hpp"
 
 RNG Global_RNG = RNG();

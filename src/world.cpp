@@ -1,5 +1,4 @@
 #include <string>
-
 #include "headers/world.hpp"
 
 WorldClass* Initialize(std::string mapname)

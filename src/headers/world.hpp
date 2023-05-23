@@ -1,11 +1,10 @@
 #pragma once
 
-#include <string>
-
 #define MAP_W 64
 #define MAP_H 29
 // temporary for now, need to get a font that has characters with width and height the same.
 
+#include <string>
 #include "node.hpp"
 #include "entity.hpp"
 #include "tower.hpp"
