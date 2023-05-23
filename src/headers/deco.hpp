@@ -9,7 +9,7 @@ struct Deco
     char x;
     char y;
     //char color; ... errrrr probably not
-    char skin;  // an actual ASCII char
+    char skin;  // an actual ASCII character
 
     Deco(char skin, char X, char Y)
     {
