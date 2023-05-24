@@ -12,7 +12,8 @@ struct Enemy
     Node* move_to;  // The current node the entity is walking to.
     float speed;  // Map units to move after each second.
     int health;
-    char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser
+    char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
+    char immunity;    // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
 
     Enemy(char type, Node* start_node)
     {

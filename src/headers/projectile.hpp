@@ -14,6 +14,7 @@ struct Projectile
     float angle;
     float speed;
     int dmg;  // projectile dmg + tower dmg = total dmg
+    char type; // 0 = Fire, 1 = Electricity, 2 = Laser
 
     Projectile(float x, float y, float angle, float speed, int dmg, Tower* spawner)
     {
@@ -22,6 +23,7 @@ struct Projectile
         this->angle = angle;
         this->speed = speed;
         this->dmg = dmg + spawner->dmg;
+        this->type = spawner->type;  // projectile inherits its spawner type.
     }
 
     void Advance()

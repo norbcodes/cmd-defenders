@@ -20,6 +20,8 @@ struct Tower
     if it's lower than this value, we deal additional damage.
     */
     int firerate;  // Amount of tics between shots
+    char type;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
+                // yup, this is where the enemy weakness and immune var come in play
 
     Tower(char type)
     {

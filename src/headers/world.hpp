@@ -30,4 +30,4 @@ struct WorldClass
     }
 };
 
-WorldClass* Initialize(std::string mapname);
+WorldClass InitializeWorld(std::string mapname);
