@@ -16,7 +16,7 @@ WorldClass InitializeWorld(std::string mapname)
     {
         if (std::stoi(mapname) >= 0 && std::stoi(mapname) <= 19)
         {
-            MapData = main_maps[std::stol(mapname)];
+            MapData = main_maps[std::stoi(mapname)];
         }
     }
     catch (std::invalid_argument){}  // do nothing.
