@@ -12,8 +12,12 @@ WorldClass InitializeWorld(std::string mapname)
 
     nlohmann::json MapData;
 
-    if (std::stol(mapname) >= 0 && std::stol(mapname) <= 19)
+    try
     {
-        MapData = main_maps[std::stol(mapname)];
+        if (std::stoi(mapname) >= 0 && std::stoi(mapname) <= 19)
+        {
+            MapData = main_maps[std::stol(mapname)];
+        }
     }
+    catch (std::invalid_argument){}  // do nothing.
 }
