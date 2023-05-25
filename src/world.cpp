@@ -1,4 +1,6 @@
 #include <string>
+#include <iostream>
+#include <fstream>
 #include "headers/world.hpp"
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/maps.hpp"
@@ -19,5 +21,40 @@ WorldClass InitializeWorld(std::string mapname)
             MapData = main_maps[std::stoi(mapname)];
         }
     }
-    catch (std::invalid_argument){}  // do nothing.
+    catch (const std::invalid_argument&)
+    {
+        // mapname is not a number -> custom map detected
+        std::ifstream CustomMap("./Custom_Content" + mapname);
+        MapData = nlohmann::json::parse(CustomMap);
+    }
+
+    WorldClass t_World;  // t_ prefix for "temporary"
+
+    t_World.name = MapData["name"];
+
+    // Node loader
+    // NOTE: Run the LinkNodes() function to link the nodes together!
+
+    for (int i = 0; i != MapData["nodes"]["node_count"]; i++)
+    {
+        int x = MapData["nodes"][std::to_string(i)]["x"];
+        int y = MapData["nodes"][std::to_string(i)]["y"];
+        Node t_Node;
+        t_Node.x = x; t_Node.y = y;
+        t_World.ai_nodes[i] = t_Node;  // insert node
+    }
+
+    // Deco loader
+
+    for (int i = 0; i != MapData["deco"]["deco_count"]; i++)
+    {
+        int x = MapData["deco"][std::to_string(i)]["x"];
+        int y = MapData["deco"][std::to_string(i)]["y"];
+        std::string skin = MapData["deco"][std::to_string(i)]["skin"];
+        Deco t_Deco;
+        t_Deco.x = x; t_Deco.y = y; t_Deco.skin = skin;
+        t_World.decorations[i] = t_Deco;
+    }
+
+    return t_World;
 }

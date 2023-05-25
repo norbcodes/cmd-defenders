@@ -16,6 +16,9 @@ struct Projectile
     int dmg;  // projectile dmg + tower dmg = total dmg
     char type; // 0 = Fire, 1 = Electricity, 2 = Laser
 
+    // Default constructor
+    Projectile() {}
+
     Projectile(float x, float y, float angle, float speed, int dmg, Tower* spawner)
     {
         this->x = x;

@@ -15,6 +15,9 @@ struct Enemy
     char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
     char immunity;    // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
 
+    // Default constructor
+    Enemy() {}
+
     Enemy(char type, Node* start_node)
     {
         /*
