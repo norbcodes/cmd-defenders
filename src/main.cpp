@@ -1,9 +1,6 @@
 #include <iostream>
-#include <windows.h>
-#include <winuser.h>
 #include "headers/rng.hpp"
 #include "headers/strings.hpp"
-#include "headers/ui.hpp"
 
 RNG Global_RNG = RNG();
 
