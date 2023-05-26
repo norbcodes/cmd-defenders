@@ -4,5 +4,6 @@ src/*.json
 map_designs
 map_designs/*
 *.o
+*.bat
 
 # map_designs contains, well... designs of maps.
