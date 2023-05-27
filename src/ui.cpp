@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#define LINESEP "-----------------------------------------------------------------------------------------\n"
+
 // A bunch of ANSI escape codes:
 // Reset all text attributes
 #define C_END       "\033[0m"
@@ -160,4 +162,9 @@ void RestoreCursor()
 void SwitchCursorVisibility(bool b)
 {
     std::cout << (b) ? SHOWC : HIDEC;
+}
+
+std::string LineSep()
+{
+    return LINESEP;
 }

@@ -13,3 +13,4 @@ std::string ResetColor();
 
 void RestoreCursor();
 void SwitchCursorVisibility(bool b);
+std::string LineSep();

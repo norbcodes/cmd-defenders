@@ -25,8 +25,9 @@
 
 <h1>Download?</h1>
 <p>
+  Please not this <b>project is still in development.</b>
   You can get the latest stable release <a href="https://github.com/norbcodes/cmd-defenders/releases">here</a>.
-  Or you can clone the <b>main</b> branch and compile the code yourself.
+  Or you can clone the <b>main</b> branch and compile the code yourself (might, or will be, unstable).
 </p>
 
 <h1>Custom Content</h1>
