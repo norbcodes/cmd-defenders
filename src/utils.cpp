@@ -15,20 +15,20 @@ short GetArrowKey(int arrow)
     switch (arrow)
     {
         case 0:
-            return GetAsyncKeyState(VK_UP) & 0x8000;
+            return GetAsyncKeyState(VK_UP);
         case 1:
-            return GetAsyncKeyState(VK_DOWN) & 0x8000;
+            return GetAsyncKeyState(VK_DOWN);
         case 2:
-            return GetAsyncKeyState(VK_RIGHT) & 0x8000;
+            return GetAsyncKeyState(VK_RIGHT);
         case 3:
-            return GetAsyncKeyState(VK_LEFT) & 0x8000;
+            return GetAsyncKeyState(VK_LEFT);
     }
     return -1;
 }
 
 short GetEnterKey()
 {
-    return GetAsyncKeyState(VK_RETURN) & 0x8000;
+    return GetAsyncKeyState(VK_RETURN);
 }
 
 void SetWindowSize(int x, int y)

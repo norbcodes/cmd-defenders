@@ -6,6 +6,17 @@
 
 RNG Global_RNG = RNG();
 
+//          KEYS
+static bool KEYS[5] = {
+    false,  // Enter
+    false,  // Up
+    false,  // Down
+    false,  // Right
+    false   // Left
+};
+// Global to only this source file.
+// OBVIOUSLY NORB
+
 void WelcomeMessage()
 {
     // A smol welcome screen :>
@@ -16,12 +27,17 @@ void WelcomeMessage()
     std::cout << LineSep();
     std::cout << "Press enter to continue...";
     std::cin.get();
+    while (GetEnterKey() % 0x8000)
+    {
+        continue;
+    }
 }
 
 void MainMenu()
 {
+    ClearConsole();
     int selection = 0;
-    while (!GetEnterKey())
+    while(!KEYS[0])
     {
         RestoreCursor();
         std::cout << LineSep();
@@ -32,21 +48,34 @@ void MainMenu()
         std::cout << ((selection == 2) ? "-> " + MM_CT : "   " + MM_CT ) << "\n";
         std::cout << ((selection == 3) ? "-> " + MM_EX : "   " + MM_EX ) << "\n";
         std::cout << LineSep();
-        if (GetArrowKey(0))
+
+        // Find the most significant bit and the least significant bit...
+        // Who the hell though this was a good idea
+        // got me suffering over here
+
+        KEYS[1] = (GetArrowKey(0) & 0x8000) == 0x8000;
+        KEYS[2] = (GetArrowKey(1) & 0x8000) == 0x8000;
+
+        if (KEYS[1])
         {
             selection -= 1;
             if (selection < 0)
             {
-                selection = 3;
+                selection = 0;
             }
-            selection %= 4;
         }
-        if (GetArrowKey(1))
+        if (KEYS[2])
         {
             selection += 1;
-            selection %= 4;
         }
-        Sleep(90);
+        selection %= 4;
+        KEYS[1] = false; KEYS[2] = false;
+        
+        Sleep(75);
+
+        // AAAAAA
+        // Degrading sanity
+        KEYS[0] = ((GetEnterKey() & 0x8000) == 0x8000) && ((GetEnterKey() & 0x0001) == 0);
     }
 }
 
@@ -54,6 +83,7 @@ int main()
 {
     ClearConsole();
     // i love mf366!!
+    WelcomeMessage();
     MainMenu();
     return 0;
 }
