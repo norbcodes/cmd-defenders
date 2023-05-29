@@ -20,7 +20,7 @@
     <li><b><i>Reverse!</b></i><br>Enemies start at the end of track.</li>
     <li><b><i>Sandbox</b></i><br>Unlimited money and lives. You can also spawn enemies at will.</li>
   </ul>
-  <blockquote>Note that at <i>Hard</i> and <i>CMD Pro</i> gamemodes, you will also recieve 1.5x and 2x more cash respectively.</blockquote>
+  <blockquote>Note that at <i>Hard</i> and <i>CMD Pro</i> gamemodes, you will also recieve 2x more cash.</blockquote>
 </p>
 
 <h1>Download?</h1>
