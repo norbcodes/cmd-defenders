@@ -1,5 +1,7 @@
 #include <iostream>
 #include "headers/rng.hpp"
+#include "headers/world.hpp"
+#include "headers/renderer.hpp"
 #include "headers/strings.hpp"
 #include "headers/utils.hpp"
 #include "headers/ui.hpp"
@@ -122,7 +124,9 @@ int main()
 {
     ClearConsole();
     // i love mf366!!
-    WelcomeMessage();
-    MainMenu();
+    //WelcomeMessage();
+    //MainMenu();
+    WorldClass MyGame = InitializeWorld("0");
+    GenerateCache(&MyGame);
     return 0;
 }
