@@ -1,8 +1,9 @@
 #pragma once
 
-void SetGameTitle();
+bool GetArrowKey(int arrow);
+bool GetEnterKey();
+bool GetNumKey(int which);
 void SetWindowSize(int x, int y);
-short GetArrowKey(int arrow);
+void SetGameTitle();
 void ClearConsole();
-short GetEnterKey();
 void Sleep(int ms);

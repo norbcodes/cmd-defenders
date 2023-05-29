@@ -69,7 +69,6 @@ std::string RedText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_RED;
         case 1:
@@ -81,7 +80,6 @@ std::string GreenText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_GREEN;
         case 1:
@@ -93,7 +91,6 @@ std::string OrangeText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_YELLOW;
         case 1:
@@ -105,7 +102,6 @@ std::string BlueText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_BLUE;
         case 1:
@@ -117,7 +113,6 @@ std::string MagentaText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_MAGENTA;
         case 1:
@@ -129,7 +124,6 @@ std::string CyanText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_CYAN;
         case 1:
@@ -141,7 +135,6 @@ std::string WhiteText(bool bright)
 {
     switch (bright)
     {
-        // 0 = false, 1 = true obviously
         case 0:
             return C_WHITE;
         case 1:
@@ -157,6 +150,21 @@ std::string ResetColor()
 void RestoreCursor()
 {
     std::cout << RESTOREC;
+}
+
+std::string BoldText()
+{
+    return S_BOLD;
+}
+
+std::string ItalicText()
+{
+    return S_ITALIC;
+}
+
+std::string Underline()
+{
+    return S_UNDER;
 }
 
 void SwitchCursorVisibility(bool b)

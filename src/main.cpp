@@ -17,65 +17,104 @@ static bool KEYS[5] = {
 // Global to only this source file.
 // OBVIOUSLY NORB
 
+// Declare stuff here
+void WelcomeMessage();
+void ConfirmExit();
+void MainMenu();
+
+void KeyGuard()
+{
+    // If anything is pressed down: do not let things happen.
+    while (GetEnterKey() || GetArrowKey(1) || GetArrowKey(2) || GetArrowKey(3) || GetArrowKey(4) || GetNumKey(1) || GetNumKey(2) || GetNumKey(3) || GetNumKey(4))
+    {
+        continue;
+    }
+}
+
 void WelcomeMessage()
 {
     // A smol welcome screen :>
     RestoreCursor();
-    std::cout << "NorbCodes presents...\n";
-    std::cout << LineSep();
-    std::cout << (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2);
-    std::cout << LineSep();
-    std::cout << "Press enter to continue...";
+    std::cout << ItalicText() + G_NORB + "\n\n";
+    std::cout << BoldText() + BlueText(true) + (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2 + '\n') + ResetColor();
+    std::cout << ItalicText() + G_NORB2 + '\n';
+    std::cout << BoldText() + U_ENTER + ResetColor();
     std::cin.get();
-    while (GetEnterKey() % 0x8000)
+}
+
+void ConfirmExit()
+{
+    ClearConsole();
+    RestoreCursor();
+    int selection;
+    std::cout << LineSep();
+    std::cout << ItalicText() + RedText(true) + MM_CEX + '\n' + ResetColor();
+    std::cout << BoldText() + "1. " + U_YES + '\n' + "2. " + U_NO + '\n' + ResetColor();
+    std::cout << LineSep();
+
+    KeyGuard();
+    while (true)
     {
-        continue;
+        if (GetNumKey(1))
+        {
+            /* 
+            Code to run when exiting... Nothing here yet... 
+            */
+            break;
+        }
+        if (GetNumKey(2))
+        {
+            MainMenu();
+            break;
+        }
     }
 }
 
 void MainMenu()
 {
     ClearConsole();
-    int selection = 0;
-    while(!KEYS[0])
+    RestoreCursor();
+    std::cout << LineSep();
+    std::cout << BlueText(true) + BoldText() + (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2) + ResetColor();
+    std::cout << LineSep();
+    std::cout << BoldText() + "1. " + MM_PLAY << "\n";
+    std::cout << "2. " + MM_OPT << "\n";
+    std::cout << "3. " + MM_CT << "\n";
+    std::cout << "4. " + MM_EX << "\n" + ResetColor();
+    std::cout << LineSep();
+
+    char selection;
+
+    KeyGuard();
+    while (true)
     {
-        RestoreCursor();
-        std::cout << LineSep();
-        std::cout << (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2);
-        std::cout << LineSep();
-        std::cout << ((selection == 0) ? "-> " + MM_PLAY : "   " + MM_PLAY ) << "\n";
-        std::cout << ((selection == 1) ? "-> " + MM_OPT : "   " + MM_OPT ) << "\n";
-        std::cout << ((selection == 2) ? "-> " + MM_CT : "   " + MM_CT ) << "\n";
-        std::cout << ((selection == 3) ? "-> " + MM_EX : "   " + MM_EX ) << "\n";
-        std::cout << LineSep();
-
-        // Find the most significant bit and the least significant bit...
-        // Who the hell though this was a good idea
-        // got me suffering over here
-
-        KEYS[1] = (GetArrowKey(0) & 0x8000) == 0x8000;
-        KEYS[2] = (GetArrowKey(1) & 0x8000) == 0x8000;
-
-        if (KEYS[1])
+        if (GetNumKey(1))
         {
-            selection -= 1;
-            if (selection < 0)
-            {
-                selection = 0;
-            }
+            selection = 1;
+            break;
         }
-        if (KEYS[2])
+        if (GetNumKey(2))
         {
-            selection += 1;
+            selection = 2;
+            break;
         }
-        selection %= 4;
-        KEYS[1] = false; KEYS[2] = false;
-        
-        Sleep(75);
+        if (GetNumKey(3))
+        {
+            selection = 3;
+            break;
+        }
+        if (GetNumKey(4))
+        {
+            selection = 4;
+            break;
+        }
+    }
 
-        // AAAAAA
-        // Degrading sanity
-        KEYS[0] = ((GetEnterKey() & 0x8000) == 0x8000) && ((GetEnterKey() & 0x0001) == 0);
+    switch (selection)
+    {
+        case 4:
+            ConfirmExit();
+            break;
     }
 }
 

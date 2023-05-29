@@ -10,25 +10,39 @@
 Functions for setting the console title and some more stuff.
 */
 
-short GetArrowKey(int arrow)
+bool GetArrowKey(int arrow)
 {
+    short key;
     switch (arrow)
     {
         case 0:
-            return GetAsyncKeyState(VK_UP);
+            key = GetAsyncKeyState(VK_UP);
         case 1:
-            return GetAsyncKeyState(VK_DOWN);
+            key = GetAsyncKeyState(VK_DOWN);
         case 2:
-            return GetAsyncKeyState(VK_RIGHT);
+            key = GetAsyncKeyState(VK_RIGHT);
         case 3:
-            return GetAsyncKeyState(VK_LEFT);
+            key = GetAsyncKeyState(VK_LEFT);
     }
-    return -1;
+    return key;
 }
 
-short GetEnterKey()
+bool GetEnterKey()
 {
     return GetAsyncKeyState(VK_RETURN);
+}
+
+bool GetNumKey(int which)
+{
+    // I know my own code BUT JUST IN CASE
+    if (which >= 0 && which <= 9)
+    {
+        
+        return GetAsyncKeyState(0x30 + which) || GetAsyncKeyState(0x60 + which);;
+        // According to Microsofts Virtual Key Codes...
+        // 0x30 <-> 0x39 are F1 <-> F9 keys
+        // 0x60 <-> 0x69 are numpad keys
+    }
 }
 
 void SetWindowSize(int x, int y)

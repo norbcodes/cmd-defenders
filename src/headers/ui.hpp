@@ -12,5 +12,8 @@ std::string WhiteText(bool bright);
 std::string ResetColor();
 
 void RestoreCursor();
+std::string BoldText();
+std::string ItalicText();
+std::string Underline();
 void SwitchCursorVisibility(bool b);
 std::string LineSep();
