@@ -16,7 +16,7 @@ struct NodeInfo
     bool LinkDirs[4] = {0, 0, 0, 0};
 };
 
-void GenerateCache(WorldClass* world)
+void GenerateCache(const WorldClass& world)
 {
     // Generate the RendererCache.
 

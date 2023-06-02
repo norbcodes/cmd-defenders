@@ -1,4 +1,4 @@
 #pragma once
 #include "world.hpp"
 
-void GenerateCache(WorldClass* world);
+void GenerateCache(const WorldClass& world);

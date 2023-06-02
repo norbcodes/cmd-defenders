@@ -41,4 +41,4 @@ struct Tower
     }
 };
 
-void HurtEntity(Tower* attacker, Enemy* target);
+void HurtEntity(Tower& attacker, Enemy& target);
