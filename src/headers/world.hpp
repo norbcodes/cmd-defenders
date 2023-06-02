@@ -49,7 +49,13 @@ struct WorldClass
                 continue;
             }
 
-            Ai_Nodes[i-1].link = &(Ai_Nodes[i]);
+            if (i == Ai_Nodes.size())
+            {
+                break;
+            }
+
+            Ai_Nodes[i-1].link_next = &(Ai_Nodes[i]);
+            Ai_Nodes[i+1].link_prev = &(Ai_Nodes[i]);
         }
     }
 };

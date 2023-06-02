@@ -8,13 +8,19 @@ struct Node
 {
     char x;
     char y;
-    Node* link;
+    Node* link_next;
+    Node* link_prev;
 
     // Default constructor
     Node() {}
 
     Node* GetNext()
     {
-        return this->link;
+        return this->link_next;
+    }
+
+    Node* GetPrevious()
+    {
+        return this->link_prev;
     }
 };
