@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include "headers/rng.hpp"
 #include "headers/world.hpp"
 #include "headers/renderer.hpp"
@@ -127,6 +129,6 @@ int main()
     //WelcomeMessage();
     //MainMenu();
     WorldClass MyGame = InitializeWorld("0");
-    GenerateCache(&MyGame);
+    GenerateCache(MyGame);
     return 0;
 }

@@ -1,7 +1,6 @@
-#include <string>
-#include <vector>
 #include <iostream>
-#include <algorithm>
+#include <string>
+#include <bits/stdc++.h>
 #include "headers/world.hpp"
 
 static std::string RendererCache[MAP_W * MAP_H];
@@ -16,7 +15,7 @@ struct NodeInfo
     bool LinkDirs[4] = {0, 0, 0, 0};
 };
 
-void GenerateCache(const WorldClass& world)
+void GenerateCache(WorldClass const& world)
 {
     // Generate the RendererCache.
 
