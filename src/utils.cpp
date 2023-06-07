@@ -5,10 +5,17 @@
 #include <strsafe.h>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 /*
 Functions for setting the console title and some more stuff.
 */
+
+COORD DefaultFontSize;
+COORD GameplayFontSize;
+
+// Gameplay font has to have all characters be exactly the same width and height.
+// DefaultFont is the console's font when it first loads.
 
 bool GetArrowKey(int arrow)
 {
@@ -45,12 +52,12 @@ bool GetNumKey(int which)
     }
 }
 
-void SetWindowSize(int x, int y)
+void SetWindowSize(int width, int height)
 {
     HWND Window = GetConsoleWindow();
     if (Window != NULL)
     { 
-        SetWindowPos(Window, 0, 0, 0, x, y, SWP_SHOWWINDOW|SWP_NOMOVE); 
+        SetWindowPos(Window, 0, 0, 0, width, height, SWP_SHOWWINDOW|SWP_NOMOVE); 
     }
 }
 

@@ -42,7 +42,7 @@ WorldClass InitializeWorld(std::string mapname)
         int y = MapData["nodes"][std::to_string(i)]["y"];
         Node t_Node;
         t_Node.x = x; t_Node.y = y;
-        t_World.Ai_Nodes.emplace_back(t_Node);  // insert node
+        t_World.Ai_Nodes.emplace_back();  // insert node
     }
 
     // Deco loader
@@ -54,7 +54,7 @@ WorldClass InitializeWorld(std::string mapname)
         std::string skin = MapData["deco"][std::to_string(i)]["skin"];
         Deco t_Deco;
         t_Deco.x = x; t_Deco.y = y; t_Deco.skin = skin;
-        t_World.Decorations.emplace_back(t_Deco);
+        t_World.Decorations.emplace_back();
     }
 
     return t_World;
