@@ -128,6 +128,7 @@ int main()
     // i love mf366!!
     //WelcomeMessage();
     //MainMenu();
+    std::cout << "Hi";
     WorldClass MyGame = InitializeWorld("0");
     GenerateCache(MyGame);
     return 0;

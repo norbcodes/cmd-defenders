@@ -14,12 +14,12 @@ struct Node
     // Default constructor
     Node() {}
 
-    Node* GetNext()
+    Node* GetNext() const
     {
         return this->link_next;
     }
 
-    Node* GetPrevious()
+    Node* GetPrevious() const
     {
         return this->link_prev;
     }

@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 #include <fstream>
 #include "headers/world.hpp"
 #include "headers/nlohmann_json/json.hpp"
