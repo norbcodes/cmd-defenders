@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "headers/world.hpp"
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/maps.hpp"
@@ -37,23 +38,23 @@ WorldClass InitializeWorld(std::string mapname)
 
     for (int i = 0; i != MapData["nodes"]["node_count"]; i++)
     {
-        int x = MapData["nodes"][std::to_string(i)]["x"];
-        int y = MapData["nodes"][std::to_string(i)]["y"];
-        Node t_Node;
-        t_Node.x = x; t_Node.y = y;
-        t_World.Ai_Nodes.emplace_back();  // insert node
+        unsigned int x = MapData["nodes"][std::to_string(i)]["x"];
+        unsigned int y = MapData["nodes"][std::to_string(i)]["y"];
+        t_World.Ai_Nodes.emplace_back(x, y);  // emplace node
+        // When you have a massive brain fart and forget that
+        // .emplace_back takes in the constructor arguments...
+        // What the fuck Norb?
     }
+    //std::cout << t_World.Ai_Nodes[0].x << " " << t_World.Ai_Nodes[0].y;
 
     // Deco loader
 
     for (int i = 0; i != MapData["deco"]["deco_count"]; i++)
     {
-        int x = MapData["deco"][std::to_string(i)]["x"];
-        int y = MapData["deco"][std::to_string(i)]["y"];
+        unsigned int x = MapData["deco"][std::to_string(i)]["x"];
+        unsigned int y = MapData["deco"][std::to_string(i)]["y"];
         std::string skin = MapData["deco"][std::to_string(i)]["skin"];
-        Deco t_Deco;
-        t_Deco.x = x; t_Deco.y = y; t_Deco.skin = skin;
-        t_World.Decorations.emplace_back();
+        t_World.Decorations.emplace_back(x, y, skin);
     }
 
     return t_World;
