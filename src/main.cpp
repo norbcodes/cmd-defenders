@@ -129,6 +129,7 @@ int main()
     //WelcomeMessage();
     //MainMenu();
     WorldClass MyGame = InitializeWorld("0");
+    MyGame.LinkNodes();
     GenerateCache(MyGame);
     return 0;
 }
