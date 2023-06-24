@@ -33,12 +33,12 @@ struct Tower
         */
     }
 
-    void PointAt(Enemy* target)
+    void PointAt(Enemy& target)
     {
         // listen i do not know much about trigonometry
         // when playtesting comes i will fix this (if it even doesn't work in the first place)
-        this->angle = atan2(target->y, target->x);
+        this->angle = atan2(target.y, target.x);
     }
 };
 
-void HurtEntity(Tower& attacker, Enemy& target);
+void HurtEntity(const Tower& attacker, Enemy& target);

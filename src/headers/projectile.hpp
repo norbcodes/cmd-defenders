@@ -19,14 +19,14 @@ struct Projectile
     // Default constructor
     Projectile() {}
 
-    Projectile(float x, float y, float angle, float speed, int dmg, Tower* spawner)
+    Projectile(float x, float y, float angle, float speed, int dmg, const Tower& spawner)
     {
         this->x = x;
         this->y = y;
         this->angle = angle;
         this->speed = speed;
-        this->dmg = dmg + spawner->dmg;
-        this->type = spawner->type;  // projectile inherits its spawner type.
+        this->dmg = dmg + spawner.dmg;
+        this->type = spawner.type;  // projectile inherits its spawner type.
     }
 
     void Advance()
@@ -43,4 +43,4 @@ struct Projectile
     }
 };
 
-void ProjectileHurt(Projectile* attacker, Enemy* target);
+void ProjectileHurt(const Projectile& attacker, Enemy& target);

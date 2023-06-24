@@ -62,4 +62,4 @@ struct WorldClass
     }
 };
 
-WorldClass InitializeWorld(std::string mapname);
+WorldClass InitializeWorld(const std::string& mapname);

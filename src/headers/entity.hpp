@@ -18,7 +18,7 @@ struct Enemy
     // Default constructor
     Enemy() {}
 
-    Enemy(char type, Node* start_node)
+    Enemy(char type, const Node& start_node)
     {
         /*
         Still gotta write out all the enemy types...

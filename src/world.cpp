@@ -5,7 +5,7 @@
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/maps.hpp"
 
-WorldClass InitializeWorld(std::string mapname)
+WorldClass InitializeWorld(const std::string& mapname)
 {
     /*
     If mapname is a number between 1 - 20, then we load main game maps.

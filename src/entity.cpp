@@ -6,7 +6,7 @@
 extern RNG Global_RNG;
 
 // entity hurt function
-void HurtEntity(Tower& attacker, Enemy& target)
+void HurtEntity(const Tower& attacker, Enemy& target)
 {
     if (attacker.type == target.immunity)
     {
@@ -29,7 +29,7 @@ void HurtEntity(Tower& attacker, Enemy& target)
 }
 
 // projectile hurt function
-void ProjectileHurt(Projectile& attacker, Enemy& target)
+void ProjectileHurt(const Projectile& attacker, Enemy& target)
 {
     if (attacker.type == target.immunity)
     {

@@ -1,7 +1,7 @@
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #include <winuser.h>
-#include <tchar.h>
+//#include <tchar.h>
 #include <strsafe.h>
 #include <chrono>
 #include <thread>
@@ -10,12 +10,6 @@
 /*
 Functions for setting the console title and some more stuff.
 */
-
-COORD DefaultFontSize;
-COORD GameplayFontSize;
-
-// Gameplay font has to have all characters be exactly the same width and height.
-// DefaultFont is the console's font when it first loads.
 
 bool GetArrowKey(int arrow)
 {
