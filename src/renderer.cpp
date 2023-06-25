@@ -4,13 +4,51 @@
 #include <bits/stdc++.h>
 #include "headers/world.hpp"
 #include "headers/node.hpp"
+#include "unordered_map"
 
 static char RendererCache[MAP_W * MAP_H];
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
+static std::unordered_map<unsigned char, char> CharacterMap;
+
+/*
+Each cell and their value:
+
+    8
+2   x   4
+    1 
+
+We check each adjacent tile and add their value to the final score.
+Then we use to score in a lookup table to get the character to render.
+
+*/
+
+static void InitializeMap()
+{
+    CharacterMap[0b00000000] = ' ';
+    CharacterMap[0b00000001] = '-';
+    CharacterMap[0b00000010] = '|';
+    CharacterMap[0b00000011] = '+';
+    CharacterMap[0b00000100] = '|';
+    CharacterMap[0b00000101] = '+';
+    CharacterMap[0b00000110] = '|';
+    CharacterMap[0b00000111] = '+';
+    CharacterMap[0b00001000] = '-';
+    CharacterMap[0b00001001] = '-';
+    CharacterMap[0b00001010] = '+';
+    CharacterMap[0b00001011] = '+';
+    CharacterMap[0b00001100] = '+';
+    CharacterMap[0b00001101] = '+';
+    CharacterMap[0b00001110] = '+';
+    CharacterMap[0b00001111] = '+';
+}
+
 void GenerateCache(const WorldClass& world)
 {
+    // Initialize the CharacterMap.
+    InitializeMap();
+
     // Generate the RendererCache.
 
     char TrackMarker = '@';  // doesn't have to be that, can be anything really
@@ -49,17 +87,13 @@ void GenerateCache(const WorldClass& world)
 
     for (int i = 0; i != MAP_W * MAP_H; i++)
     {
-        /*
-        Each cell and their value:
-        
-           8
-        2  x   4
-           1 
+        // Are we on the track?
+        // If yes, do not advance further.
+        if (RendererCache[i] == TrackMarker)
+        {
+            continue;
+        }
 
-        We check each adjacent tile and add their value to the final score.
-        Then we use to score in a lookup table to get the character to render.
-
-        */
         unsigned char score = 0b00000000;  // A value from 0 - 255.
 
         // Check tiles right below us and above us.
@@ -83,5 +117,16 @@ void GenerateCache(const WorldClass& world)
         {
             score = score | 0b00000100;
         }
+
+        RendererCache[i] = CharacterMap[score];
+    }
+
+    for (int i = 0; i != MAP_W * MAP_H; i++)
+    {
+        if (i % MAP_W * MAP_H == 0)
+        {
+            std::cout << "\n";
+        }
+        std::cout << RendererCache[i];
     }
 }
