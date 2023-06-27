@@ -25,6 +25,7 @@ static bool KEYS[5] = {
 void WelcomeMessage();
 void ConfirmExit();
 void MainMenu();
+// basically exists so that the assembler doesn't beat my ass
 
 void KeyGuard()
 {
@@ -52,8 +53,8 @@ void ConfirmExit()
     RestoreCursor();
     int selection;
     std::cout << LineSep();
-    std::cout << ItalicText() + RedText(true) + MM_CEX + '\n' + ResetColor();
-    std::cout << BoldText() + "1. " + U_YES + '\n' + "2. " + U_NO + '\n' + ResetColor();
+    std::cout << ItalicText() + RedText(true) + MM_CEX + "\n" + ResetColor();
+    std::cout << BoldText() + "1. " + U_YES + "\n" + "2. " + U_NO + "\n" + ResetColor();
     std::cout << LineSep();
 
     KeyGuard();
@@ -61,9 +62,11 @@ void ConfirmExit()
     {
         if (GetNumKey(1))
         {
+            ClearConsole();
             /* 
             Code to run when exiting... Nothing here yet... 
             */
+            std::cout << BlueText(false) << G_ENDSCREEN << ResetColor() << "\n";
             break;
         }
         if (GetNumKey(2))
@@ -79,12 +82,13 @@ void MainMenu()
     ClearConsole();
     RestoreCursor();
     std::cout << LineSep();
-    std::cout << BlueText(true) + BoldText() + (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2) + ResetColor();
+    std::cout << BlueText(true) + BoldText() + (G_TITLE_SMALL) + ResetColor();
     std::cout << LineSep();
     std::cout << BoldText() + "1. " + MM_PLAY << "\n";
     std::cout << "2. " + MM_OPT << "\n";
     std::cout << "3. " + MM_CT << "\n";
-    std::cout << "4. " + MM_EX << "\n" + ResetColor();
+    std::cout << "4. " + MM_HAND << "\n";
+    std::cout << "5. " + MM_EX << "\n" + ResetColor();
     std::cout << LineSep();
 
     char selection;
@@ -112,11 +116,17 @@ void MainMenu()
             selection = 4;
             break;
         }
+
+        if (GetNumKey(5))
+        {
+            selection = 5;
+            break;
+        }
     }
 
     switch (selection)
     {
-        case 4:
+        case 5:
             ConfirmExit();
             break;
     }
@@ -126,10 +136,7 @@ int main()
 {
     ClearConsole();
     // i love mf366!!
-    //WelcomeMessage();
-    //MainMenu();
-    WorldClass MyGame = InitializeWorld("0");
-    MyGame.LinkNodes();
-    GenerateCache(MyGame);
+    WelcomeMessage();
+    MainMenu();
     return 0;
 }

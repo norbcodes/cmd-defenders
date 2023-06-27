@@ -1,6 +1,6 @@
 *.exe
 .vscode
-src/*.json
+*.json
 map_designs
 map_designs/*
 *.o
