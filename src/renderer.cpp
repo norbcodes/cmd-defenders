@@ -21,7 +21,7 @@ Each cell and their value:
 
 We check each adjacent tile and add their value to the final score.
 Then we use to score in a lookup table to get the character to render.
-
+We also check corners, and if any is detected then the score is automatically 128.
 */
 
 static void InitializeMap()
@@ -42,6 +42,7 @@ static void InitializeMap()
     CharacterMap[0b00001101] = '+';
     CharacterMap[0b00001110] = '+';
     CharacterMap[0b00001111] = '+';
+    CharacterMap[0b10000000] = '+';
 }
 
 void GenerateCache(const WorldClass& world)
@@ -51,10 +52,11 @@ void GenerateCache(const WorldClass& world)
 
     // Generate the RendererCache.
 
-    char TrackMarker = '@';  // doesn't have to be that, can be anything really
+    const char TrackMarker = '@';  // doesn't have to be that, can be anything really
 
     memset(RendererCache, ' ', sizeof(unsigned char) * (MAP_W * MAP_H));
 
+    // Draw Track markers in the RendererCache
     for (int i = 0; i != world.Ai_Nodes.size(); i++)
     {
         const Node& current_node = world.Ai_Nodes[i];
@@ -96,37 +98,51 @@ void GenerateCache(const WorldClass& world)
 
         unsigned char score = 0b00000000;  // A value from 0 - 255.
 
-        // Check tiles right below us and above us.
+        // Check tile right below us.
         if (RendererCache[i + MAP_W] == TrackMarker)
         {
             score = score | 0b00000001;
         }
 
+        // Check tile right above us.
         if (RendererCache[i - MAP_W] == TrackMarker)
         {
             score = score | 0b00001000;
         }
 
-        // Check tiles on the right and left to us.
+        // Check tiles on the right to us.
         if (RendererCache[i - 1] == TrackMarker)
         {
             score = score | 0b00000010;
         }
 
+        // Check tiles on the left to us.
         if (RendererCache[i + 1] == TrackMarker)
         {
             score = score | 0b00000100;
         }
 
+        // Check corner tiles, all of them
+        if ((RendererCache[i + MAP_W + 1] == TrackMarker ||
+             RendererCache[i + MAP_W - 1] == TrackMarker ||
+             RendererCache[i - MAP_W + 1] == TrackMarker ||
+             RendererCache[i - MAP_W - 1] == TrackMarker) &&
+            score == 0)
+        {
+            score = score | 0b10000000;
+        }
+
         RendererCache[i] = CharacterMap[score];
     }
 
-    for (int i = 0; i != MAP_W * MAP_H; i++)
+    // All done, cache generated, now delete all track markers
+    for (int i = 0; i != (MAP_H * MAP_W); i++)
     {
-        if (i % MAP_W * MAP_H == 0)
+        if (RendererCache[i] == TrackMarker)
         {
-            std::cout << "\n";
+            RendererCache[i] = ' ';
         }
-        std::cout << RendererCache[i];
     }
+
+    // Cache generated. Can be used by the rendering function now.
 }
