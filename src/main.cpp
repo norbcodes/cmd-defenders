@@ -66,7 +66,12 @@ void ConfirmExit()
             /* 
             Code to run when exiting... Nothing here yet... 
             */
-            std::cout << BlueText(false) << G_ENDSCREEN << ResetColor() << "\n";
+            KeyGuard();
+            std::cout << BlueText(false) << G_ENDSCREEN << ResetColor() << "\n\n";
+            while (!GetEnterKey())
+            {
+                continue;
+            }
             break;
         }
         if (GetNumKey(2))
@@ -82,7 +87,26 @@ void MainMenu()
     ClearConsole();
     RestoreCursor();
     std::cout << LineSep();
-    std::cout << BlueText(true) + BoldText() + (G_TITLE_SMALL) + ResetColor();
+
+    std::string Color;
+
+    switch (Global_RNG.Get(3))
+    {
+        case 0:
+            Color = BlueText(true);
+            break;
+        case 1:
+            Color = GreenText(true);
+            break;
+        case 2:
+            Color = OrangeText(true);
+            break;
+        case 3:
+            Color = MagentaText(true);
+            break;
+    }
+
+    std::cout << Color + BoldText() + (G_TITLE_SMALL) + ResetColor();
     std::cout << LineSep();
     std::cout << BoldText() + "1. " + MM_PLAY << "\n";
     std::cout << "2. " + MM_OPT << "\n";
