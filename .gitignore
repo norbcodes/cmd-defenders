@@ -1,9 +1,7 @@
 *.exe
 .vscode
 *.json
-map_designs
-map_designs/*
+ideas
+ideas/*
 *.o
 *.bat
-
-# map_designs contains, well... designs of maps.

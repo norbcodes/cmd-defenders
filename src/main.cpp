@@ -26,6 +26,7 @@ void WelcomeMessage();
 void ConfirmExit();
 void MainMenu();
 // basically exists so that the assembler doesn't beat my ass
+// or the linker? I don't even know...
 
 void KeyGuard()
 {

@@ -11,6 +11,7 @@ struct Tower
     char x;
     char y;
     float angle;
+    int cost;
     // stats
     short radius;
     int dmg;
@@ -33,7 +34,7 @@ struct Tower
         */
     }
 
-    void PointAt(Enemy& target)
+    void PointAt(const Enemy& target)
     {
         // listen i do not know much about trigonometry
         // when playtesting comes i will fix this (if it even doesn't work in the first place)
