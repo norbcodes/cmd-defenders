@@ -8,6 +8,7 @@ extern std::string G_TITLE_SMALL;
 extern std::string G_ENDSCREEN;
 extern std::string G_NORB;
 extern std::string G_NORB2;
+extern std::string G_NORB_ALT;
 extern std::string U_YES;
 extern std::string U_NO;
 extern std::string U_ENTER;
@@ -29,3 +30,5 @@ extern std::string MM_GM4;
 extern std::string MM_GM5;
 extern std::string MM_GM6;
 extern std::string MM_RETURN;
+
+// So beautiful to look at...

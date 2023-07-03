@@ -112,7 +112,7 @@ static void MapSelection()
         std::cout << ResetColor();
         selection = -1;
         RestoreCursor();
-        std::cout << LineSep();
+        std::cout << WhiteText(false) << LineSep() << ResetColor();
 
         std::cout << BlueText(true) << BoldText() << ItalicText();
         std::cout << (gamemodeSelection ? MM_MESG2 : MM_MESG);
@@ -148,6 +148,7 @@ static void MapSelection()
         {
             std::cout << "9. " << MM_RETURN;
         }
+        std::cout << WhiteText(false) << LineSep() << ResetColor();
 
         KeyGuard();
         while (true)
@@ -182,6 +183,11 @@ static void MapSelection()
                 selection = 5;
                 break;
             }
+            if (GetNumKey(6))
+            {
+                selection = 6;
+                break;
+            }
             if (GetNumKey(9))
             {
                 selection = 9;
@@ -189,12 +195,12 @@ static void MapSelection()
             }
             if (GetArrowKey(2))
             {
-                selection = 6;
+                selection = 15;
                 break;
             }
             if (GetArrowKey(3))
             {
-                selection = 7;
+                selection = 16;
                 break;
             }
         }
@@ -210,7 +216,7 @@ static void MapSelection()
                         MainMenu();
                         break;
 
-                    case 6:
+                    case 15:
                         page += 1;
                         if (page > maxPages)
                         {
@@ -218,7 +224,7 @@ static void MapSelection()
                         }
                         break;
 
-                    case 7:
+                    case 16:
                         page -= 1;
                         if (page < 0)
                         {
@@ -276,7 +282,7 @@ static void MainMenu()
 {
     ClearConsole();
     RestoreCursor();
-    std::cout << LineSep();
+    std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     std::string Color;
 
@@ -297,13 +303,13 @@ static void MainMenu()
     }
 
     std::cout << Color + BoldText() + (G_TITLE_SMALL) + ResetColor();
-    std::cout << LineSep();
+    std::cout << BoldText() << ItalicText() << "\t\t\t\t\t" << G_NORB_ALT << "\n" << ResetColor();
     std::cout << BoldText() + "1. " + MM_PLAY << "\n";
     std::cout << "2. " + MM_OPT << "\n";
     std::cout << "3. " + MM_CT << "\n";
     std::cout << "4. " + MM_HAND << "\n";
     std::cout << "5. " + MM_EX << "\n" + ResetColor();
-    std::cout << LineSep();
+    std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     char selection;
 

@@ -43,6 +43,7 @@ std::string G_TITLE_SMALL = \
 
 std::string G_NORB      = "NorbCodes presents...";
 std::string G_NORB2     = "A tower defense game, entirely in the CMD. Coded by Norb (NorbCodes) using C++.";
+std::string G_NORB_ALT  = "A game by Norb.";
 
 std::string G_ENDSCREEN = \
 " \
@@ -77,7 +78,7 @@ std::string MM_MAP      = "Maps are in no particular order, difficulty may wary 
 std::string MM_ARROWS   = "Use right and left arrow keys to change page.";
 std::string MM_BACK     = "Go back";
 std::string MM_MESG2    = "Select a gamemode...   ";
-std::string MM_GM1      = "Standard\n";
+std::string MM_GM1      = "Standard\n   Default gamemode.";
 std::string MM_GM2      = "Hard\n   Enemies have 1.5x more health and move 2x faster.\n";
 std::string MM_GM3      = "CMD Pro\n   Enemies have 2x more health, speed and take 2 extra lives when they reach the end of the track.\n";
 std::string MM_GM4      = "Half Cash\n   Recieve half of the cash from enemy kills and wave bonuses.\n";
