@@ -18,12 +18,17 @@ bool GetArrowKey(int arrow)
     {
         case 0:
             key = GetAsyncKeyState(VK_UP);
+            break;
         case 1:
             key = GetAsyncKeyState(VK_DOWN);
+            break;
         case 2:
             key = GetAsyncKeyState(VK_RIGHT);
+            break;
         case 3:
             key = GetAsyncKeyState(VK_LEFT);
+            break;
+        // imagine forgetting to add break in a switch statement...
     }
     return key;
 }
