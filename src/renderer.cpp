@@ -26,6 +26,7 @@ We also check corners, and if any is detected then the score is automatically 12
 
 static void InitializeMap()
 {
+    CharacterMap.reserve(17);
     CharacterMap[0b00000000] = ' ';
     CharacterMap[0b00000001] = '-';
     CharacterMap[0b00000010] = '|';

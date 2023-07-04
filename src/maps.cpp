@@ -1,4 +1,5 @@
 #include "headers/nlohmann_json/json.hpp"
+#include "headers/maps.hpp"
 
 /*
 Main game maps are hardcoded here.
@@ -12,5 +13,5 @@ nlohmann::json test = nlohmann::json::parse("{\"name\": \"TEST\",\"nodes\":{\"no
 // MAP02 - Integer Overflow
 // ...
 
-nlohmann::json MainMaps[20] = {Map01, test};
+nlohmann::json MainMaps[MAPCOUNT] = {Map01, test};
 // Add all maps into a handy list :)

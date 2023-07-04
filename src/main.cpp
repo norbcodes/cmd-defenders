@@ -10,6 +10,7 @@
 #include "headers/ui.hpp"
 #include "headers/maps.hpp"
 #include "headers/nlohmann_json/json.hpp"
+#include "headers/save.hpp"
 
 RNG Global_RNG = RNG();
 
@@ -96,7 +97,7 @@ static void MapSelection()
 
     ClearConsole();
 
-    const double mapCount = floor(sizeof(MainMaps) / sizeof(nlohmann::json));
+    const double mapCount = floor(MAPCOUNT);
     const double mapCountQuarter = floor(mapCount / 4);
     int page = 0;
     const int maxPages = 3;
@@ -359,7 +360,10 @@ int main()
 {
     ClearConsole();
     // i love mf366!!
-    WelcomeMessage();
-    MainMenu();
+    //WelcomeMessage();
+    //MainMenu();
+    UserData myData;
+    myData.SetPath("test.json");
+    myData.Save();
     return 0;
 }
