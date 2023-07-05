@@ -149,6 +149,7 @@ struct GlobalData
         {
             if (!GlobalExists())
             {
+                CreateGlobalJson();
                 this->_InitValues();
             }
             else

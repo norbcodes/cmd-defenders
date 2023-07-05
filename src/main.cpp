@@ -361,8 +361,15 @@ static void MainMenu()
 int main()
 {
     ClearConsole();
+
+    // data/
+    // Unless it already exists, then do not do anything.
+    CreateSaveDir();
+
+    GlobalData GLOBAL();
+
     // i love mf366!!
+
     WelcomeMessage();
-    MainMenu();
     return 0;
 }
