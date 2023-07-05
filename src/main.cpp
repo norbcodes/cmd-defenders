@@ -134,22 +134,24 @@ static void MapSelection()
         }
         else
         {
+            std::cout << ResetColor() << BoldText();
             std::cout << "Gamemodes:" << "\n" << SEP << "\n";
-            std::cout << "1. " << MM_GM1 << "\n";
-            std::cout << "2. " << MM_GM2 << "\n";
-            std::cout << "3. " << MM_GM3 << "\n";
-            std::cout << "4. " << MM_GM4 << "\n";
-            std::cout << "5. " << MM_GM5 << "\n";
-            std::cout << "6. " << MM_GM6 << "";
-            std::cout << SEP << "\n\n";
+            std::cout << ResetColor() << ItalicText();
+            std::cout << WhiteText(true) << "1. " << MM_GM1 << "\n";
+            std::cout << OrangeText(false) << "2. " << MM_GM2 << "\n";
+            std::cout << RedText(true) << "3. " << MM_GM3 << "\n";
+            std::cout << GreenText(true) << "4. " << MM_GM4 << "\n";
+            std::cout << MagentaText(false) << "5. " << MM_GM5 << "\n";
+            std::cout << BoldText() << BlueText(false) << "6. " << MM_GM6 << ResetColor();
+            std::cout << BoldText() << SEP << "\n\n" << ResetColor();
         }
 
-        std::cout << BoldText() << WhiteText(true) << "0. " << MM_BACK << "\n";
+        std::cout << BoldText() << RedText(true) << "0. " << MM_BACK << "\n";
         if (gamemodeSelection)
         {
-            std::cout << "9. " << MM_RETURN;
+            std::cout << RedText(true) << "9. " << MM_RETURN << "\n";
         }
-        std::cout << WhiteText(false) << LineSep() << ResetColor();
+        std::cout << ResetColor() << WhiteText(false) << LineSep() << ResetColor();
 
         KeyGuard();
         while (true)
@@ -305,11 +307,11 @@ static void MainMenu()
 
     std::cout << Color + BoldText() + (G_TITLE_SMALL) + ResetColor();
     std::cout << BoldText() << ItalicText() << "\t\t\t\t\t" << G_NORB_ALT << "\n" << ResetColor();
-    std::cout << BoldText() + "1. " + MM_PLAY << "\n";
-    std::cout << "2. " + MM_OPT << "\n";
-    std::cout << "3. " + MM_CT << "\n";
-    std::cout << "4. " + MM_HAND << "\n";
-    std::cout << "5. " + MM_EX << "\n" + ResetColor();
+    std::cout << BoldText() + GreenText(true) + "1. " + MM_PLAY << "\n";
+    std::cout << OrangeText(false) <<"2. " + MM_OPT << "\n";
+    std::cout << MagentaText(true) <<"3. " + MM_CT << "\n";
+    std::cout << CyanText(false) << "4. " + MM_HAND << "\n";
+    std::cout << RedText(true) <<"5. " + MM_EX << "\n" + ResetColor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     char selection;
@@ -360,10 +362,7 @@ int main()
 {
     ClearConsole();
     // i love mf366!!
-    //WelcomeMessage();
-    //MainMenu();
-    UserData myData;
-    myData.SetPath("test.json");
-    myData.Save();
+    WelcomeMessage();
+    MainMenu();
     return 0;
 }

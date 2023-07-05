@@ -1,5 +1,8 @@
 #pragma once
 
+#define SAVEDIR             "./users/"
+#define GLOBALJSON          "./global.json"
+
 #include <fstream>
 #include <string>
 #include <unordered_map>
@@ -7,28 +10,37 @@
 #include "nlohmann_json/json.hpp"
 #include "maps.hpp"
 
-#define DEFAULT_USER "default_username"
+#define DEFAULT_USER        "default_username"
 // key identifiers
-#define GAMETIME "gametime"
-#define MAPCOMPL "map_completions"
-#define USER "username"
+#define GAMETIME            "gametime"
+#define MAPCOMPL            "map_completions"
+#define USER                "username"
+#define EXP                 "exp"
 
 /*
 
 Saving user data.
+Stuff like achievements, challenges, tower upgrades, map completion badges, loaded custom content...
 
-Stuff like achievements, challenges, tower upgrades, color palette, map completion badges, loaded custom content...
+Also saving and reading global.json
+Where global stuff is stored.
 
 */
 
 /*
-
-    TODO: Achievement and challenge saving
+    TODO: User data loading
+    TODO: Global data loading
+    TODO: Global data - custom color palette (if enabled)
+    TODO: Global data - Achievement and challenge saving
 
 */
 
 // I don't normally use private/public in code that is not gonna be used by anybody
 // But here it comes in handy
+
+// Also I know this can be easily cheated
+// But who cares? You get free software, you can do whatever the fuck you want with it.
+
 struct UserData
 {
     private:
@@ -39,6 +51,7 @@ struct UserData
         std::string UserName;
         std::unordered_map<int, unsigned char> MapCompletions;
         long long gametime;
+        long long exp;
 
         void _InitValues()
         {
@@ -47,10 +60,14 @@ struct UserData
             for (int i = 0; i != MAPCOUNT; i++)
             {
                 this->MapCompletions.emplace(i, 0b00000000);
+                // 0b00000000 is a number from 0 - 255
+                // With the last 5 bits mapping to: standard, hard, cmd pro, half cash, reverse
+                // from right to left, respectively.
             }
 
             this->gametime = 0;
             this->UserName = DEFAULT_USER;
+            this->exp = 0;
         }
 
         void _LoadValues()
@@ -105,3 +122,41 @@ struct UserData
             return this->path;
         }
 };
+
+bool GlobalExists();
+void CreateGlobalJson();
+
+struct GlobalData
+{
+    private:
+        std::string currentUser;
+        bool enableWelcomeScreen;
+
+        void _InitValues()
+        {
+            // Initialize internal variables same thing as in UserData
+            this->currentUser = "";  // empty for now
+            this->enableWelcomeScreen = true;
+        }
+
+        void _LoadValues()
+        {
+            // Load shit
+        }
+
+    public:
+        GlobalData()
+        {
+            if (!GlobalExists())
+            {
+                this->_InitValues();
+            }
+            else
+            {
+                this->_LoadValues();
+            }
+        }
+};
+
+bool SaveDirExists();
+void CreateSaveDir();
