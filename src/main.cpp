@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <memory>
 
 #include "headers/rng.hpp"
 #include "headers/world.hpp"
@@ -25,13 +26,6 @@ static bool KEYS[5] = {
 // Global to only this source file.
 // OBVIOUSLY NORB
 
-// Declare stuff here
-static void WelcomeMessage();
-static void ConfirmExit();
-static void MainMenu();
-// basically exists so that the assembler doesn't beat my ass
-// or the linker? I don't even know...
-
 static void KeyGuard()
 {
     // If anything is pressed down: do not let things happen.
@@ -52,7 +46,7 @@ static void WelcomeMessage()
     std::cin.get();
 }
 
-static void ConfirmExit()
+static void ConfirmExit(std::unique_ptr<GlobalData>& global)
 {
     ClearConsole();
     RestoreCursor();
@@ -68,26 +62,31 @@ static void ConfirmExit()
         if (GetNumKey(1))
         {
             ClearConsole();
-            /* 
-            Code to run when exiting... Nothing here yet... 
-            */
+
+            global.reset();
+
             KeyGuard();
-            std::cout << BlueText(false) << G_ENDSCREEN << ResetColor() << "\n\n";
-            while (!GetEnterKey())
-            {
-                continue;
-            }
-            break;
+            ClearConsole();
+            std::cout << BoldText() << BlueText(false) << G_ENDSCREEN << ResetColor() << '\n';
+
+            std::cout << "\033[8m";
+
+            // Why bother clearing stdin
+            // when you can sneakily hide it from the user ;)
+            std::string useless;
+            std::cin >> useless;
+            std::cout << useless << ResetColor();
+
+            exit(EXIT_SUCCESS);
         }
         if (GetNumKey(2))
         {
-            MainMenu();
             break;
         }
     }
 }
 
-static void MapSelection()
+static void MapSelection(int& param1, int& param2)
 {
     /*
     
@@ -216,7 +215,6 @@ static void MapSelection()
                 {
                     case 0:
                         inLoop = false;
-                        MainMenu();
                         break;
 
                     case 15:
@@ -251,7 +249,6 @@ static void MapSelection()
                 {
                     case 0:
                         inLoop = false;
-                        MainMenu();
                         break;
 
                     case 9:
@@ -273,15 +270,19 @@ static void MapSelection()
 
     if ( selectedMap != -1 && selectedGamemode != -1 )
     {
+        param1 = selectedMap;
+        param2 = selectedGamemode;
         /*
-
         StartGame(selectedMap, selectedGamemode)
-
         */
     }
+
+    param1 = -1;
+    param2 = -1;
+    // Means failure
 }
 
-static void MainMenu()
+static void MainMenu(int& param1)
 {
     ClearConsole();
     RestoreCursor();
@@ -314,7 +315,7 @@ static void MainMenu()
     std::cout << RedText(true) <<"5. " + MM_EX << "\n" + ResetColor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 
-    char selection;
+    int selection;
 
     KeyGuard();
     while (true)
@@ -347,6 +348,9 @@ static void MainMenu()
         }
     }
 
+    param1 = selection;
+
+    /*
     switch (selection)
     {
         case 1:
@@ -356,6 +360,7 @@ static void MainMenu()
             ConfirmExit();
             break;
     }
+    */
 }
 
 int main()
@@ -366,10 +371,42 @@ int main()
     // Unless it already exists, then do not do anything.
     CreateSaveDir();
 
-    GlobalData GLOBAL();
+    std::unique_ptr<GlobalData> GLOBAL = std::make_unique<GlobalData>();
 
     // i love mf366!!
 
-    WelcomeMessage();
+    if ( GLOBAL->Get_WS_option() )
+    {
+        WelcomeMessage();
+    }
+
+    // Calling functions from functions may inflate the call stack
+    // soooo let's not do that
+    while (true)
+    {
+        int MainMenuOption;
+        MainMenu(MainMenuOption);
+
+        switch (MainMenuOption)
+        {
+            case 1:
+                int selectedMap;
+                int selectedGamemode;
+                MapSelection(selectedMap, selectedGamemode);
+
+                if (selectedMap != -1 && selectedGamemode != -1)
+                {
+                    // Enter game!
+                    // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+                    // StartGame( selectedMap, selectedGamemode );
+                }
+                break;
+
+            case 5:
+                ConfirmExit(GLOBAL);
+                break;
+        }
+    }
     return 0;
 }

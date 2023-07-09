@@ -9,9 +9,17 @@ extern std::string G_ENDSCREEN;
 extern std::string G_NORB;
 extern std::string G_NORB2;
 extern std::string G_NORB_ALT;
+
 extern std::string U_YES;
 extern std::string U_NO;
 extern std::string U_ENTER;
+
+extern std::string USER_LINE1;
+extern std::string USER_LINE2;
+extern std::string USER_LINE3;
+extern std::string USER_WELC1;
+extern std::string USER_WELC2;
+
 extern std::string MM_PLAY;
 extern std::string MM_OPT;
 extern std::string MM_CT;

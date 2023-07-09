@@ -5,3 +5,5 @@ ideas
 ideas/*
 *.o
 *.bat
+users/
+global.json

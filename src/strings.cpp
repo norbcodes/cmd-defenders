@@ -66,6 +66,13 @@ std::string U_YES       = "Yes";
 std::string U_NO        = "No";
 std::string U_ENTER     = "Press enter to continue...";
 
+// prefix USER - UsernameScreen()
+std::string USER_LINE1  = "Hey, welcome to CMD Defenders!";
+std::string USER_LINE2  = "What would you like the game to call you?";
+std::string USER_LINE3  = "Please type in your username: ";
+std::string USER_WELC1  = "Amazing ";
+std::string USER_WELC2  = "! You may now play the game, have fun :D";
+
 // prefix MM - Main Menu      but tbh it's also used in other places
 std::string MM_PLAY     = "Play game";
 std::string MM_OPT      = "Options";

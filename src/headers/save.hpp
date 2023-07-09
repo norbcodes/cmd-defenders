@@ -17,6 +17,9 @@
 #define USER                "username"
 #define EXP                 "exp"
 
+#define CURRENTUSER         "current_user"
+#define WELCOMESCRN         "enable_welcome"
+
 /*
 
 Saving user data.
@@ -125,10 +128,13 @@ struct UserData
 
 bool GlobalExists();
 void CreateGlobalJson();
+void UsernameScreen(std::string& dest);
 
 struct GlobalData
 {
     private:
+        nlohmann::json parsed_json;
+
         std::string currentUser;
         bool enableWelcomeScreen;
 
@@ -141,7 +147,12 @@ struct GlobalData
 
         void _LoadValues()
         {
-            // Load shit
+            // Parse
+            this->parsed_json = nlohmann::json::parse( std::ifstream(GLOBALJSON) );
+
+            // Load into internal variables
+            this->currentUser = this->parsed_json[CURRENTUSER];
+            this->enableWelcomeScreen = this->parsed_json[WELCOMESCRN];
         }
 
     public:
@@ -151,11 +162,47 @@ struct GlobalData
             {
                 CreateGlobalJson();
                 this->_InitValues();
+                UsernameScreen( this->currentUser );
             }
             else
             {
                 this->_LoadValues();
             }
+        }
+
+        void Save()
+        {
+            this->parsed_json[CURRENTUSER] = this->currentUser;
+            this->parsed_json[WELCOMESCRN] = this->enableWelcomeScreen;
+
+            std::ofstream(GLOBALJSON) << this->parsed_json.dump(4, ' ', true);
+        }
+
+        ~GlobalData()
+        {
+            this->Save();  // B)
+        }
+
+        // Some getters and setters
+
+        void SetUser(const std::string& user)
+        {
+            this->currentUser = user;
+        }
+
+        std::string GetUser() const
+        {
+            return this->currentUser;
+        }
+
+        void Set_WS_option(bool enabled)
+        {
+            this->enableWelcomeScreen = enabled;
+        }
+
+        bool Get_WS_option() const
+        {
+            return this->enableWelcomeScreen;
         }
 };
 
