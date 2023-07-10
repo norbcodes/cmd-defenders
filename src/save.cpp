@@ -59,3 +59,9 @@ void UsernameScreen(std::string& dest)
 
     ClearConsole();
 }
+
+bool SaveFileExists(const std::string& filepath)
+{
+    std::ifstream FILE(SAVEDIR + filepath + ".json");
+    return FILE.good();
+}

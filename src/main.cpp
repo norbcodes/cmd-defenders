@@ -46,7 +46,7 @@ static void WelcomeMessage()
     std::cin.get();
 }
 
-static void ConfirmExit(std::unique_ptr<GlobalData>& global)
+static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<UserData>& user)
 {
     ClearConsole();
     RestoreCursor();
@@ -64,6 +64,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global)
             ClearConsole();
 
             global.reset();
+            user.reset();
 
             KeyGuard();
             ClearConsole();
@@ -367,11 +368,25 @@ int main()
 {
     ClearConsole();
 
-    // data/
+    // users/
     // Unless it already exists, then do not do anything.
     CreateSaveDir();
 
-    std::unique_ptr<GlobalData> GLOBAL = std::make_unique<GlobalData>();
+    std::unique_ptr<GlobalData> GLOBAL      = std::make_unique<GlobalData>();
+    std::unique_ptr<UserData>   USERDATA    = std::make_unique<UserData>();
+
+    std::cout << GLOBAL->GetUser();
+    std::cin.get();
+
+    if (!SaveFileExists(GLOBAL->GetUser()))
+    {
+        USERDATA->SetPath(GLOBAL->GetUser());
+        USERDATA->SetUsername(GLOBAL->GetUser());
+    }
+    else
+    {
+        USERDATA->LoadSave(GLOBAL->GetUser());
+    }
 
     // i love mf366!!
 
@@ -404,7 +419,7 @@ int main()
                 break;
 
             case 5:
-                ConfirmExit(GLOBAL);
+                ConfirmExit(GLOBAL, USERDATA);
                 break;
         }
     }

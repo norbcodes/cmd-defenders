@@ -44,6 +44,8 @@ Where global stuff is stored.
 // Also I know this can be easily cheated
 // But who cares? You get free software, you can do whatever the fuck you want with it.
 
+bool SaveFileExists(const std::string& filepath);
+
 struct UserData
 {
     private:
@@ -86,14 +88,16 @@ struct UserData
 
         UserData(const std::string& path)
         {
-            this->parsed_json = nlohmann::json::parse( std::ifstream(path) );
+            this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
             this->path = path;
             this->_LoadValues();
         }
 
         void LoadSave(const std::string& path)
         {
-            this->parsed_json = nlohmann::json::parse( std::ifstream(path) );
+            this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
+            this->path = path;
+            this->_LoadValues();
         }
 
         void Save()
@@ -110,7 +114,13 @@ struct UserData
             this->parsed_json[MAPCOMPL] = MapCompletionsObj;
             this->parsed_json[USER] = this->UserName;
 
-            std::ofstream(this->path) << this->parsed_json.dump(4, ' ', true);
+            std::ofstream(SAVEDIR + this->path + ".json") << this->parsed_json.dump(4, ' ', true);
+        }
+
+        ~UserData()
+        {
+            this->Save();
+            // fuck you
         }
 
         // Some getters and setters to make my life easier
@@ -123,6 +133,16 @@ struct UserData
         std::string GetPath() const
         {
             return this->path;
+        }
+
+        void SetUsername(const std::string& username)
+        {
+            this->UserName = username;
+        }
+
+        std::string GetUsername() const
+        {
+            return this->UserName;
         }
 };
 
