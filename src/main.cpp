@@ -2,6 +2,7 @@
 #include <string>
 #include <math.h>
 #include <memory>
+#include <csignal>
 
 #include "headers/rng.hpp"
 #include "headers/world.hpp"
@@ -12,8 +13,14 @@
 #include "headers/maps.hpp"
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/save.hpp"
+#include "headers/game.hpp"
 
 RNG Global_RNG = RNG();
+
+// DO NOT USE FOR ANYTHING.
+// LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
+static std::unique_ptr<GlobalData>*     GLOBAL_REF;
+static std::unique_ptr<UserData>*       USER_REF; 
 
 //          KEYS
 static bool KEYS[5] = {
@@ -361,7 +368,25 @@ static void MainMenu(int& param1)
             ConfirmExit();
             break;
     }
+    Nonononono
     */
+}
+
+// Goldfoot's machine,
+// creates another fiend,
+// so beautiful..
+// They'll make you kill!
+static void KILL(int signum)
+{
+    ClearConsole();
+    // Might as well clear the console.
+
+    (*GLOBAL_REF).reset();
+    (*USER_REF).reset();
+    std::string useless;
+    std::cin >> useless;
+    std::cout << useless << ResetColor();
+    exit(EXIT_SUCCESS);
 }
 
 int main()
@@ -375,9 +400,24 @@ int main()
     std::unique_ptr<GlobalData> GLOBAL      = std::make_unique<GlobalData>();
     std::unique_ptr<UserData>   USERDATA    = std::make_unique<UserData>();
 
+    // magic
+    GLOBAL_REF = &GLOBAL;
+    USER_REF = &USERDATA;
+
+    // Ah yes, signal handling!
+    signal(SIGINT, KILL);
+    signal(SIGBREAK, KILL);
+
+    {
+        std::string USERNAME;
+        UsernameScreen(USERNAME);
+        GLOBAL->SetUser(USERNAME);
+    }
+
     std::cout << GLOBAL->GetUser();
     std::cin.get();
 
+    // Load user data.
     if (!SaveFileExists(GLOBAL->GetUser()))
     {
         USERDATA->SetPath(GLOBAL->GetUser());
@@ -390,6 +430,7 @@ int main()
 
     // i love mf366!!
 
+    // Why would anyone not like the welcome screen? :(
     if ( GLOBAL->Get_WS_option() )
     {
         WelcomeMessage();
@@ -414,7 +455,7 @@ int main()
                     // Enter game!
                     // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
-                    // StartGame( selectedMap, selectedGamemode );
+                    StartGame(std::to_string(selectedMap), selectedGamemode, USERDATA, GLOBAL);
                 }
                 break;
 

@@ -182,7 +182,6 @@ struct GlobalData
             {
                 CreateGlobalJson();
                 this->_InitValues();
-                UsernameScreen( this->currentUser );
             }
             else
             {

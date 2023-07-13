@@ -12,8 +12,13 @@ struct Enemy
     Node* move_to;  // The current node the entity is walking to.
     float speed;  // Map units to move after each second.
     int health;
-    char weakness;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
-    char immunity;    // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
+    // the amount of money you get from an entity
+    // is based on this equation:
+    // (HEALTH / 3) * (SPEED * 1.5)
+    // So the more health it has and the faster it goes, the more you earn.
+    int armor;
+    char weakness;  // Fire / Electricity / Laser / Hitscan - or any combination of them
+    char immunity;    // Fire / Electricity / Laser / Hitscan - or any combination of them
 
     // Default constructor
     Enemy() {}
