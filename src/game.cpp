@@ -21,4 +21,8 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
 
     // Generate renderer cache.
     GenerateCache(*WORLD);
+
+    /*
+    TODO: Insert music playback code here
+    */
 }

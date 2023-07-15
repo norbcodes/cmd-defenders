@@ -454,7 +454,6 @@ int main()
                 {
                     // Enter game!
                     // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
                     StartGame(std::to_string(selectedMap), selectedGamemode, USERDATA, GLOBAL);
                 }
                 break;
