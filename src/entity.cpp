@@ -3,24 +3,22 @@
 #include "headers/rng.hpp"
 #include "headers/projectile.hpp"
 
-extern RNG Global_RNG;
-
 // entity hurt function
 void HurtEntity(const Tower& attacker, Enemy& target)
 {
-    if (attacker.type == target.immunity)
+    if (attacker.type == target.GetImmunities().getAttr( attacker.type ))
     {
         return;
     }
 
     int total_dmg = attacker.dmg;
     
-    if (Global_RNG.Get(255) < attacker.crit_att_change)
+    if (n_randint(0, 255) < attacker.crit_att_change)
     {
-        total_dmg += Global_RNG.Get(5);
+        total_dmg += n_randint(0, 5);
     }
 
-    if (attacker.type == target.weakness)
+    if (attacker.type == target.GetWeaknesses().getAttr( attacker.type ))
     {
         total_dmg += 10;
     }
@@ -31,14 +29,14 @@ void HurtEntity(const Tower& attacker, Enemy& target)
 // projectile hurt function
 void ProjectileHurt(const Projectile& attacker, Enemy& target)
 {
-    if (attacker.type == target.immunity)
+    if (attacker.type == target.GetImmunities().getAttr( attacker.type ))
     {
         return;
     }
 
     int total_dmg = attacker.dmg;
 
-    if (attacker.type == target.weakness)
+    if (attacker.type == target.GetWeaknesses().getAttr( attacker.type ))
     {
         total_dmg += 10;
     }

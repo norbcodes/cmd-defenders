@@ -1,7 +1,8 @@
 #pragma once
 
+#define MARKER_LIFETIME 60  // for now
+
 #include "entity.hpp"
-#include "world.hpp"
 
 /*
 A big X anywhere where an enemy dies.
@@ -12,7 +13,7 @@ struct DeathMarker
     char x;
     char y;
     int lifetime;
-    char color;  // 1 - Orange; 2 - Blue; 3 - Red; 4 - Gray
+    char color;  // 0 - Orange; 1 - Blue; 2 - Red; 3 - Gray
 
     DeathMarker() : lifetime(0)
     {}
@@ -20,5 +21,3 @@ struct DeathMarker
     DeathMarker(char x, char y, int lifetime, char color) : x(x), y(y), lifetime(lifetime), color(color)
     {}
 };
-
-void SpawnMarker(const Enemy& enemy, const WorldClass& world);

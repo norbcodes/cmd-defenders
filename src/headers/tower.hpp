@@ -8,21 +8,22 @@ This file contains the Tower class and functions from tower.cpp.
 
 struct Tower
 {
-    char x;
-    char y;
+    unsigned char x;
+    unsigned char y;
     float angle;
-    int cost;
+    unsigned int cost;
     // stats
-    short radius;
-    int dmg;
-    char crit_att_change;  
+    unsigned short radius;
+    unsigned int dmg;
+    unsigned char crit_att_change;  
     /*
     Each time the tower attack, a random number is pulled, 
     if it's lower than this value, we deal additional damage.
     */
-    int firerate;  // Amount of tics between shots
-    char type;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
+    unsigned int firerate;  // Amount of tics between shots
+    unsigned char type;  // 0 = Fire, 1 = Electricity, 2 = Laser, 3 = Hitscan
                 // yup, this is where the enemy weakness and immune var come in play
+                // Unlike enemies, a tower may only have one type.
 
     // Default constructor
     Tower() {}

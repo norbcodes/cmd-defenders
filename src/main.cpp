@@ -15,8 +15,6 @@
 #include "headers/save.hpp"
 #include "headers/game.hpp"
 
-RNG Global_RNG = RNG();
-
 // DO NOT USE FOR ANYTHING.
 // LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
 static std::unique_ptr<GlobalData>*     GLOBAL_REF;
@@ -57,7 +55,6 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 {
     ClearConsole();
     RestoreCursor();
-    int selection;
     std::cout << LineSep();
     std::cout << ItalicText() + RedText(true) + MM_CEX + "\n" + ResetColor();
     std::cout << BoldText() + "1. " + U_YES + "\n" + "2. " + U_NO + "\n" + ResetColor();
@@ -298,7 +295,9 @@ static void MainMenu(int& param1)
 
     std::string Color;
 
-    switch (Global_RNG.Get(3))
+    std::cout << n_randint(0, 3) << "\n\n";
+
+    switch (n_randint(0, 3))
     {
         case 0:
             Color = BlueText(true);
@@ -392,6 +391,7 @@ static void KILL(int signum)
 int main()
 {
     ClearConsole();
+    SetGameTitle();
 
     // users/
     // Unless it already exists, then do not do anything.
@@ -413,9 +413,6 @@ int main()
         UsernameScreen(USERNAME);
         GLOBAL->SetUser(USERNAME);
     }
-
-    std::cout << GLOBAL->GetUser();
-    std::cin.get();
 
     // Load user data.
     if (!SaveFileExists(GLOBAL->GetUser()))

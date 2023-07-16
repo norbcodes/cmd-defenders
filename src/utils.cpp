@@ -30,7 +30,7 @@ bool GetArrowKey(int arrow)
             break;
         // imagine forgetting to add break in a switch statement...
     }
-    return key;
+    return (short)0;
 }
 
 bool GetEnterKey()
@@ -43,7 +43,6 @@ bool GetNumKey(int which)
     // I know my own code BUT JUST IN CASE
     if (which >= 0 && which <= 9)
     {
-        
         return GetAsyncKeyState(0x30 + which) || GetAsyncKeyState(0x60 + which);;
         // According to Microsofts Virtual Key Codes...
         // 0x30 <-> 0x39 are F1 <-> F9 keys

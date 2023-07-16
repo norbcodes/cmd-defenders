@@ -55,8 +55,8 @@ struct UserData
         // Actual data to then store in the json.
         std::string UserName;
         std::unordered_map<int, unsigned char> MapCompletions;
-        long long gametime;
-        long long exp;
+        unsigned long long gametime;
+        unsigned long long exp;
 
         void _InitValues()
         {

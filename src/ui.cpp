@@ -169,7 +169,7 @@ std::string Underline()
 
 void SwitchCursorVisibility(bool b)
 {
-    std::cout << (b) ? SHOWC : HIDEC;
+    std::cout << ((b) ? SHOWC : HIDEC);
 }
 
 std::string LineSep()

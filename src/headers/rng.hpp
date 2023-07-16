@@ -1,19 +1,10 @@
 #pragma once
-#include <random>
 
 /*
 Random number generator
+
+I decided not to use one single global class for RNG calls.
 */
 
-struct RNG
-{
-    private:
-        std::random_device rd;
-
-    public:
-        int Get(int limit)
-        {
-            std::mt19937 generator(this->rd());
-            return generator() % limit;
-        }
-};
+// So we don't collide with any randint function that can be in the STD.
+int n_randint(int min, int max);

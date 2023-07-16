@@ -12,6 +12,7 @@
 #include "tower.hpp"
 #include "deco.hpp"
 #include "projectile.hpp"
+#include "deathmarker.hpp"
 
 // World as in when you are in-game, as this class controls all of it
 
@@ -22,11 +23,12 @@ struct WorldClass
     short lives;
     int money;
 
-    std::vector<Node> Ai_Nodes;
-    std::vector<Deco> Decorations;  // for the sake of making the maps a bit better to look at :)
-    std::vector<Enemy> Enemies;
-    std::vector<Tower> Towers;
-    std::vector<Projectile> Projectiles;  // good lord
+    std::vector<Node>           Ai_Nodes;
+    std::vector<Deco>           Decorations;  // for the sake of making the maps a bit better to look at :)
+    std::vector<Enemy>          Enemies;
+    std::vector<Tower>          Towers;
+    std::vector<Projectile>     Projectiles;  // good lord
+    std::vector<DeathMarker>    Markers;
 
     WorldClass() {}
 
@@ -37,6 +39,7 @@ struct WorldClass
         this->Enemies.reserve(255);
         this->Towers.reserve(255);
         this->Projectiles.reserve(255);
+        this->Markers.reserve(255);
     }
 
     void LinkNodes()
@@ -49,7 +52,7 @@ struct WorldClass
                 continue;
             }
 
-            if (i == Ai_Nodes.size())
+            if (((unsigned int)i) == Ai_Nodes.size())
             {
                 break;
             }
@@ -61,5 +64,9 @@ struct WorldClass
         Ai_Nodes[Ai_Nodes.size()-1].link_next = nullptr;
     }
 };
+
+// Including world.hpp in deathmarker.hpp will cause an error
+// It HAS to be here.
+void SpawnMarker(const Enemy& enemy, WorldClass& world);
 
 WorldClass InitializeWorld(const std::string& mapname);
