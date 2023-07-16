@@ -7,3 +7,6 @@ ideas/*
 *.bat
 users/
 global.json
+resources/
+resources/*
+resources/*.*
