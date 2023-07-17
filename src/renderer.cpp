@@ -7,6 +7,7 @@
 #include "unordered_map"
 
 static char RendererCache[MAP_W * MAP_H];
+static char LineSeparatorCache[MAP_W + 2];
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
@@ -44,6 +45,20 @@ static void InitializeMap()
     CharacterMap[0b00001110] = '+';
     CharacterMap[0b00001111] = '+';
     CharacterMap[0b10000000] = '+';
+}
+
+static void GenerateLineCache()
+{
+    LineSeparatorCache[0] = '+';
+    unsigned int pos = 1;
+    while (pos != MAP_W + 1)
+    {
+        LineSeparatorCache[pos] = '-';
+        pos += 1;
+    }
+    LineSeparatorCache[ sizeof(LineSeparatorCache) - 1 ] = '+';
+
+    std::cout << LineSeparatorCache;
 }
 
 void GenerateCache(const WorldClass& world)
@@ -146,4 +161,6 @@ void GenerateCache(const WorldClass& world)
     }
 
     // Cache generated. Can be used by the rendering function now.
+    // Also generate LineSeparatorCache, because we can ;)
+    GenerateLineCache();
 }

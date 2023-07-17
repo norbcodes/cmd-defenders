@@ -13,13 +13,13 @@ struct Projectile
     float y;
     float angle;
     float speed;
-    int dmg;  // projectile dmg + tower dmg = total dmg
-    char type; // 0 = Fire, 1 = Electricity, 2 = Laser
+    unsigned int dmg;  // projectile dmg + tower dmg = total dmg
+    unsigned char type; // 0 = Fire, 1 = Electricity, 2 = Laser
 
     // Default constructor
     Projectile() {}
 
-    Projectile(float x, float y, float angle, float speed, int dmg, const Tower& spawner)
+    Projectile(float x, float y, float angle, float speed, unsigned int dmg, const Tower& spawner)
     {
         this->x = x;
         this->y = y;

@@ -7,9 +7,9 @@
 void SpawnMarker(const Enemy& enemy, WorldClass& world)
 {
     world.Markers.emplace_back(
-        (char)floor(enemy.x),
-        (char)floor(enemy.y),
+        (unsigned char)floor(enemy.x),
+        (unsigned char)floor(enemy.y),
         MARKER_LIFETIME,
-        (char)enemy.GetWeaknesses().color
+        (unsigned char)enemy.GetWeaknesses().color
     );
 }

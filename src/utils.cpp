@@ -11,7 +11,7 @@
 Functions for setting the console title and some more stuff.
 */
 
-bool GetArrowKey(int arrow)
+bool n_GetArrowKey(int arrow)
 {
     short key;
     switch (arrow)
@@ -33,12 +33,12 @@ bool GetArrowKey(int arrow)
     return (short)0;
 }
 
-bool GetEnterKey()
+bool n_GetEnterKey()
 {
     return GetAsyncKeyState(VK_RETURN);
 }
 
-bool GetNumKey(int which)
+bool n_GetNumKey(int which)
 {
     // I know my own code BUT JUST IN CASE
     if (which >= 0 && which <= 9)
@@ -50,7 +50,7 @@ bool GetNumKey(int which)
     }
 }
 
-void SetWindowSize(int width, int height)
+void n_SetWindowSize(int width, int height)
 {
     HWND Window = GetConsoleWindow();
     if (Window != NULL)
@@ -59,19 +59,19 @@ void SetWindowSize(int width, int height)
     }
 }
 
-void SetGameTitle()
+void n_SetGameTitle()
 {
     TCHAR GameTitle[14];
     StringCchPrintf(GameTitle, MAX_PATH, TEXT("%s"), "CMD Defenders");
     SetConsoleTitle(GameTitle);
 }
 
-void ClearConsole()
+void n_ClearConsole()
 {
     system("cls");
 }
 
-void Sleep(int ms)
+void n_Sleep(int ms)
 {
     // ms = milliseconds btw
     std::chrono::milliseconds duration(ms);

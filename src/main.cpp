@@ -20,21 +20,10 @@
 static std::unique_ptr<GlobalData>*     GLOBAL_REF;
 static std::unique_ptr<UserData>*       USER_REF; 
 
-//          KEYS
-static bool KEYS[5] = {
-    false,  // Enter
-    false,  // Up
-    false,  // Down
-    false,  // Right
-    false   // Left
-};
-// Global to only this source file.
-// OBVIOUSLY NORB
-
 static void KeyGuard()
 {
     // If anything is pressed down: do not let things happen.
-    while (GetEnterKey() || GetArrowKey(1) || GetArrowKey(2) || GetArrowKey(3) || GetArrowKey(4) || GetNumKey(1) || GetNumKey(2) || GetNumKey(3) || GetNumKey(4)|| GetNumKey(5)|| GetNumKey(6)|| GetNumKey(7)|| GetNumKey(8)|| GetNumKey(9))
+    while (n_GetEnterKey() || n_GetArrowKey(1) || n_GetArrowKey(2) || n_GetArrowKey(3) || n_GetArrowKey(4) || n_GetNumKey(1) || n_GetNumKey(2) || n_GetNumKey(3) || n_GetNumKey(4)|| n_GetNumKey(5)|| n_GetNumKey(6)|| n_GetNumKey(7)|| n_GetNumKey(8)|| n_GetNumKey(9))
     {
         continue;
     }
@@ -53,7 +42,7 @@ static void WelcomeMessage()
 
 static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<UserData>& user)
 {
-    ClearConsole();
+    n_ClearConsole();
     RestoreCursor();
     std::cout << LineSep();
     std::cout << ItalicText() + RedText(true) + MM_CEX + "\n" + ResetColor();
@@ -63,15 +52,15 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
     KeyGuard();
     while (true)
     {
-        if (GetNumKey(1))
+        if (n_GetNumKey(1))
         {
-            ClearConsole();
+            n_ClearConsole();
 
             global.reset();
             user.reset();
 
             KeyGuard();
-            ClearConsole();
+            n_ClearConsole();
             std::cout << BoldText() << BlueText(false) << G_ENDSCREEN << ResetColor() << '\n';
 
             std::cout << "\033[8m";
@@ -84,7 +73,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 
             exit(EXIT_SUCCESS);
         }
-        if (GetNumKey(2))
+        if (n_GetNumKey(2))
         {
             break;
         }
@@ -94,12 +83,11 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 static void MapSelection(int& param1, int& param2)
 {
     /*
-    
-    Select a map, gamemode and play!
 
+    Select a map, gamemode and play!
     */
 
-    ClearConsole();
+    n_ClearConsole();
 
     const double mapCount = floor(MAPCOUNT);
     const double mapCountQuarter = floor(mapCount / 4);
@@ -160,52 +148,52 @@ static void MapSelection(int& param1, int& param2)
         KeyGuard();
         while (true)
         {
-            if (GetNumKey(0))
+            if (n_GetNumKey(0))
             {
                 selection = 0;
                 break;
             }
-            if (GetNumKey(1))
+            if (n_GetNumKey(1))
             {
                 selection = 1;
                 break;
             }
-            if (GetNumKey(2))
+            if (n_GetNumKey(2))
             {
                 selection = 2;
                 break;
             }
-            if (GetNumKey(3))
+            if (n_GetNumKey(3))
             {
                 selection = 3;
                 break;
             }
-            if (GetNumKey(4))
+            if (n_GetNumKey(4))
             {
                 selection = 4;
                 break;
             }
-            if (GetNumKey(5))
+            if (n_GetNumKey(5))
             {
                 selection = 5;
                 break;
             }
-            if (GetNumKey(6))
+            if (n_GetNumKey(6))
             {
                 selection = 6;
                 break;
             }
-            if (GetNumKey(9))
+            if (n_GetNumKey(9))
             {
                 selection = 9;
                 break;
             }
-            if (GetArrowKey(2))
+            if (n_GetArrowKey(2))
             {
                 selection = 15;
                 break;
             }
-            if (GetArrowKey(3))
+            if (n_GetArrowKey(3))
             {
                 selection = 16;
                 break;
@@ -241,7 +229,7 @@ static void MapSelection(int& param1, int& param2)
             }
             else
             {
-                ClearConsole();
+                n_ClearConsole();
                 gamemodeSelection = true;
                 selectedMap = selection + (page * 5);
             }
@@ -257,7 +245,7 @@ static void MapSelection(int& param1, int& param2)
                         break;
 
                     case 9:
-                        ClearConsole();
+                        n_ClearConsole();
                         gamemodeSelection = false;
                         selectedMap = -1;
                         selectedGamemode = -1;
@@ -280,6 +268,7 @@ static void MapSelection(int& param1, int& param2)
         /*
         StartGame(selectedMap, selectedGamemode)
         */
+        return;  // of course
     }
 
     param1 = -1;
@@ -289,13 +278,11 @@ static void MapSelection(int& param1, int& param2)
 
 static void MainMenu(int& param1)
 {
-    ClearConsole();
+    n_ClearConsole();
     RestoreCursor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     std::string Color;
-
-    std::cout << n_RandInt(0, 3) << "\n\n";
 
     switch (n_RandInt(0, 3))
     {
@@ -327,28 +314,28 @@ static void MainMenu(int& param1)
     KeyGuard();
     while (true)
     {
-        if (GetNumKey(1))
+        if (n_GetNumKey(1))
         {
             selection = 1;
             break;
         }
-        if (GetNumKey(2))
+        if (n_GetNumKey(2))
         {
             selection = 2;
             break;
         }
-        if (GetNumKey(3))
+        if (n_GetNumKey(3))
         {
             selection = 3;
             break;
         }
-        if (GetNumKey(4))
+        if (n_GetNumKey(4))
         {
             selection = 4;
             break;
         }
 
-        if (GetNumKey(5))
+        if (n_GetNumKey(5))
         {
             selection = 5;
             break;
@@ -377,7 +364,7 @@ static void MainMenu(int& param1)
 // They'll make you kill!
 static void KILL(int signum)
 {
-    ClearConsole();
+    n_ClearConsole();
     // Might as well clear the console.
 
     (*GLOBAL_REF).reset();
@@ -390,8 +377,8 @@ static void KILL(int signum)
 
 int main()
 {
-    ClearConsole();
-    SetGameTitle();
+    n_ClearConsole();
+    n_SetGameTitle();
 
     // users/
     // Unless it already exists, then do not do anything.
@@ -460,5 +447,5 @@ int main()
                 break;
         }
     }
-    return 0;
+    return EXIT_SUCCESS;
 }

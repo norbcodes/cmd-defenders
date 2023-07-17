@@ -57,7 +57,7 @@ void UsernameScreen(std::string& dest)
 
     std::cin.get();
 
-    ClearConsole();
+    n_ClearConsole();
 }
 
 bool SaveFileExists(const std::string& filepath)

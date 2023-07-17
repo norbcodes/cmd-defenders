@@ -1,14 +1,29 @@
 #include <memory>
 #include <string>
+#include <iostream>
 
 #include "headers/save.hpp"
 #include "headers/world.hpp"
 #include "headers/renderer.hpp"
+#include "headers/utils.hpp"
 
 // Game loop and stuff!
 
+//          KEYS
+static bool KEYS[5] = {
+    false,  // Enter
+    false,  // Up
+    false,  // Down
+    false,  // Right
+    false   // Left
+};
+// Global to only this source file.
+// OBVIOUSLY NORB
+
 void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& USERDATA, std::unique_ptr<GlobalData>& GLOBAL)
 {
+    n_ClearConsole();
+
     // USERDATA and GLOBAL is passed in so we can modify global and user data
     // obviously
 

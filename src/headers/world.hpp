@@ -3,9 +3,10 @@
 #include <string>
 #include <vector>
 
-#define MAP_W 64
-#define MAP_H 29
+#define MAP_W       64
+#define MAP_H       29
 // temporary for now, need to get a font that has characters with width and height the same.
+#define DEFAULT_HEARTS  100
 
 #include "node.hpp"
 #include "entity.hpp"
@@ -19,9 +20,9 @@
 struct WorldClass
 {
     std::string name;
-    short current_wave;  // Base game waves are not handwritten, a custom algorithm is used.
-    short lives;
-    int money;
+    unsigned short current_wave;  // Base game waves are not handwritten, a custom algorithm is used.
+    unsigned short lives;
+    unsigned int money;
 
     std::vector<Node>           Ai_Nodes;
     std::vector<Deco>           Decorations;  // for the sake of making the maps a bit better to look at :)
