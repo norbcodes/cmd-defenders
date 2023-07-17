@@ -11,7 +11,7 @@ Playing SFX during gameplay.
 HELL YEAH!
 */
 
-void nPlaySound(const char sound[])
+void n_PlaySound(const char sound[])
 {
     // Play a .wav sound.
     const std::string Filename = std::string(RESDIR) + std::string(SFXDIR) + std::string(sound) + ".wav";
@@ -19,8 +19,8 @@ void nPlaySound(const char sound[])
     PlaySoundA(LPCSTR(Filename.c_str()), NULL, SND_ASYNC | SND_FILENAME);
 }
 
-void nStopSounds()
+void n_StopSounds()
 {
     // Stops all currently playing sounds.
-    PlaySound(NULL, 0, 0);
+    PlaySoundA(NULL, 0, 0);
 }

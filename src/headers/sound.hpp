@@ -5,5 +5,5 @@ Playing SFX during gameplay.
 HELL YEAH!
 */
 
-void nPlaySound(const char sound[]);
-void nStopSounds();
+void n_PlaySound(const char sound[]);
+void n_StopSounds();

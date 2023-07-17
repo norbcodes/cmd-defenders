@@ -295,9 +295,9 @@ static void MainMenu(int& param1)
 
     std::string Color;
 
-    std::cout << n_randint(0, 3) << "\n\n";
+    std::cout << n_RandInt(0, 3) << "\n\n";
 
-    switch (n_randint(0, 3))
+    switch (n_RandInt(0, 3))
     {
         case 0:
             Color = BlueText(true);

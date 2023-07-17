@@ -15,7 +15,7 @@ struct Tower
     // stats
     unsigned short radius;
     unsigned int dmg;
-    unsigned char crit_att_change;  
+    unsigned char crit_att_chance;  
     /*
     Each time the tower attack, a random number is pulled, 
     if it's lower than this value, we deal additional damage.

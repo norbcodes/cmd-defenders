@@ -6,7 +6,7 @@ Random number generator
 I decided not to use one single global class for RNG calls.
 */
 
-int n_randint(int min, int max)
+int n_RandInt(int min, int max)
 {
     std::random_device RD;
     std::mt19937 GEN( RD() );
