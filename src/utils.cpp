@@ -77,3 +77,30 @@ void n_Sleep(int ms)
     std::chrono::milliseconds duration(ms);
     std::this_thread::sleep_for(duration);
 }
+
+void n_TickFPS(int fps)
+{
+    n_Sleep((int)((1 / fps) * 1000));  
+    // Divide 1 by FPS, multiply by 1000 to get the milliseconds and then convert to int
+}
+
+bool n_GetSpacebar()
+{
+    // Next wave button
+    return GetAsyncKeyState(VK_SPACE);
+}
+
+bool n_GetPKey()
+{
+    // Pausing during the game
+    return GetAsyncKeyState(0x50);
+}
+
+void n_KeyGuard()
+{
+    // If anything is pressed down: do not let things happen.
+    while (n_GetEnterKey() || n_GetArrowKey(1) || n_GetArrowKey(2) || n_GetArrowKey(3) || n_GetArrowKey(4) || n_GetNumKey(1) || n_GetNumKey(2) || n_GetNumKey(3) || n_GetNumKey(4)|| n_GetNumKey(5)|| n_GetNumKey(6)|| n_GetNumKey(7)|| n_GetNumKey(8)|| n_GetNumKey(9) || n_GetPKey() || n_GetSpacebar())
+    {
+        continue;
+    }
+}

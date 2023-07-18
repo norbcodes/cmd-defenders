@@ -19,7 +19,7 @@ static bool KEYS[7] = {
     false,  // Right
     false,  // Left
     false,  // Spacebar - Next wave
-    false  // P - pause the game
+    false   // P - pause the game
 };
 // Global to only this source file.
 // OBVIOUSLY NORB
@@ -32,6 +32,8 @@ static void DetectKeys()
     KEYS[2] = n_GetArrowKey(1);
     KEYS[3] = n_GetArrowKey(2);
     KEYS[4] = n_GetArrowKey(3);
+    KEYS[5] = n_GetSpacebar();
+    KEYS[6] = n_GetPKey();
 }
 
 void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& USERDATA, std::unique_ptr<GlobalData>& GLOBAL)
@@ -65,8 +67,8 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
     //////////////////////////////////////A
     while (GameLoop)
     {
-        n_Sleep( FPS * 1000 );
+        RestoreCursor();
+        n_TickFPS(FPS);
         DetectKeys();
-        std::cout << KEYS << "\n";
     }
 }

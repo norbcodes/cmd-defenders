@@ -20,15 +20,6 @@
 static std::unique_ptr<GlobalData>*     GLOBAL_REF;
 static std::unique_ptr<UserData>*       USER_REF; 
 
-static void KeyGuard()
-{
-    // If anything is pressed down: do not let things happen.
-    while (n_GetEnterKey() || n_GetArrowKey(1) || n_GetArrowKey(2) || n_GetArrowKey(3) || n_GetArrowKey(4) || n_GetNumKey(1) || n_GetNumKey(2) || n_GetNumKey(3) || n_GetNumKey(4)|| n_GetNumKey(5)|| n_GetNumKey(6)|| n_GetNumKey(7)|| n_GetNumKey(8)|| n_GetNumKey(9))
-    {
-        continue;
-    }
-}
-
 static void WelcomeMessage()
 {
     // A smol welcome screen :>
@@ -49,7 +40,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
     std::cout << BoldText() + "1. " + U_YES + "\n" + "2. " + U_NO + "\n" + ResetColor();
     std::cout << LineSep();
 
-    KeyGuard();
+    n_KeyGuard();
     while (true)
     {
         if (n_GetNumKey(1))
@@ -59,7 +50,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
             global.reset();
             user.reset();
 
-            KeyGuard();
+            n_KeyGuard();
             n_ClearConsole();
             std::cout << BoldText() << BlueText(false) << G_ENDSCREEN << ResetColor() << '\n';
 
@@ -145,7 +136,7 @@ static void MapSelection(int& param1, int& param2)
         }
         std::cout << ResetColor() << WhiteText(false) << LineSep() << ResetColor();
 
-        KeyGuard();
+        n_KeyGuard();
         while (true)
         {
             if (n_GetNumKey(0))
@@ -313,7 +304,7 @@ static void MainMenu(int& param1)
 
     int selection;
 
-    KeyGuard();
+    n_KeyGuard();
     while (true)
     {
         if (n_GetNumKey(1))
