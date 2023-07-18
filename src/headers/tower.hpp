@@ -1,13 +1,18 @@
 #pragma once
 #include <math.h>
 #include "entity.hpp"
+#include "collision.hpp"
 
 /*
 This file contains the Tower class and functions from tower.cpp.
 */
 
+#define TOWER_SPEED_BOOST   3
+#define TOWER_DMG_BOOST     2
+
 struct Tower
 {
+    unsigned int boosting_time = 0;
     unsigned char x;
     unsigned char y;
     float angle;
@@ -41,6 +46,19 @@ struct Tower
         // when playtesting comes i will fix this (if it even doesn't work in the first place)
         this->angle = atan2(target.y, target.x);
     }
+};
+
+#define SPIKYROCK_HP    50
+#define SPIKYROCK_DMG   30
+
+// A special tower type.
+struct SpikyRock
+{
+    unsigned int health;
+    unsigned int dmg;
+    BoundingBox Box;
+
+    SpikyRock() : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )) {}
 };
 
 void HurtEntity(const Tower& attacker, Enemy& target);

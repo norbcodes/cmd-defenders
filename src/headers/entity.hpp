@@ -1,5 +1,6 @@
 #pragma once
 #include "node.hpp"
+#include "collision.hpp"
 
 /*
 This file contains the Enemy class and functions for entity handling from entity.cpp.
@@ -48,6 +49,7 @@ struct Enemy
     float x;
     float y;
     Node* move_to;  // The current node the entity is walking to.
+    BoundingBox Box;
     float speed;  // Map units to move after each second.
     unsigned int health;
     // the amount of money you get from an entity
@@ -59,9 +61,9 @@ struct Enemy
     unsigned char immunity;    // Fire / Electricity / Laser / Hitscan - or any combination of them
 
     // Default constructor
-    Enemy() {}
+    Enemy() : Box(BoundingBox( E_HITBOX_W, E_HITBOX_H )) {}
 
-    Enemy(char type, const Node& start_node)
+    Enemy(char type, const Node& start_node) : Box(BoundingBox( E_HITBOX_W, E_HITBOX_H ))
     {
         /*
         Still gotta write out all the enemy types...

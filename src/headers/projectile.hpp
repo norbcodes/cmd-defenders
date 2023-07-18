@@ -2,6 +2,7 @@
 #include <math.h>
 #include "entity.hpp"
 #include "tower.hpp"
+#include "collision.hpp"
 
 /*
 Projectile class and code.
@@ -13,18 +14,16 @@ struct Projectile
     float y;
     float angle;
     float speed;
+    BoundingBox Box;
     unsigned int dmg;  // projectile dmg + tower dmg = total dmg
     unsigned char type; // 0 = Fire, 1 = Electricity, 2 = Laser
 
     // Default constructor
-    Projectile() {}
+    Projectile() : Box(BoundingBox( P_HITBOX_W, P_HITBOX_H )) {}
 
-    Projectile(float x, float y, float angle, float speed, unsigned int dmg, const Tower& spawner)
+    Projectile(float x, float y, float angle, float speed, unsigned int dmg, const Tower& spawner) 
+    : x(x), y(y), angle(angle), speed(speed), Box(BoundingBox( P_HITBOX_W, P_HITBOX_H ))
     {
-        this->x = x;
-        this->y = y;
-        this->angle = angle;
-        this->speed = speed;
         this->dmg = dmg + spawner.dmg;
         this->type = spawner.type;  // projectile inherits its spawner type.
     }
