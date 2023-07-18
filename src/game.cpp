@@ -57,11 +57,8 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
 
     /*
     TODO: Insert music playback code here
-    No!
+    No! Not yet atleast...
     */
-
-    std::cout << WORLD->name;
-    std::cin.get();
 
     //////////////////////////////////////A
     // HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
