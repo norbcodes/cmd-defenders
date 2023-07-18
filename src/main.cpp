@@ -232,6 +232,8 @@ static void MapSelection(int& param1, int& param2)
                 n_ClearConsole();
                 gamemodeSelection = true;
                 selectedMap = selection + (page * 5);
+                // this calculation doesn't account for the fact that indexes start at 0
+                // Very devilish bug :(
             }
         }
         else
@@ -263,8 +265,8 @@ static void MapSelection(int& param1, int& param2)
 
     if ( selectedMap != -1 && selectedGamemode != -1 )
     {
-        param1 = selectedMap;
-        param2 = selectedGamemode;
+        param1 = selectedMap - 1;
+        param2 = selectedGamemode - 1;
         /*
         StartGame(selectedMap, selectedGamemode)
         */
@@ -395,6 +397,7 @@ int main()
     signal(SIGINT, KILL);
     signal(SIGBREAK, KILL);
 
+    if (GLOBAL->GetUser() == "")
     {
         std::string USERNAME;
         UsernameScreen(USERNAME);

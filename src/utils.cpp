@@ -30,7 +30,7 @@ bool n_GetArrowKey(int arrow)
             break;
         // imagine forgetting to add break in a switch statement...
     }
-    return key;  // FUCKING DUMBASS XDDDDDD
+    return key;
 }
 
 bool n_GetEnterKey()

@@ -60,6 +60,9 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
     No!
     */
 
+    std::cout << WORLD->name;
+    std::cin.get();
+
     //////////////////////////////////////A
     // HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     //////////////////////////////////////A

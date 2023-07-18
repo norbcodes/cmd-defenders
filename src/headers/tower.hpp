@@ -62,3 +62,4 @@ struct SpikyRock
 };
 
 void HurtEntity(const Tower& attacker, Enemy& target);
+void SpikyHurt(SpikyRock& rock, Enemy& target);

@@ -3,7 +3,7 @@
 #include "headers/rng.hpp"
 #include "headers/projectile.hpp"
 
-// entity hurt function
+// Tower on Entity attack
 void HurtEntity(const Tower& attacker, Enemy& target)
 {
     // Check immunity.
@@ -28,10 +28,10 @@ void HurtEntity(const Tower& attacker, Enemy& target)
         total_dmg += 10;
     }
 
-    target.health -= total_dmg;  // Ouch.
+    target.Hurt(total_dmg);  // Ouch.
 }
 
-// projectile hurt function
+// Projectile on Entity attack
 void ProjectileHurt(const Projectile& attacker, Enemy& target)
 {
     // Check immunity.
@@ -48,5 +48,12 @@ void ProjectileHurt(const Projectile& attacker, Enemy& target)
         total_dmg += 10;
     }
 
-    target.health -= total_dmg;  // Deal damage.
+    target.Hurt(total_dmg);  // Deal damage.
+}
+
+// Spiky Rock on Entity attack
+void SpikyHurt(SpikyRock& rock, Enemy& target)
+{
+    rock.health -= 1;
+    target.Hurt(rock.dmg);
 }

@@ -1,4 +1,7 @@
 #pragma once
+
+#include <math.h>
+
 #include "node.hpp"
 #include "collision.hpp"
 
@@ -43,6 +46,10 @@ struct EnemyAttributes
         }
     }
 };
+
+#define ARMOR_HEALTH_RATIO  2  
+// If armor >= 1, then 50% of damage goes to health and other 50% to armor
+// Of course if the 50% is higher than our armor value, then the rest is applied to health.
 
 struct Enemy
 {
@@ -95,6 +102,35 @@ struct Enemy
             // Enemy and Node Y is same: horizontal movement
             this->x += (this->x - this->move_to->x < 0) ? this->speed : -(this->speed);
         }
+    }
+
+    void Hurt(unsigned int dmg)
+    {
+        // Due to armor being a thing, we need this function
+        // init our variables 
+        unsigned int TakeHealth = dmg;
+        unsigned int TakeArmor = 0;
+
+        // Do stuff if this enemy has armor
+        if (this->armor >= 1)
+        {
+            // Incoming damage is splited between health and armor
+            float HalfDamage = dmg / ARMOR_HEALTH_RATIO;
+            TakeHealth = (unsigned int)floor(HalfDamage);
+            TakeArmor = (unsigned int)ceil(HalfDamage);
+
+            // If there is more incoming damage to the armor than we can withstand,
+            // it will contribute to health damage
+            if (TakeArmor > this->armor)
+            {
+                TakeHealth += fabs(this->armor - TakeArmor);
+                TakeArmor = 0; // instantly zeored
+            }
+        }
+
+        // Deal the damage >:)
+        this->health -= TakeHealth;
+        this->armor -= TakeArmor;
     }
 
     EnemyAttributes GetWeaknesses() const
