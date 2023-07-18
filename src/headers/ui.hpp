@@ -68,9 +68,9 @@ struct UiManager
     public:
         UiManager() : TowerPlacing(false), TowerMarkerX(0), TowerMarkerY(0), TowerSelection(-1) {}
 
-        void SwitchTowerPlacingMode()
+        void ChangeTowerPlacingMode(bool a)
         {
-            this->TowerPlacing = !(this->TowerPlacing);
+            this->TowerPlacing = a;
         }
 
         // ARE WE IN TOWER PLACING MODE OR NAH???
