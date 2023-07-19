@@ -57,8 +57,6 @@ static void GenerateLineCache()
         pos += 1;
     }
     LineSeparatorCache[ sizeof(LineSeparatorCache) - 1 ] = '+';
-
-    std::cout << LineSeparatorCache;
 }
 
 void GenerateCache(const WorldClass& world)

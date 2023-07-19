@@ -27,4 +27,24 @@ struct Node
     {
         return this->link_prev;
     }
+
+    void SetNext(Node& next)
+    {
+        this->link_next = &next;
+    }
+
+    void SetPrev(Node& prev)
+    {
+        this->link_prev = &prev;
+    }
+
+    void SetNextNull()
+    {
+        this->link_next = nullptr;
+    }
+
+    void SetPrevNull()
+    {
+        this->link_prev = nullptr;
+    }
 };

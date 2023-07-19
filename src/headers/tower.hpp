@@ -12,7 +12,7 @@ This file contains the Tower class and functions from tower.cpp.
 
 struct Tower
 {
-    unsigned int boosting_time = 0;
+    unsigned int boosting_time;
     unsigned char x;
     unsigned char y;
     float angle;
@@ -31,9 +31,9 @@ struct Tower
                 // Unlike enemies, a tower may only have one type.
 
     // Default constructor
-    Tower() {}
+    Tower() : boosting_time(0), x(-1), y(-1) {}
 
-    Tower(char type)
+    Tower(unsigned char type, unsigned int x, unsigned y) : boosting_time(0), x(x), y(y)
     {
         /*
         Still gotta type out the Tower types..

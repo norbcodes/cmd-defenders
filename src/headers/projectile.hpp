@@ -19,7 +19,7 @@ struct Projectile
     unsigned char type; // 0 = Fire, 1 = Electricity, 2 = Laser
 
     // Default constructor
-    Projectile() : Box(BoundingBox( P_HITBOX_W, P_HITBOX_H )) {}
+    Projectile() : Box(BoundingBox( P_HITBOX_W, P_HITBOX_H )), x(-1.0f), y(-1.0f), speed(0.0f) {}
 
     Projectile(float x, float y, float angle, float speed, unsigned int dmg, const Tower& spawner) 
     : x(x), y(y), angle(angle), speed(speed), Box(BoundingBox( P_HITBOX_W, P_HITBOX_H ))

@@ -58,11 +58,11 @@ struct WorldClass
                 break;
             }
 
-            Ai_Nodes[i-1].link_next = &(Ai_Nodes[i]);
-            Ai_Nodes[i+1].link_prev = &(Ai_Nodes[i]);
+            Ai_Nodes[i-1].SetNext(Ai_Nodes[i]);
+            Ai_Nodes[i+1].SetPrev(Ai_Nodes[i]);
         }
-        Ai_Nodes[0].link_prev = nullptr;
-        Ai_Nodes[Ai_Nodes.size()-1].link_next = nullptr;
+        Ai_Nodes[0].SetPrevNull();
+        Ai_Nodes[Ai_Nodes.size()-1].SetNextNull();
     }
 };
 
