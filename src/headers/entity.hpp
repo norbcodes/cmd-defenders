@@ -68,10 +68,10 @@ struct Enemy
     unsigned char immunity;    // Fire / Electricity / Laser / Hitscan - or any combination of them
 
     // Default constructor
-    Enemy() : Box(BoundingBox( E_HITBOX_W, E_HITBOX_H )), x(-1.0f), y(-1.0f) {}
+    Enemy() : x(-1.0f), y(-1.0f), Box(BoundingBox( E_HITBOX_W, E_HITBOX_H ))  {}
 
     Enemy(unsigned char type, const Node& start_node, float x, float y) 
-    : Box(BoundingBox( E_HITBOX_W, E_HITBOX_H )), y(y), x(x)
+    : x(x), y(y), Box(BoundingBox( E_HITBOX_W, E_HITBOX_H ))
     {
         /*
         Still gotta write out all the enemy types...

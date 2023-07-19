@@ -60,10 +60,10 @@ struct SpikyRock
     unsigned int dmg;
     BoundingBox Box;
 
-    SpikyRock() : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )), x(-1), y(-1) {}
+    SpikyRock() : x(-1), y(-1), health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )) {}
 
     SpikyRock(unsigned int x, unsigned int y)
-    : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )), x(x), y(y)  {}
+    : x(x), y(y), health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H ))  {}
 };
 
 void HurtEntity(const Tower& attacker, Enemy& target);

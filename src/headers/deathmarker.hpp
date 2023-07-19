@@ -15,7 +15,7 @@ struct DeathMarker
     unsigned int lifetime;
     unsigned char color;  // 0 - Orange; 1 - Blue; 2 - Red; 3 - Gray
 
-    DeathMarker() : lifetime(0)
+    DeathMarker() : x(-1), y(-1), lifetime(0)
     {}
 
     DeathMarker(unsigned char x, unsigned char y, unsigned int lifetime, unsigned char color) : x(x), y(y), lifetime(lifetime), color(color)
