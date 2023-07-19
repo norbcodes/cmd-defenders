@@ -54,11 +54,16 @@ struct Tower
 // A special tower type.
 struct SpikyRock
 {
+    unsigned int x;
+    unsigned int y;
     unsigned int health;
     unsigned int dmg;
     BoundingBox Box;
 
-    SpikyRock() : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )) {}
+    SpikyRock() : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )), x(-1), y(-1) {}
+
+    SpikyRock(unsigned int x, unsigned int y)
+    : health(SPIKYROCK_HP), dmg(SPIKYROCK_DMG), Box(BoundingBox( S_HITBOX_W, S_HITBOX_H )), x(x), y(y)  {}
 };
 
 void HurtEntity(const Tower& attacker, Enemy& target);
