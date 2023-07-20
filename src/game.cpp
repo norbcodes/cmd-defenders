@@ -48,7 +48,7 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
     std::unique_ptr<UiManager>  UI_MANAGER  = std::make_unique<UiManager>();
 
     // Do stuff
-    *WORLD = InitializeWorld(map);  // pretty sure this might get me impaled on a pitchfork
+    InitializeWorld(WORLD, map);  // pretty sure this might get me impaled on a pitchfork
     WORLD->LinkNodes();
 
     // Generate renderer cache.

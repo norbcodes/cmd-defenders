@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 #define MAP_W       64
 #define MAP_H       29
@@ -17,6 +18,11 @@
 
 // World as in when you are in-game, as this class controls all of it
 
+#define MAP_SIZE            MAP_W * MAP_H
+#define MAX_DECO            UINT8_MAX
+#define MAX_ENEMIES         500
+#define MAX_PROJECTILES     500
+
 struct WorldClass
 {
     std::string name;
@@ -24,24 +30,14 @@ struct WorldClass
     unsigned short lives;
     unsigned int money;
 
-    std::vector<Node>           Ai_Nodes;
-    std::vector<Deco>           Decorations;  // for the sake of making the maps a bit better to look at :)
-    std::vector<Enemy>          Enemies;
-    std::vector<Tower>          Towers;
-    std::vector<Projectile>     Projectiles;  // good lord
-    std::vector<DeathMarker>    Markers;
+    std::unique_ptr<std::vector<Node>>           Ai_Nodes;
+    std::unique_ptr<std::vector<Deco>>           Decorations;  // for the sake of making the maps a bit better to look at :)
+    std::unique_ptr<std::vector<Enemy>>          Enemies;
+    std::unique_ptr<std::vector<Tower>>          Towers;
+    std::unique_ptr<std::vector<Projectile>>     Projectiles;  // good lord
+    std::unique_ptr<std::vector<DeathMarker>>    Markers;
 
     WorldClass() {}
-
-    void ReserveVectors()
-    {
-        this->Ai_Nodes.reserve(255);
-        this->Decorations.reserve(255);
-        this->Enemies.reserve(255);
-        this->Towers.reserve(255);
-        this->Projectiles.reserve(255);
-        this->Markers.reserve(255);
-    }
 
     void LinkNodes()
     {
@@ -53,16 +49,17 @@ struct WorldClass
                 continue;
             }
 
-            if (((unsigned int)i) == Ai_Nodes.size())
+            if (((unsigned int)i) == (this->Ai_Nodes)->size())
             {
                 break;
             }
 
-            Ai_Nodes[i-1].SetNext(Ai_Nodes[i]);
-            Ai_Nodes[i+1].SetPrev(Ai_Nodes[i]);
+            (*this->Ai_Nodes)[i-1].SetNext((*this->Ai_Nodes)[i]);
+            (*this->Ai_Nodes)[i+1].SetPrev((*this->Ai_Nodes)[i]);
         }
-        Ai_Nodes[0].SetPrevNull();
-        Ai_Nodes[Ai_Nodes.size()-1].SetNextNull();
+        (*this->Ai_Nodes)[0].SetPrevNull();
+        (*this->Ai_Nodes)[Ai_Nodes->size()-1].SetNextNull();
+        // TODO: Debug this sometime
     }
 };
 
@@ -70,4 +67,4 @@ struct WorldClass
 // It HAS to be here.
 void SpawnMarker(const Enemy& enemy, WorldClass& world);
 
-WorldClass InitializeWorld(const std::string& mapname);
+void InitializeWorld(std::unique_ptr<WorldClass>& world, const std::string& mapname);

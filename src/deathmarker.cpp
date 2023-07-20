@@ -6,7 +6,7 @@
 
 void SpawnMarker(const Enemy& enemy, WorldClass& world)
 {
-    world.Markers.emplace_back(
+    world.Markers->emplace_back(
         (unsigned char)floor(enemy.x),
         (unsigned char)floor(enemy.y),
         MARKER_LIFETIME,

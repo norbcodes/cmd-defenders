@@ -71,9 +71,9 @@ void GenerateCache(const WorldClass& world)
     memset(RendererCache, ' ', sizeof(unsigned char) * (MAP_W * MAP_H));
 
     // Draw Track markers in the RendererCache
-    for (unsigned int i = 0; i != world.Ai_Nodes.size(); i++)
+    for (unsigned int i = 0; i != (*(world.Ai_Nodes)).size(); i++)
     {
-        const Node& current_node = world.Ai_Nodes[i];
+        const Node& current_node = (*(world.Ai_Nodes))[i];
         if (current_node.GetNext() == nullptr)
         {
             break;
