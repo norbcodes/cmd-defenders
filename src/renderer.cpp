@@ -2,12 +2,19 @@
 #include <string>
 #include <math.h>
 #include <bits/stdc++.h>
+#include <unordered_map>
+
 #include "headers/world.hpp"
 #include "headers/node.hpp"
-#include "unordered_map"
+#include "headers/ui.hpp"
+
+#include "headers/debug.hpp"
+
+#define SCREEN_W 97
+#define SCREEN_H 30  // 28 + 2
 
 static char RendererCache[MAP_W * MAP_H];
-static char LineSeparatorCache[MAP_W + 2];
+static char ScreenLayout[SCREEN_W * SCREEN_H];
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
@@ -47,16 +54,84 @@ static void InitializeMap()
     CharacterMap[0b10000000] = '+';
 }
 
-static void GenerateLineCache()
+static void GenerateScreenLayoutCache()
 {
-    LineSeparatorCache[0] = '+';
-    unsigned int pos = 1;
-    while (pos != MAP_W + 1)
+    char LineSep[SCREEN_W];
+    char Edges[SCREEN_W];
+
+    ////////////////////////////////////////
+    // GENERATE INDIVIDUAL COMPONENTS     //
+    ////////////////////////////////////////
+
+    DEBUG_PRINT("Linesep gen");
+
+    // Generate the Line Sep
+    LineSep[0] = '+';
+    for (int i = 1; i != MAP_W; i++)
     {
-        LineSeparatorCache[pos] = '-';
-        pos += 1;
+        LineSep[i] = '-';
     }
-    LineSeparatorCache[ sizeof(LineSeparatorCache) - 1 ] = '+';
+    LineSep[MAP_W] = '+';  // 64th index, right after the last -
+    for (int i = 65; i != SCREEN_W; i++)
+    {
+        LineSep[i] = '-';  // Because of the UI
+    }
+    LineSep[SCREEN_W] = '+';  // The very last index. And we're done!
+
+    DEBUG_PRINT("Edge gen");
+
+    // Generate the Edges
+    Edges[0] = '|';
+    for (int i = 1; i != MAP_W; i++)
+    {
+        Edges[i] = ' ';
+    }
+    Edges[MAP_W] = '|';
+    for (int i = 65; i != SCREEN_W; i++)
+    {
+        Edges[i] = ' ';
+    }
+    Edges[SCREEN_W] = '|';  // And we're done with both of these!
+
+    ////////////////////////////////////////
+    // NOW START GENERATING               //
+    ////////////////////////////////////////
+
+    DEBUG_PRINT("Layout gen");
+
+    // Top linesep
+    for (int i = 0; i != SCREEN_W; i++)
+    {
+        ScreenLayout[i] = LineSep[i];
+    }
+
+    DEBUG_PRINT("Juicy part begin");
+
+    // Now for the juicy part
+    for (int y = 0; y != SCREEN_H; y++)
+    {
+        for (int x = 0 + (SCREEN_H * y); x != (SCREEN_H * (y + 1)); x++)
+        {
+            ScreenLayout[x] = Edges[ x - (SCREEN_H * (y + 1)) ];
+        }
+    }
+    // Also there are no \n characters in there, no
+    // That's done during rendering
+
+    DEBUG_PRINT("Juicy part over");
+
+    for (int i = (SCREEN_W * SCREEN_H) - SCREEN_H; i != SCREEN_W * SCREEN_H; i++)
+    {
+        ScreenLayout[i] = LineSep[i - (SCREEN_W * SCREEN_H) - SCREEN_H];
+    }
+
+    DEBUG_PRINT("Gen finished successfully");
+}
+
+static void Blit(std::string& buffer, unsigned int x, unsigned int y, const std::string& txt, const std::string& styles)
+{
+    // A handy function that blits text to the screen buffer
+
 }
 
 void GenerateCache(const WorldClass& world)
@@ -159,6 +234,14 @@ void GenerateCache(const WorldClass& world)
     }
 
     // Cache generated. Can be used by the rendering function now.
-    // Also generate LineSeparatorCache, because we can ;)
-    GenerateLineCache();
+    // Also generate screen layout pls
+    GenerateScreenLayoutCache();
+}
+
+void Render(const WorldClass& world)
+{
+    RestoreCursor();
+
+    std::string OUTPUT[SCREEN_H * SCREEN_W];
+
 }

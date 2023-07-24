@@ -9,6 +9,8 @@
 #include "headers/utils.hpp"
 #include "headers/ui.hpp"
 
+#include "headers/debug.hpp"
+
 // Game loop and stuff!
 
 //          KEYS
@@ -40,6 +42,8 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
 {
     n_ClearConsole();
 
+    DEBUG_PRINT_WAIT("in game");
+
     // USERDATA and GLOBAL is passed in so we can modify global and user data
     // obviously
 
@@ -52,6 +56,12 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
     WORLD->LinkNodes();
 
     // Generate renderer cache.
+
+    #ifdef _NORB_DEBUG_
+    std::cout << "about to gen caches\n";
+    std::cin.get();
+    #endif
+
     GenerateCache(*WORLD);
 
     bool GameLoop = true;

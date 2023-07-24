@@ -373,9 +373,13 @@ int main()
     n_ClearConsole();
     n_SetGameTitle();
 
+    #ifndef _NORB_NO_SAVES_
+
     // users/
     // Unless it already exists, then do not do anything.
     CreateSaveDir();
+
+    #endif
 
     std::unique_ptr<GlobalData> GLOBAL      = std::make_unique<GlobalData>();
     std::unique_ptr<UserData>   USERDATA    = std::make_unique<UserData>();
@@ -387,6 +391,8 @@ int main()
     // Ah yes, signal handling!
     signal(SIGINT, KILL);
     signal(SIGBREAK, KILL);
+
+    #ifndef _NORB_NO_SAVES_
 
     if (GLOBAL->GetUser() == "")
     {
@@ -405,6 +411,8 @@ int main()
     {
         USERDATA->LoadSave(GLOBAL->GetUser());
     }
+
+    #endif
 
     // i love mf366!!
 

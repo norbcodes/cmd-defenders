@@ -88,16 +88,20 @@ struct UserData
 
         UserData(const std::string& path)
         {
+            #ifndef _NORB_NO_SAVES_
             this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
             this->path = path;
             this->_LoadValues();
+            #endif
         }
 
         void LoadSave(const std::string& path)
         {
+            #ifndef _NORB_NO_SAVES_
             this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
             this->path = path;
             this->_LoadValues();
+            #endif
         }
 
         void Save()
@@ -114,7 +118,9 @@ struct UserData
             this->parsed_json[MAPCOMPL] = MapCompletionsObj;
             this->parsed_json[USER] = this->UserName;
 
+            #ifndef _NORB_NO_SAVES_
             std::ofstream(SAVEDIR + this->path + ".json") << this->parsed_json.dump(4, ' ', true);
+            #endif
         }
 
         ~UserData()
@@ -178,6 +184,7 @@ struct GlobalData
     public:
         GlobalData()
         {
+            #ifndef _NORB_NO_SAVES_
             if (!GlobalExists())
             {
                 CreateGlobalJson();
@@ -187,6 +194,7 @@ struct GlobalData
             {
                 this->_LoadValues();
             }
+            #endif
         }
 
         void Save()
@@ -194,7 +202,9 @@ struct GlobalData
             this->parsed_json[CURRENTUSER] = this->currentUser;
             this->parsed_json[WELCOMESCRN] = this->enableWelcomeScreen;
 
+            #ifndef _NORB_NO_SAVES_
             std::ofstream(GLOBALJSON) << this->parsed_json.dump(4, ' ', true);
+            #endif
         }
 
         ~GlobalData()

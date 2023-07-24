@@ -29,6 +29,9 @@ struct WorldClass
     unsigned short current_wave;  // Base game waves are not handwritten, a custom algorithm is used.
     unsigned short lives;
     unsigned int money;
+    unsigned short landmines;
+    unsigned short spiky_rocks;
+    unsigned short tower_boosts;
 
     std::unique_ptr<std::vector<Node>>           Ai_Nodes;
     std::unique_ptr<std::vector<Deco>>           Decorations;  // for the sake of making the maps a bit better to look at :)
