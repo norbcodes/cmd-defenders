@@ -57,10 +57,7 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
 
     // Generate renderer cache.
 
-    #ifdef _NORB_DEBUG_
-    std::cout << "about to gen caches\n";
-    std::cin.get();
-    #endif
+    DEBUG_PRINT_WAIT("about to gen caches");
 
     GenerateCache(*WORLD);
 
