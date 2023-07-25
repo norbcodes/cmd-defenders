@@ -59,6 +59,8 @@ static void GenerateScreenLayoutCache()
     char LineSep[SCREEN_W];
     char Edges[SCREEN_W];
 
+    memset(ScreenLayout, ' ', sizeof(char) * (SCREEN_H * SCREEN_W));
+
     ////////////////////////////////////////
     // GENERATE INDIVIDUAL COMPONENTS     //
     ////////////////////////////////////////
@@ -76,7 +78,7 @@ static void GenerateScreenLayoutCache()
     {
         LineSep[i] = '-';  // Because of the UI
     }
-    LineSep[SCREEN_W] = '+';  // The very last index. And we're done!
+    LineSep[SCREEN_W-1] = '+';  // The very last index. And we're done!
 
     DEBUG_PRINT("Edge gen");
 
@@ -91,7 +93,7 @@ static void GenerateScreenLayoutCache()
     {
         Edges[i] = ' ';
     }
-    Edges[SCREEN_W] = '|';  // And we're done with both of these!
+    Edges[SCREEN_W-1] = '|';  // And we're done with both of these!
 
     ////////////////////////////////////////
     // NOW START GENERATING               //
@@ -108,11 +110,13 @@ static void GenerateScreenLayoutCache()
     DEBUG_PRINT("Juicy part begin");
 
     // Now for the juicy part
-    for (int y = 0; y != SCREEN_H; y++)
+    for (int y = 1; y != SCREEN_H; y++)
     {
-        for (int x = 0 + (SCREEN_H * y); x != (SCREEN_H * (y + 1)); x++)
+        // GUESS WHAT
+        // IT'S SUPPOSED TO BE SCREEN_W NOT SCREEN_H YOU ABSOLUTE MORON
+        for (int x = 0 + (SCREEN_W * y); x != (SCREEN_W * (y + 1)); x++)
         {
-            ScreenLayout[x] = Edges[ x - (SCREEN_H * (y + 1)) ];
+            ScreenLayout[x] = Edges[ x - (SCREEN_W * y) ];
         }
     }
     // Also there are no \n characters in there, no
@@ -126,12 +130,30 @@ static void GenerateScreenLayoutCache()
     }
 
     DEBUG_PRINT("Gen finished successfully");
+
+    // Does this even work
+    #ifdef _NORB_DEBUG_
+    DEBUG_PRINT_WAIT("About to print LineSep");
+    for (int i = 0; i != SCREEN_W; i++)
+    {
+        std::cout << LineSep[i];
+    }
+    std::cout << std::endl;
+    DEBUG_PRINT_WAIT("About to print ScreenLayout");
+    for (int i = 0; i != SCREEN_W * SCREEN_H; i++)
+    {
+        if (i % SCREEN_W == 0)
+        {
+            std::cout << std::endl;
+        }
+        std::cout << ScreenLayout[i];
+    }
+    #endif
 }
 
 static void Blit(std::string& buffer, unsigned int x, unsigned int y, const std::string& txt, const std::string& styles)
 {
     // A handy function that blits text to the screen buffer
-
 }
 
 void GenerateCache(const WorldClass& world)
@@ -143,7 +165,7 @@ void GenerateCache(const WorldClass& world)
 
     const char TrackMarker = '@';  // doesn't have to be that, can be anything really
 
-    memset(RendererCache, ' ', sizeof(unsigned char) * (MAP_W * MAP_H));
+    memset(RendererCache, ' ', sizeof(char) * (MAP_W * MAP_H));
 
     // Draw Track markers in the RendererCache
     for (unsigned int i = 0; i != (*(world.Ai_Nodes)).size(); i++)
@@ -243,5 +265,4 @@ void Render(const WorldClass& world)
     RestoreCursor();
 
     std::string OUTPUT[SCREEN_H * SCREEN_W];
-
 }
