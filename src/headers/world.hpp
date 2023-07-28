@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <cstdint>
 
 #define MAP_W       64
 #define MAP_H       29

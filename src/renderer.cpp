@@ -13,8 +13,8 @@
 #define SCREEN_W 97
 #define SCREEN_H 30  // 28 + 2
 
-static char RendererCache[MAP_W * MAP_H];
-static char ScreenLayout[SCREEN_W * SCREEN_H];
+static char RendererCache[MAP_W * MAP_H + 1];
+static char ScreenLayout[SCREEN_W * SCREEN_H + 1];
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
@@ -78,9 +78,8 @@ static void GenerateScreenLayoutCache()
     {
         LineSep[i] = '-';  // Because of the UI
     }
-    LineSep[SCREEN_W-1] = '+';  // The very last index. And we're done!
-
-    DEBUG_PRINT("Edge gen");
+    LineSep[SCREEN_W-2] = '+';  // The very last index. And we're done!
+    LineSep[SCREEN_W-1] = '\0';  // The very last index. And we're done!
 
     // Generate the Edges
     Edges[0] = '|';
@@ -93,41 +92,16 @@ static void GenerateScreenLayoutCache()
     {
         Edges[i] = ' ';
     }
-    Edges[SCREEN_W-1] = '|';  // And we're done with both of these!
+    Edges[SCREEN_W-2] = '|';  // And we're done with both of these!
+    Edges[SCREEN_W-1] = '\0'; 
+
+    DEBUG_PRINT(LineSep);
+    DEBUG_PRINT(Edges);
+    DEBUG_PRINT_WAIT(LineSep);
 
     ////////////////////////////////////////
     // NOW START GENERATING               //
     ////////////////////////////////////////
-
-    DEBUG_PRINT("Layout gen");
-
-    // Top linesep
-    for (int i = 0; i != SCREEN_W; i++)
-    {
-        ScreenLayout[i] = LineSep[i];
-    }
-
-    DEBUG_PRINT("Juicy part begin");
-
-    // Now for the juicy part
-    for (int y = 1; y != SCREEN_H; y++)
-    {
-        // GUESS WHAT
-        // IT'S SUPPOSED TO BE SCREEN_W NOT SCREEN_H YOU ABSOLUTE MORON
-        for (int x = 0 + (SCREEN_W * y); x != (SCREEN_W * (y + 1)); x++)
-        {
-            ScreenLayout[x] = Edges[ x - (SCREEN_W * y) ];
-        }
-    }
-    // Also there are no \n characters in there, no
-    // That's done during rendering
-
-    DEBUG_PRINT("Juicy part over");
-
-    for (int i = (SCREEN_W * SCREEN_H) - SCREEN_H; i != SCREEN_W * SCREEN_H; i++)
-    {
-        ScreenLayout[i] = LineSep[i - (SCREEN_W * SCREEN_H) - SCREEN_H];
-    }
 
     DEBUG_PRINT("Gen finished successfully");
 

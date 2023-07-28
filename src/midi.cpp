@@ -1,3 +1,5 @@
+#include "headers/garyscavone_rtmidi/RtMidi.h"
+
 /*
 Now comes the time for midi playback.
 Oh boy!
