@@ -16,10 +16,10 @@ void HurtEntity(const Tower& attacker, Enemy& target)
     unsigned int total_dmg = attacker.dmg;
     
     // Check crit attack chance
-    if (n_RandInt(0, 255) < attacker.crit_att_chance)
+    if (DefendersRNG::RandInt(0, 255) < attacker.crit_att_chance)
     {
         // If good RNG, deal damage
-        total_dmg += n_RandInt(0, 5);
+        total_dmg += DefendersRNG::RandInt(0, 5);
     }
 
     // Check weakness.

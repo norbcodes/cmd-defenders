@@ -29,18 +29,18 @@ static bool KEYS[7] = {
 static void DetectKeys()
 {
     // exactly
-    KEYS[0] = n_GetEnterKey();
-    KEYS[1] = n_GetArrowKey(0);
-    KEYS[2] = n_GetArrowKey(1);
-    KEYS[3] = n_GetArrowKey(2);
-    KEYS[4] = n_GetArrowKey(3);
-    KEYS[5] = n_GetSpacebar();
-    KEYS[6] = n_GetPKey();
+    KEYS[0] = DefendersUtils::GetEnterKey();
+    KEYS[1] = DefendersUtils::GetArrowKey(0);
+    KEYS[2] = DefendersUtils::GetArrowKey(1);
+    KEYS[3] = DefendersUtils::GetArrowKey(2);
+    KEYS[4] = DefendersUtils::GetArrowKey(3);
+    KEYS[5] = DefendersUtils::GetSpacebar();
+    KEYS[6] = DefendersUtils::GetPKey();
 }
 
 void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& USERDATA, std::unique_ptr<GlobalData>& GLOBAL)
 {
-    n_ClearConsole();
+    DefendersUtils::ClearConsole();
 
     DEBUG_PRINT_WAIT("in game");
 
@@ -75,7 +75,7 @@ void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& 
     while (GameLoop)
     {
         RestoreCursor();
-        n_TickFPS(FPS);
+        DefendersUtils::TickFPS(FPS);
         DetectKeys();
     }
 }

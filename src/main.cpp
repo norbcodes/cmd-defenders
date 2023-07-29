@@ -33,25 +33,25 @@ static void WelcomeMessage()
 
 static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<UserData>& user)
 {
-    n_ClearConsole();
+    DefendersUtils::ClearConsole();
     RestoreCursor();
     std::cout << LineSep();
     std::cout << ItalicText() + RedText(true) + MM_CEX + "\n" + ResetColor();
     std::cout << BoldText() + "1. " + U_YES + "\n" + "2. " + U_NO + "\n" + ResetColor();
     std::cout << LineSep();
 
-    n_KeyGuard();
+    DefendersUtils::KeyGuard();
     while (true)
     {
-        if (n_GetNumKey(1))
+        if (DefendersUtils::GetNumKey(1))
         {
-            n_ClearConsole();
+            DefendersUtils::ClearConsole();
 
             global.reset();
             user.reset();
 
-            n_KeyGuard();
-            n_ClearConsole();
+            DefendersUtils::KeyGuard();
+            DefendersUtils::ClearConsole();
             std::cout << BoldText() << BlueText(false) << G_ENDSCREEN << ResetColor() << '\n';
 
             std::cout << "\033[8m";
@@ -64,7 +64,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 
             exit(EXIT_SUCCESS);
         }
-        if (n_GetNumKey(2))
+        if (DefendersUtils::GetNumKey(2))
         {
             break;
         }
@@ -78,7 +78,7 @@ static void MapSelection(int& param1, int& param2)
     Select a map, gamemode and play!
     */
 
-    n_ClearConsole();
+    DefendersUtils::ClearConsole();
 
     const double mapCount = floor(MAPCOUNT);
     const double mapCountQuarter = floor(mapCount / 4);
@@ -136,55 +136,55 @@ static void MapSelection(int& param1, int& param2)
         }
         std::cout << ResetColor() << WhiteText(false) << LineSep() << ResetColor();
 
-        n_KeyGuard();
+        DefendersUtils::KeyGuard();
         while (true)
         {
-            if (n_GetNumKey(0))
+            if (DefendersUtils::GetNumKey(0))
             {
                 selection = 0;
                 break;
             }
-            if (n_GetNumKey(1))
+            if (DefendersUtils::GetNumKey(1))
             {
                 selection = 1;
                 break;
             }
-            if (n_GetNumKey(2))
+            if (DefendersUtils::GetNumKey(2))
             {
                 selection = 2;
                 break;
             }
-            if (n_GetNumKey(3))
+            if (DefendersUtils::GetNumKey(3))
             {
                 selection = 3;
                 break;
             }
-            if (n_GetNumKey(4))
+            if (DefendersUtils::GetNumKey(4))
             {
                 selection = 4;
                 break;
             }
-            if (n_GetNumKey(5))
+            if (DefendersUtils::GetNumKey(5))
             {
                 selection = 5;
                 break;
             }
-            if (n_GetNumKey(6))
+            if (DefendersUtils::GetNumKey(6))
             {
                 selection = 6;
                 break;
             }
-            if (n_GetNumKey(9))
+            if (DefendersUtils::GetNumKey(9))
             {
                 selection = 9;
                 break;
             }
-            if (n_GetArrowKey(2))
+            if (DefendersUtils::GetArrowKey(2))
             {
                 selection = 15;
                 break;
             }
-            if (n_GetArrowKey(3))
+            if (DefendersUtils::GetArrowKey(3))
             {
                 selection = 16;
                 break;
@@ -220,7 +220,7 @@ static void MapSelection(int& param1, int& param2)
             }
             else
             {
-                n_ClearConsole();
+                DefendersUtils::ClearConsole();
                 gamemodeSelection = true;
                 selectedMap = selection + (page * 5);
                 // this calculation doesn't account for the fact that indexes start at 0
@@ -238,7 +238,7 @@ static void MapSelection(int& param1, int& param2)
                         break;
 
                     case 9:
-                        n_ClearConsole();
+                        DefendersUtils::ClearConsole();
                         gamemodeSelection = false;
                         selectedMap = -1;
                         selectedGamemode = -1;
@@ -271,13 +271,13 @@ static void MapSelection(int& param1, int& param2)
 
 static void MainMenu(int& param1)
 {
-    n_ClearConsole();
+    DefendersUtils::ClearConsole();
     RestoreCursor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     std::string Color;
 
-    switch (n_RandInt(0, 3))
+    switch (DefendersRNG::RandInt(0, 3))
     {
         case 0:
             Color = BlueText(true);
@@ -304,31 +304,31 @@ static void MainMenu(int& param1)
 
     int selection;
 
-    n_KeyGuard();
+    DefendersUtils::KeyGuard();
     while (true)
     {
-        if (n_GetNumKey(1))
+        if (DefendersUtils::GetNumKey(1))
         {
             selection = 1;
             break;
         }
-        if (n_GetNumKey(2))
+        if (DefendersUtils::GetNumKey(2))
         {
             selection = 2;
             break;
         }
-        if (n_GetNumKey(3))
+        if (DefendersUtils::GetNumKey(3))
         {
             selection = 3;
             break;
         }
-        if (n_GetNumKey(4))
+        if (DefendersUtils::GetNumKey(4))
         {
             selection = 4;
             break;
         }
 
-        if (n_GetNumKey(5))
+        if (DefendersUtils::GetNumKey(5))
         {
             selection = 5;
             break;
@@ -357,7 +357,7 @@ static void MainMenu(int& param1)
 // They'll make you kill!
 static void KILL(int signum)
 {
-    n_ClearConsole();
+    DefendersUtils::ClearConsole();
     // Might as well clear the console.
 
     (*GLOBAL_REF).reset();
@@ -370,8 +370,8 @@ static void KILL(int signum)
 
 int main()
 {
-    n_ClearConsole();
-    n_SetGameTitle();
+    DefendersUtils::ClearConsole();
+    DefendersUtils::SetGameTitle();
 
     #ifndef _NORB_NO_SAVES_
 
