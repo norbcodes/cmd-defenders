@@ -18,7 +18,7 @@ struct Deco
     
     Deco(unsigned int x, unsigned int y, const std::string& skin) : x(x), y(y), skin(skin) {}
 
-    Deco(std::string skin, char X, char Y)
+    Deco(const std::string& skin, char X, char Y)
     {
         this->x = X;
         this->y = Y;

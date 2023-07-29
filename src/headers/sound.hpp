@@ -5,5 +5,8 @@ Playing SFX during gameplay.
 HELL YEAH!
 */
 
-void n_PlaySound(const char sound[]);
-void n_StopSounds();
+namespace DefendersSound
+{
+    void PlaySound(const char sound[]);
+    void StopSounds();
+}
