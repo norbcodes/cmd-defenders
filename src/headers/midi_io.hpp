@@ -101,8 +101,20 @@ namespace DefendersMidiIO
             }
     };
 
-    // Nevermind then, meta messages are not sent over a MIDI connection
-    // And pretty sure that Sysex won't be needed since we just need to play a midi file
+    struct MetaEvent
+    {
+        private:
+            unsigned char meta_type;
+            std::unique_ptr< std::vector<char> > data;
+        public:
+            MetaEvent(unsigned char meta_type, const VariableLength& var_length)
+            : meta_type(meta_type), data( std::make_unique< std::vector<char> >() )
+            {
+                this->data->reserve(var_length.GetLength());
+            }
+    };
+
+    // Pretty sure that Sysex won't be needed since we just need to play a midi file
 
     struct TrackEvent
     {
@@ -114,7 +126,7 @@ namespace DefendersMidiIO
         public:
             TrackEvent() : delta(0) {}
 
-            TrackEvent(const VariableLength& delta,const MidiEvent& midi_data)
+            TrackEvent(const VariableLength& delta, const MidiEvent& midi_data)
             : delta(delta), midi_data(midi_data) {}
     };
 

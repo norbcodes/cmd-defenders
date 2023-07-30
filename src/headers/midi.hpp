@@ -1,6 +1,7 @@
 #pragma once
 
 #include "midi_io.hpp"
+#include <memory>
 
 /*
 Functions from midi.cpp and stuff
@@ -12,9 +13,13 @@ namespace DefendersMidi
     struct Midi
     {
         DefendersMidiIO::HeaderChunk header;
-        DefendersMidiIO::TrackChunk track;
+        std::unique_ptr< std::vector<DefendersMidiIO::TrackChunk> > track;
 
-        Midi() : header( DefendersMidiIO::HeaderChunk() ), track( DefendersMidiIO::TrackChunk() ) {}
+        Midi()
+        : header( DefendersMidiIO::HeaderChunk() ), track( std::make_unique<std::vector<DefendersMidiIO::TrackChunk>>() ) 
+        {
+            this->track->reserve(INT8_MAX);  // 127 should be enough, hopefully
+        }
     };
 }
 

@@ -15,7 +15,9 @@
 
 #define HEX(a,b) ((int)a *0x0100) + (int)b
 
-#define isMidiValid(midi) ( ((int)midi.get() == 0x4D) && ((int)midi.get() == 0x54) && ((int)midi.get() == 0x68) && ((int)midi.get() == 0x64) )
+#define isMidiValid(midi)   ( ((int)midi.get() == 0x4D) && ((int)midi.get() == 0x54) && ((int)midi.get() == 0x68) && ((int)midi.get() == 0x64) )
+#define isTrackChunk(midi)  ( ((int)midi.get() == 0x4D) && ((int)midi.get() == 0x54) && ((int)midi.get() == 0x72) && ((int)midi.get() == 0x6B) )
+#define isMSBset(byte)      ( (byte % 0b10000000) == 0b10000000 )
 
 /*
 Wanted to use a library to read and parse midi files
@@ -45,6 +47,7 @@ void ReadMidiFile(const std::string& path, DefendersMidi::Midi& write_to)
     // Get rid of the next 4 bytes, they are the same in all midi files
     for (int i = 0; i != 4; i++) { MidiFile.get(); }
 
+    // Read header data
     write_to.header.SetFormat               ( HEX(MidiFile.get(), MidiFile.get()) );
     write_to.header.SetTrackChunkAmount     ( HEX(MidiFile.get(), MidiFile.get()) );
     write_to.header.SetDivision             ( HEX(MidiFile.get(), MidiFile.get()) );
@@ -54,4 +57,11 @@ void ReadMidiFile(const std::string& path, DefendersMidi::Midi& write_to)
     DEBUG_PRINT(write_to.header.GetDivision());
 
     DEBUG_PRINT_WAIT("Header info set");
+
+    // Read track chunk data
+    if (!isTrackChunk(MidiFile))
+    {
+        return;
+        // just return for now
+    }
 }
