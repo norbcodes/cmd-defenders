@@ -4,6 +4,8 @@
 #include <memory>
 #include <csignal>
 
+#include "headers/debug.hpp"
+
 #include "headers/rng.hpp"
 #include "headers/world.hpp"
 #include "headers/renderer.hpp"
@@ -14,6 +16,11 @@
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/save.hpp"
 #include "headers/game.hpp"
+
+#ifdef _NORB_DEBUG_
+#include "headers/midi.hpp"
+#include "headers/midi_io.hpp"
+#endif // _NORB_DEBUG_
 
 // DO NOT USE FOR ANYTHING.
 // LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
@@ -373,13 +380,23 @@ int main()
     DefendersUtils::ClearConsole();
     DefendersUtils::SetGameTitle();
 
+    #ifdef _NORB_DEBUG_
+
+    DEBUG_PRINT("sTUFF!");
+
+    DefendersMidi::Midi myMidi;
+    ReadMidiFile("C:\\Users\\roboh\\Desktop\\untitled.mid", myMidi);
+
+    DEBUG_PRINT_WAIT("end of sTUFF!");
+    #endif // _NORB_DEBUG_
+
     #ifndef _NORB_NO_SAVES_
 
     // users/
     // Unless it already exists, then do not do anything.
     CreateSaveDir();
 
-    #endif
+    #endif // _NORB_NO_SAVES_
 
     std::unique_ptr<GlobalData> GLOBAL      = std::make_unique<GlobalData>();
     std::unique_ptr<UserData>   USERDATA    = std::make_unique<UserData>();
@@ -464,5 +481,5 @@ int main()
         // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
         StartGame(std::to_string(selectedMap), selectedGamemode, USERDATA, GLOBAL);
     }
-    #endif
+    #endif // _NORB_ENTER_GAME_
 }

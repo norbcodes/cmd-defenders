@@ -1,3 +1,5 @@
+#include "headers/sound.hpp"
+
 #include <windows.h>
 #include <mmsystem.h>
 #include <string>
@@ -11,9 +13,9 @@ Playing SFX during gameplay.
 HELL YEAH!
 */
 
-namespace DefendersSound
+namespace DefenderSound
 {
-    void PlaySound(const char sound[])
+    void PlaySFX(const char sound[])
     {
         // Play a .wav sound.
         const std::string Filename = std::string(RESDIR) + std::string(SFXDIR) + std::string(sound) + ".wav";

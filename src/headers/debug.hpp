@@ -1,9 +1,7 @@
 #pragma once
 
 /*
-
 Debug my stuff please!
-
 */
 
 #ifdef _NORB_DEBUG_

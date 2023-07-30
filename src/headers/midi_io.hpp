@@ -11,7 +11,7 @@ namespace DefendersMidiIO
     {
         // Midi has this thing that sometimes when specifying length of events etc.
         // If the most significant byte is set, we need to read another byte.
-        // This means 0x81 0x7F translates to 255.
+        // This means 0x81 0x7F translates to 255 because why not apparently??
         private:
             unsigned int length;
 
@@ -40,6 +40,36 @@ namespace DefendersMidiIO
             HeaderChunk(unsigned short format, unsigned short track_chunks, short division)
             : format(format), track_chunks(track_chunks), division(division)
             {}
+
+            void SetFormat(unsigned short n)
+            {
+                this->format = n;
+            }
+
+            unsigned short GetFormat() const
+            {
+                return this->format;
+            }
+
+            void SetDivision(short n)
+            {
+                this->division = n;
+            }
+
+            short GetDivision() const
+            {
+                return this->division;
+            }
+
+            void SetTrackChunkAmount(unsigned short n)
+            {
+                this->track_chunks = n;
+            }
+
+            unsigned short GetTrackChunkAmount() const
+            {
+                return this->track_chunks;
+            }
     };
 
     struct MidiEvent
@@ -97,7 +127,7 @@ namespace DefendersMidiIO
         public:
             TrackChunk() : events( std::make_unique<std::vector<TrackEvent>>() )
             {
-                this->events->reserve(UINT64_MAX);
+                this->events->reserve(UINT16_MAX);
             }
 
             void PushBackEvent(const TrackEvent& event)

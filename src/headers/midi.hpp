@@ -1,4 +1,4 @@
-#pragma
+#pragma once
 
 #include "midi_io.hpp"
 
@@ -17,3 +17,5 @@ namespace DefendersMidi
         Midi() : header( DefendersMidiIO::HeaderChunk() ), track( DefendersMidiIO::TrackChunk() ) {}
     };
 }
+
+void ReadMidiFile(const std::string& path, DefendersMidi::Midi& write_to);
