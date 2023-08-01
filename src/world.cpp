@@ -1,10 +1,15 @@
 #include <string>
 #include <fstream>
-#include <iostream>
 #include <vector>
 #include "headers/world.hpp"
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/maps.hpp"
+
+#include "headers/debug.hpp"
+
+#ifdef _NORB_DEBUG_
+#include <iostream>
+#endif
 
 void InitializeWorld(std::unique_ptr<WorldClass>& world, const std::string& mapname)
 {
@@ -59,7 +64,11 @@ void InitializeWorld(std::unique_ptr<WorldClass>& world, const std::string& mapn
         // .emplace_back takes in the constructor arguments...
         // What the fuck Norb?
     }
-    //std::cout << t_World.Ai_Nodes[0].x << " " << t_World.Ai_Nodes[0].y;
+
+    #ifdef _NORB_DEBUG_
+    std::cout << (*(world->Ai_Nodes))[0].x << " " << (*(world->Ai_Nodes))[0].y << std::endl;
+    std::cin.get();
+    #endif
 
     // Deco loader
 

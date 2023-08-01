@@ -8,7 +8,6 @@
 
 #include "headers/rng.hpp"
 #include "headers/world.hpp"
-#include "headers/renderer.hpp"
 #include "headers/strings.hpp"
 #include "headers/utils.hpp"
 #include "headers/ui.hpp"
