@@ -30,10 +30,10 @@ static void WelcomeMessage()
 {
     // A smol welcome screen :>
     RestoreCursor();
-    std::cout << ItalicText() + G_NORB + "\n\n";
-    std::cout << BoldText() + BlueText(true) + (G_TITLE_WORD1 + '\n' + G_TITLE_WORD2 + '\n') + ResetColor();
-    std::cout << ItalicText() + G_NORB2 + '\n';
-    std::cout << BoldText() + U_ENTER + ResetColor();
+    std::cout << ItalicText() + DefendersStrings::G_NORB + "\n\n";
+    std::cout << BoldText() + BlueText(true) + (DefendersStrings::G_TITLE_WORD1 + '\n' + DefendersStrings::G_TITLE_WORD2 + '\n') + ResetColor();
+    std::cout << ItalicText() + DefendersStrings::G_NORB2 + '\n';
+    std::cout << BoldText() + DefendersStrings::U_ENTER + ResetColor();
     std::cin.get();
 }
 
@@ -42,8 +42,8 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
     DefendersUtils::ClearConsole();
     RestoreCursor();
     std::cout << LineSep();
-    std::cout << ItalicText() + RedText(true) + MM_CEX + "\n" + ResetColor();
-    std::cout << BoldText() + "1. " + U_YES + "\n" + "2. " + U_NO + "\n" + ResetColor();
+    std::cout << ItalicText() + RedText(true) + DefendersStrings::MM_CEX + "\n" + ResetColor();
+    std::cout << BoldText() + "1. " + DefendersStrings::U_YES + "\n" + "2. " + DefendersStrings::U_NO + "\n" + ResetColor();
     std::cout << LineSep();
 
     DefendersUtils::KeyGuard();
@@ -58,7 +58,7 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 
             DefendersUtils::KeyGuard();
             DefendersUtils::ClearConsole();
-            std::cout << BoldText() << BlueText(false) << G_ENDSCREEN << ResetColor() << '\n';
+            std::cout << BoldText() << BlueText(false) << DefendersStrings::G_ENDSCREEN << ResetColor() << '\n';
 
             std::cout << "\033[8m";
 
@@ -80,7 +80,6 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
 static void MapSelection(int& param1, int& param2)
 {
     /*
-
     Select a map, gamemode and play!
     */
 
@@ -105,10 +104,10 @@ static void MapSelection(int& param1, int& param2)
         std::cout << WhiteText(false) << LineSep() << ResetColor();
 
         std::cout << BlueText(true) << BoldText() << ItalicText();
-        std::cout << (gamemodeSelection ? MM_MESG2 : MM_MESG);
+        std::cout << (gamemodeSelection ? DefendersStrings::MM_MESG2 : DefendersStrings::MM_MESG);
         std::cout << ResetColor() << "\n\n";
 
-        std::cout << WhiteText(false) + MM_MAP + ResetColor() << "\n\n";
+        std::cout << WhiteText(false) + DefendersStrings::MM_MAP + ResetColor() << "\n\n";
 
         std::cout << BoldText();
         if (!gamemodeSelection)
@@ -119,26 +118,26 @@ static void MapSelection(int& param1, int& param2)
                 std::cout << (i + 1) << ". " << MainMaps[i + (page * 5)]["name"] << "                 \n";
             }
             std::cout << SEP << "\n";
-            std::cout << ResetColor() << "\n" << WhiteText(false) << MM_ARROWS << "\n\n";
+            std::cout << ResetColor() << "\n" << WhiteText(false) << DefendersStrings::MM_ARROWS << "\n\n";
         }
         else
         {
             std::cout << ResetColor() << BoldText();
             std::cout << "Gamemodes:" << "\n" << SEP << "\n";
             std::cout << ResetColor() << ItalicText();
-            std::cout << WhiteText(true) << "1. " << MM_GM1 << "\n";
-            std::cout << OrangeText(false) << "2. " << MM_GM2 << "\n";
-            std::cout << RedText(true) << "3. " << MM_GM3 << "\n";
-            std::cout << GreenText(true) << "4. " << MM_GM4 << "\n";
-            std::cout << MagentaText(false) << "5. " << MM_GM5 << "\n";
-            std::cout << BoldText() << BlueText(false) << "6. " << MM_GM6 << ResetColor();
+            std::cout << WhiteText(true) << "1. " << DefendersStrings::MM_GM1 << "\n";
+            std::cout << OrangeText(false) << "2. " << DefendersStrings::MM_GM2 << "\n";
+            std::cout << RedText(true) << "3. " << DefendersStrings::MM_GM3 << "\n";
+            std::cout << GreenText(true) << "4. " << DefendersStrings::MM_GM4 << "\n";
+            std::cout << MagentaText(false) << "5. " << DefendersStrings::MM_GM5 << "\n";
+            std::cout << BoldText() << BlueText(false) << "6. " << DefendersStrings::MM_GM6 << ResetColor();
             std::cout << BoldText() << SEP << "\n\n" << ResetColor();
         }
 
-        std::cout << BoldText() << RedText(true) << "0. " << MM_BACK << "\n";
+        std::cout << BoldText() << RedText(true) << "0. " << DefendersStrings::MM_BACK << "\n";
         if (gamemodeSelection)
         {
-            std::cout << RedText(true) << "9. " << MM_RETURN << "\n";
+            std::cout << RedText(true) << "9. " << DefendersStrings::MM_RETURN << "\n";
         }
         std::cout << ResetColor() << WhiteText(false) << LineSep() << ResetColor();
 
@@ -299,13 +298,13 @@ static void MainMenu(int& param1)
             break;
     }
 
-    std::cout << Color + BoldText() + (G_TITLE_SMALL) + ResetColor();
-    std::cout << BoldText() << ItalicText() << "\t\t\t\t\t" << G_NORB_ALT << "\n" << ResetColor();
-    std::cout << BoldText() + GreenText(true) + "1. " + MM_PLAY << "\n";
-    std::cout << OrangeText(false) <<"2. " + MM_OPT << "\n";
-    std::cout << MagentaText(true) <<"3. " + MM_CT << "\n";
-    std::cout << CyanText(false) << "4. " + MM_HAND << "\n";
-    std::cout << RedText(true) <<"5. " + MM_EX << "\n" + ResetColor();
+    std::cout << Color + BoldText() + (DefendersStrings::G_TITLE_SMALL) + ResetColor();
+    std::cout << BoldText() << ItalicText() << "\t\t\t\t\t" << DefendersStrings::G_NORB_ALT << "\n" << ResetColor();
+    std::cout << BoldText() + GreenText(true) + "1. " + DefendersStrings::MM_PLAY << "\n";
+    std::cout << OrangeText(false) <<"2. " + DefendersStrings::MM_OPT << "\n";
+    std::cout << MagentaText(true) <<"3. " + DefendersStrings::MM_CT << "\n";
+    std::cout << CyanText(false) << "4. " + DefendersStrings::MM_HAND << "\n";
+    std::cout << RedText(true) <<"5. " + DefendersStrings::MM_EX << "\n" + ResetColor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 
     int selection;

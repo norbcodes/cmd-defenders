@@ -46,13 +46,13 @@ void UsernameScreen(std::string& dest)
     std::cout << ResetColor() << WhiteText(false) << LineSep();
 
     std::cout << ResetColor();
-    std::cout << BoldText() << WhiteText(true) << USER_LINE1 << '\n' << ResetColor();
-    std::cout << BlueText(true) << USER_LINE2 << '\n';
-    std::cout << ItalicText() << RedText(true) << USER_LINE3 << ResetColor();
+    std::cout << BoldText() << WhiteText(true) << DefendersStrings::USER_LINE1 << '\n' << ResetColor();
+    std::cout << BlueText(true) << DefendersStrings::USER_LINE2 << '\n';
+    std::cout << ItalicText() << RedText(true) << DefendersStrings::USER_LINE3 << ResetColor();
     DefendersUtils::KeyGuard();
     std::getline( std::cin, dest );
-    std::cout << '\n' << BoldText() << GreenText(false) << USER_WELC1 << dest << USER_WELC2 << '\n';
-    std::cout << ResetColor() << BlackText(true) << U_ENTER << ResetColor() << '\n';
+    std::cout << '\n' << BoldText() << GreenText(false) << DefendersStrings::USER_WELC1 << dest << DefendersStrings::USER_WELC2 << '\n';
+    std::cout << ResetColor() << BlackText(true) << DefendersStrings::U_ENTER << ResetColor() << '\n';
 
     std::cout << ResetColor() << WhiteText(false) << LineSep();
 
