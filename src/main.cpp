@@ -23,8 +23,8 @@
 
 // DO NOT USE FOR ANYTHING.
 // LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
-static std::unique_ptr<GlobalData>*     GLOBAL_REF;
-static std::unique_ptr<UserData>*       USER_REF; 
+std::unique_ptr<GlobalData>     GLOBAL;
+std::unique_ptr<UserData>       USERDATA; 
 
 static void WelcomeMessage()
 {
@@ -37,7 +37,7 @@ static void WelcomeMessage()
     std::cin.get();
 }
 
-static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<UserData>& user)
+static void ConfirmExit()
 {
     DefendersUtils::ClearConsole();
     RestoreCursor();
@@ -53,8 +53,8 @@ static void ConfirmExit(std::unique_ptr<GlobalData>& global, std::unique_ptr<Use
         {
             DefendersUtils::ClearConsole();
 
-            global.reset();
-            user.reset();
+            GLOBAL.reset();
+            USERDATA.reset();
 
             DefendersUtils::KeyGuard();
             DefendersUtils::ClearConsole();
@@ -365,8 +365,8 @@ static void KILL(int signum)
     DefendersUtils::ClearConsole();
     // Might as well clear the console.
 
-    (*GLOBAL_REF).reset();
-    (*USER_REF).reset();
+    GLOBAL.reset();
+    USERDATA.reset();
     std::string useless;
     std::cin >> useless;
     std::cout << useless << ResetColor();
@@ -396,12 +396,8 @@ int main()
 
     #endif // _NORB_NO_SAVES_
 
-    std::unique_ptr<GlobalData> GLOBAL      = std::make_unique<GlobalData>();
-    std::unique_ptr<UserData>   USERDATA    = std::make_unique<UserData>();
-
-    // magic
-    GLOBAL_REF = &GLOBAL;
-    USER_REF = &USERDATA;
+    GLOBAL      = std::make_unique<GlobalData>();
+    USERDATA    = std::make_unique<UserData>();
 
     // Ah yes, signal handling!
     signal(SIGINT, KILL);
@@ -456,12 +452,12 @@ int main()
                 {
                     // Enter game!
                     // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-                    StartGame(std::to_string(selectedMap), selectedGamemode, USERDATA, GLOBAL);
+                    StartGame(std::to_string(selectedMap), selectedGamemode);
                 }
                 break;
 
             case 5:
-                ConfirmExit(GLOBAL, USERDATA);
+                ConfirmExit();
                 break;
         }
     }
@@ -477,7 +473,7 @@ int main()
     {
         // Enter game!
         // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        StartGame(std::to_string(selectedMap), selectedGamemode, USERDATA, GLOBAL);
+        StartGame(std::to_string(selectedMap), selectedGamemode);
     }
     #endif // _NORB_ENTER_GAME_
 }

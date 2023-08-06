@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <bits/stdc++.h>
 #include <unordered_map>
 
 #include "headers/world.hpp"
@@ -13,8 +12,7 @@
 #define SCREEN_W 97
 #define SCREEN_H 30  // 28 + 2
 
-static char RendererCache[MAP_W * MAP_H + 1];
-static char ScreenLayout[SCREEN_W * SCREEN_H + 1];
+static std::string RendererCache;
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
@@ -54,77 +52,6 @@ static void InitializeMap()
     CharacterMap[0b10000000] = '+';
 }
 
-static void GenerateScreenLayoutCache()
-{
-    char LineSep[SCREEN_W];
-    char Edges[SCREEN_W];
-
-    memset(ScreenLayout, ' ', sizeof(char) * (SCREEN_H * SCREEN_W));
-
-    ////////////////////////////////////////
-    // GENERATE INDIVIDUAL COMPONENTS     //
-    ////////////////////////////////////////
-
-    DEBUG_PRINT("Linesep gen");
-
-    // Generate the Line Sep
-    LineSep[0] = '+';
-    for (int i = 1; i != MAP_W; i++)
-    {
-        LineSep[i] = '-';
-    }
-    LineSep[MAP_W] = '+';  // 64th index, right after the last -
-    for (int i = 65; i != SCREEN_W; i++)
-    {
-        LineSep[i] = '-';  // Because of the UI
-    }
-    LineSep[SCREEN_W-2] = '+';  // The very last index. And we're done!
-    LineSep[SCREEN_W-1] = '\0';  // The very last index. And we're done!
-
-    // Generate the Edges
-    Edges[0] = '|';
-    for (int i = 1; i != MAP_W; i++)
-    {
-        Edges[i] = ' ';
-    }
-    Edges[MAP_W] = '|';
-    for (int i = 65; i != SCREEN_W; i++)
-    {
-        Edges[i] = ' ';
-    }
-    Edges[SCREEN_W-2] = '|';  // And we're done with both of these!
-    Edges[SCREEN_W-1] = '\0'; 
-
-    DEBUG_PRINT(LineSep);
-    DEBUG_PRINT(Edges);
-    DEBUG_PRINT_WAIT(LineSep);
-
-    ////////////////////////////////////////
-    // NOW START GENERATING               //
-    ////////////////////////////////////////
-
-    DEBUG_PRINT("Gen finished successfully");
-
-    // Does this even work
-    #ifdef _NORB_DEBUG_
-    DEBUG_PRINT_WAIT("About to print LineSep");
-    for (int i = 0; i != SCREEN_W; i++)
-    {
-        std::cout << LineSep[i];
-    }
-    std::cout << std::endl;
-    DEBUG_PRINT_WAIT("About to print ScreenLayout");
-    for (int i = 0; i != SCREEN_W * SCREEN_H; i++)
-    {
-        if (i % SCREEN_W == 0)
-        {
-            std::cout << std::endl;
-        }
-        std::cout << ScreenLayout[i];
-    }
-    #endif
-}
-
 static void Blit(std::string& buffer, unsigned int x, unsigned int y, const std::string& txt, const std::string& styles)
 {
     // A handy function that blits text to the screen buffer
@@ -137,9 +64,14 @@ void GenerateCache(const WorldClass& world)
 
     // Generate the RendererCache.
 
+    for (int i = 0; i != MAP_H * MAP_W; i++)
+    {
+        RendererCache += ' ';
+    }
+
     const char TrackMarker = '@';  // doesn't have to be that, can be anything really
 
-    memset(RendererCache, ' ', sizeof(char) * (MAP_W * MAP_H));
+    DEBUG_PRINT_WAIT("Write track markers");
 
     // Draw Track markers in the RendererCache
     for (unsigned int i = 0; i != (*(world.Ai_Nodes)).size(); i++)
@@ -171,6 +103,8 @@ void GenerateCache(const WorldClass& world)
             }
         }
     }
+
+    DEBUG_PRINT_WAIT("Write track edges");
 
     for (int i = 0; i != MAP_W * MAP_H; i++)
     {
@@ -220,6 +154,8 @@ void GenerateCache(const WorldClass& world)
         RendererCache[i] = CharacterMap[score];
     }
 
+    DEBUG_PRINT_WAIT("Done");
+
     // All done, cache generated, now delete all track markers
     for (int i = 0; i != (MAP_H * MAP_W); i++)
     {
@@ -229,9 +165,16 @@ void GenerateCache(const WorldClass& world)
         }
     }
 
+    #ifdef _NORB_DEBUG_
+    DEBUG_PRINT("Render cache print");
+    for (int i = 0; i != MAP_H * MAP_W; i++)
+    {
+        if (i % MAP_W == 0) { std::cout << std::endl; }
+        std::cout << RendererCache[i];
+    }
+    #endif  // _NORB_DEBUG_
+
     // Cache generated. Can be used by the rendering function now.
-    // Also generate screen layout pls
-    GenerateScreenLayoutCache();
 }
 
 void Render(const WorldClass& world)

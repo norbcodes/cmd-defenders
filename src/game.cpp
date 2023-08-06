@@ -11,6 +11,9 @@
 
 #include "headers/debug.hpp"
 
+extern std::unique_ptr<GlobalData>     GLOBAL;
+extern std::unique_ptr<UserData>       USERDATA; 
+
 // Game loop and stuff!
 
 //          KEYS
@@ -38,7 +41,7 @@ static void DetectKeys()
     KEYS[6] = DefendersUtils::GetPKey();
 }
 
-void StartGame(const std::string& map, int gamemode, std::unique_ptr<UserData>& USERDATA, std::unique_ptr<GlobalData>& GLOBAL)
+void StartGame(const std::string& map, int gamemode)
 {
     DefendersUtils::ClearConsole();
 
