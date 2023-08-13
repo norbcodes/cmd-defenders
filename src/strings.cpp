@@ -99,6 +99,29 @@ namespace DefendersStrings
     std::string HB_CAT1     = "Controls...";
     std::string HB_CAT2     = "How to play...";
     std::string HB_CAT3     = "All about modding...";
-    std::string HB_ADD_CAT  = "Addon Handbook Entries...";  // handbook entries for other addons
+    std::string HB_ADD_CAT  = "Modded Handbook Entries...";  // handbook entries for other addons
     std::string HB_CAT4     = "Credits where they are due...";
+}
+
+#include "headers/ui.hpp"
+
+namespace DefendersHandbook
+{
+    // Only the vanilla handbook
+    // Modded handbooks are handled differently
+
+    // prefix CAT_CT - Category "Controls..."
+    std::string CAT_CT_TEXT = \
+    BoldText() + 
+    "---=== Controls ===---\n" \
+    + ResetColor() + \
+    "The controls are pretty simple in this game, as it is text based, you only\n \
+    need the keyboard. \
+    \n\n \
+    You can use the numpad keys to navigate the tower sidebar, \
+    \nuse the + or - to scroll down or up \
+    \nand press enter to select it. \
+    \nYou can use WSAD or the arrow keys to \
+    \nmove the tower where you want it and press enter to place it down. \
+    \n\nAs for powerups, you can use the three keys right next to where the key \"M\" is.\n\n";
 }

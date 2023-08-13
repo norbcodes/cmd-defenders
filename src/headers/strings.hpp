@@ -50,3 +50,8 @@ namespace DefendersStrings
 
     // So beautiful to look at...
 }
+
+namespace DefendersHandbook
+{
+    extern std::string CAT_CT_TEXT;
+}

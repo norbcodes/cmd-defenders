@@ -15,10 +15,7 @@
 #include "headers/nlohmann_json/json.hpp"
 #include "headers/save.hpp"
 #include "headers/game.hpp"
-
-#ifdef _NORB_DEBUG_
-#include "headers/midi.hpp"
-#endif // _NORB_DEBUG_
+#include "headers/handbook.hpp"
 
 // DO NOT USE FOR ANYTHING.
 // LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
@@ -40,7 +37,7 @@ static void ConfirmExit()
 {
     DefendersUtils::ClearConsole();
     RestoreCursor();
-    std::cout << LineSep();
+    std::cout << WhiteText(false) << LineSep() << ResetColor();
     std::cout << ItalicText() + RedText(true) + DefendersStrings::MM_CEX + "\n" + ResetColor();
     std::cout << BoldText() + "1. " + DefendersStrings::U_YES + "\n" + "2. " + DefendersStrings::U_NO + "\n" + ResetColor();
     std::cout << LineSep();
@@ -432,7 +429,7 @@ int main()
 
         switch (MainMenuOption)
         {
-            case 1:
+            case 1:  // Play game option
                 int selectedMap;
                 int selectedGamemode;
                 MapSelection(selectedMap, selectedGamemode);
@@ -445,7 +442,11 @@ int main()
                 }
                 break;
 
-            case 5:
+            case 4:  // Enter handbook
+                EnterHandbook();
+                break;
+
+            case 5:  // Exit :(
                 ConfirmExit();
                 break;
         }
