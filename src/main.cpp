@@ -18,7 +18,6 @@
 
 #ifdef _NORB_DEBUG_
 #include "headers/midi.hpp"
-#include "headers/midi_io.hpp"
 #endif // _NORB_DEBUG_
 
 // DO NOT USE FOR ANYTHING.
@@ -377,16 +376,6 @@ int main()
 {
     DefendersUtils::ClearConsole();
     DefendersUtils::SetGameTitle();
-
-    #ifdef _NORB_DEBUG_
-
-    DEBUG_PRINT("sTUFF!");
-
-    DefendersMidi::Midi myMidi;
-    ReadMidiFile("C:\\Users\\roboh\\Desktop\\untitled.mid", myMidi);
-
-    DEBUG_PRINT_WAIT("end of sTUFF!");
-    #endif // _NORB_DEBUG_
 
     #ifndef _NORB_NO_SAVES_
 
