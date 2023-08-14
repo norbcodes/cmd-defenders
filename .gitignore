@@ -10,3 +10,9 @@ global.json
 resources/
 resources/*
 resources/*.*
+
+*.py
+obj/
+obj/*
+# What the hell? Python files in a C++ game??
+# Naaah the python script just recompiles files that have been changed since the last compilation :P
