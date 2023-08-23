@@ -10,3 +10,4 @@ global.json
 resources/
 resources/*
 resources/*.*
+/*.dll
