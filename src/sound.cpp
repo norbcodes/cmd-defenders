@@ -6,19 +6,19 @@
 
 #include "headers/resdir.hpp"
 
-#define SFXDIR "sounds\\"
+#define SFXDIR std::string(RESDIR) + std::string("sounds\\")
 
 /*
 Playing SFX during gameplay.
 HELL YEAH!
 */
 
-namespace DefenderSound
+namespace DefendersSound
 {
     void PlaySFX(const char sound[])
     {
         // Play a .wav sound.
-        const std::string Filename = std::string(RESDIR) + std::string(SFXDIR) + std::string(sound) + ".wav";
+        const std::string Filename = SFXDIR + std::string(sound) + std::string(".wav");
 
         PlaySoundA(LPCSTR(Filename.c_str()), NULL, SND_ASYNC | SND_FILENAME);
     }

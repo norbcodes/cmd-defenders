@@ -1,7 +1,6 @@
 #define _WIN32_WINNT 0x0500
 #include <windows.h>
 #include <winuser.h>
-//#include <tchar.h>
 #include <strsafe.h>
 #include <chrono>
 #include <thread>
