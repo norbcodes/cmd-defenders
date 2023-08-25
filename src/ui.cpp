@@ -7,91 +7,42 @@
 
 std::string BlackText(bool bright)
 {
-    switch (bright)
-    {
-        // 0 = false, 1 = true obviously
-        case 0:
-            return C_BLACK;
-        case 1:
-            return CB_BLACK;
-    }
+    return (bright ? C_BLACK : CB_BLACK);
 }
 
 std::string RedText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_RED;
-        case 1:
-            return CB_RED;
-    }
+    return (bright ? C_RED : CB_RED);
 }
 
 std::string GreenText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_GREEN;
-        case 1:
-            return CB_GREEN;
-    }
+    return (bright ? C_GREEN : CB_GREEN);
 }
 
 std::string OrangeText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_YELLOW;
-        case 1:
-            return CB_YELLOW;
-    }
+    return (bright ? C_YELLOW : CB_YELLOW);
 }
 
 std::string BlueText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_BLUE;
-        case 1:
-            return CB_CYAN;
-    }
+    return (bright ? C_BLUE : CB_CYAN);
 }
 
 std::string MagentaText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_MAGENTA;
-        case 1:
-            return CB_MAGENTA;
-    }
+    return (bright ? C_MAGENTA : CB_MAGENTA);
 }
 
 std::string CyanText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_CYAN;
-        case 1:
-            return CB_CYAN;
-    }
+    return (bright ? C_CYAN : CB_CYAN);
 }
 
 std::string WhiteText(bool bright)
 {
-    switch (bright)
-    {
-        case 0:
-            return C_WHITE;
-        case 1:
-            return CB_WHITE;
-    }
+    return (bright ? C_WHITE : CB_WHITE);
 }
 
 std::string ResetColor()

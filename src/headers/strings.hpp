@@ -41,17 +41,17 @@ namespace DefendersStrings
     extern std::string MM_GM6;
     extern std::string MM_RETURN;
 
+    // So beautiful to look at...
+}
+
+namespace DefendersHandbook
+{
     extern std::string HB_GREET;
     extern std::string HB_CAT1;
     extern std::string HB_CAT2;
     extern std::string HB_CAT3;
     extern std::string HB_ADD_CAT;
     extern std::string HB_CAT4;
-
-    // So beautiful to look at...
-}
-
-namespace DefendersHandbook
-{
+    
     extern std::string CAT_CT_TEXT;
 }

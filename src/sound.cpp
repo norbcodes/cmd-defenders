@@ -6,8 +6,6 @@
 
 #include "headers/resdir.hpp"
 
-#define SFXDIR std::string(RESDIR) + std::string("sounds\\")
-
 /*
 Playing SFX during gameplay.
 HELL YEAH!
@@ -23,7 +21,7 @@ namespace DefendersSound
         PlaySoundA(LPCSTR(Filename.c_str()), NULL, SND_ASYNC | SND_FILENAME);
     }
 
-    void StopSounds()
+    void StopSFX()
     {
         // Stops all currently playing sounds.
         PlaySoundA(NULL, 0, 0);

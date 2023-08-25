@@ -93,14 +93,6 @@ namespace DefendersStrings
     std::string MM_GM5      = "Reverse!\n   Enemies approach from the other end of the track.\n";
     std::string MM_GM6      = "Sandbox\n   Unlimited money and lives. You can also spawn enemies at will.\n";
     std::string MM_RETURN   = "Go back to map selection";
-
-    // prefix HB - Hand book
-    std::string HB_GREET    = "This is the official game Handbook. Pick a category...";
-    std::string HB_CAT1     = "Controls...";
-    std::string HB_CAT2     = "How to play...";
-    std::string HB_CAT3     = "All about modding...";
-    std::string HB_ADD_CAT  = "Modded Handbook Entries...";  // handbook entries for other addons
-    std::string HB_CAT4     = "Credits where they are due...";
 }
 
 #include "headers/ui.hpp"
@@ -109,6 +101,14 @@ namespace DefendersHandbook
 {
     // Only the vanilla handbook
     // Modded handbooks are handled differently
+
+    // prefix HB - Hand book
+    std::string HB_GREET    = "This is the official game Handbook. Pick a category...";
+    std::string HB_CAT1     = "Controls...";
+    std::string HB_CAT2     = "How to play...";
+    std::string HB_CAT3     = "All about modding...";
+    std::string HB_ADD_CAT  = "Modded Handbook Entries...";  // handbook entries for other addons
+    std::string HB_CAT4     = "Credits where they are due...";
 
     // prefix CAT_CT - Category "Controls..."
     std::string CAT_CT_TEXT = \
@@ -123,5 +123,5 @@ namespace DefendersHandbook
     \nand press enter to select it. \
     \nYou can use WSAD or the arrow keys to \
     \nmove the tower where you want it and press enter to place it down. \
-    \n\nAs for powerups, you can use the three keys right next to where the key \"M\" is.\n\n";
+    \n\nAs for powerups, you can use the three keys on the right from where the key \"M\" is.\n\n";
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#define SAVEDIR             "./users/"
+#define SAVEDIR             "./Users/"
 #define GLOBALJSON          "./global.json"
 
 #include <fstream>
@@ -92,7 +92,7 @@ struct UserData
             this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
             this->path = path;
             this->_LoadValues();
-            #endif
+            #endif // _NORB_NO_SAVES_
         }
 
         void LoadSave(const std::string& path)
@@ -101,7 +101,7 @@ struct UserData
             this->parsed_json = nlohmann::json::parse( std::ifstream(SAVEDIR + path + ".json") );
             this->path = path;
             this->_LoadValues();
-            #endif
+            #endif // _NORB_NO_SAVES_
         }
 
         void Save()
@@ -120,7 +120,7 @@ struct UserData
 
             #ifndef _NORB_NO_SAVES_
             std::ofstream(SAVEDIR + this->path + ".json") << this->parsed_json.dump(4, ' ', true);
-            #endif
+            #endif // _NORB_NO_SAVES_
         }
 
         ~UserData()
@@ -194,7 +194,7 @@ struct GlobalData
             {
                 this->_LoadValues();
             }
-            #endif
+            #endif // _NORB_NO_SAVES_
         }
 
         void Save()
@@ -204,7 +204,7 @@ struct GlobalData
 
             #ifndef _NORB_NO_SAVES_
             std::ofstream(GLOBALJSON) << this->parsed_json.dump(4, ' ', true);
-            #endif
+            #endif // _NORB_NO_SAVES_
         }
 
         ~GlobalData()

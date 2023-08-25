@@ -8,6 +8,7 @@
     <li>If you're on anything other than Windows 10, winmm may be useless.</li>
     <li>Yes, I compiled Fluidsynth from source.</li>
     <li>Make sure to put the Fluidsynth DLL next to the game exe (mainly a note for Norb).</li>
+    <li>Last compiled fluidsynth version: 2.3.3.</li>
 </ul>
 
 <p><i>Thank your for you patience.</i></p>

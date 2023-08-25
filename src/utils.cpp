@@ -10,6 +10,8 @@
 Functions for setting the console title and some more stuff.
 */
 
+#define PKEY 0x50
+
 namespace DefendersUtils
 {
     bool GetArrowKey(int arrow)
@@ -94,7 +96,7 @@ namespace DefendersUtils
     bool GetPKey()
     {
         // Pausing during the game
-        return GetAsyncKeyState(0x50);
+        return GetAsyncKeyState(PKEY);
     }
 
     void KeyGuard()

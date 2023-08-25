@@ -11,7 +11,7 @@
 
 #include "headers/debug.hpp"
 
-extern std::unique_ptr<GlobalData>     GLOBAL;
+extern std::unique_ptr<GlobalData>     GLOBALDATA;
 extern std::unique_ptr<UserData>       USERDATA; 
 
 // Game loop and stuff!
@@ -45,10 +45,9 @@ void StartGame(const std::string& map, int gamemode)
 {
     DefendersUtils::ClearConsole();
 
+    DEBUG_PRINT(map);
+    DEBUG_PRINT(gamemode);
     DEBUG_PRINT_WAIT("in game");
-
-    // USERDATA and GLOBAL is passed in so we can modify global and user data
-    // obviously
 
     // Create unique_ptr of WORLD
     std::unique_ptr<WorldClass> WORLD       = std::make_unique<WorldClass>();
@@ -72,9 +71,9 @@ void StartGame(const std::string& map, int gamemode)
     No! Not yet atleast...
     */
 
-    //////////////////////////////////////A
     // HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    //////////////////////////////////////A
+    // calm down Norb
+
     while (GameLoop)
     {
         RestoreCursor();

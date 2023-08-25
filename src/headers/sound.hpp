@@ -8,5 +8,5 @@ HELL YEAH!
 namespace DefendersSound
 {
     void PlaySFX(const char sound[]);
-    void StopSounds();
+    void StopSFX();
 }

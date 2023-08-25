@@ -17,9 +17,10 @@
 #include "headers/game.hpp"
 #include "headers/handbook.hpp"
 
-// DO NOT USE FOR ANYTHING.
-// LOAD THESE SO WE CAN HANDLE SIGINT AND SIGBREAK SIGNALS.
-std::unique_ptr<GlobalData>     GLOBAL;
+
+// Global variables, oh no!
+// Fight me, I dare you.
+std::unique_ptr<GlobalData>     GLOBALDATA;
 std::unique_ptr<UserData>       USERDATA; 
 
 static void WelcomeMessage()
@@ -49,7 +50,7 @@ static void ConfirmExit()
         {
             DefendersUtils::ClearConsole();
 
-            GLOBAL.reset();
+            GLOBALDATA.reset();
             USERDATA.reset();
 
             DefendersUtils::KeyGuard();
@@ -192,17 +193,17 @@ static void MapSelection(int& param1, int& param2)
             }
         }
 
-        if (!gamemodeSelection)
+        if (!gamemodeSelection)  // Not selecting a gamemode
         {
-            if (!(selection >= 1 && selection <= 5))
+            if (!(selection >= 1 && selection <= 5))  // The selection value is not within 1 and 5
             {
                 switch (selection)
                 {
-                    case 0:
+                    case 0:  // Exit to main menu
                         inLoop = false;
                         break;
 
-                    case 15:
+                    case 15:  // Next page
                         page += 1;
                         if (page > maxPages)
                         {
@@ -210,7 +211,7 @@ static void MapSelection(int& param1, int& param2)
                         }
                         break;
 
-                    case 16:
+                    case 16:  // Previous page
                         page -= 1;
                         if (page < 0)
                         {
@@ -219,26 +220,27 @@ static void MapSelection(int& param1, int& param2)
                         break;
                 }
             }
-            else
+            else  // The selection value is within 1 and 5, meaning the use has picked a map.
             {
                 DefendersUtils::ClearConsole();
-                gamemodeSelection = true;
-                selectedMap = selection + (page * 5);
+                gamemodeSelection = true;  // Go to gamemode selection
+                selectedMap = selection + (page * 5);  // Remember the selected map
                 // this calculation doesn't account for the fact that indexes start at 0
                 // Very devilish bug :(
+                // it *used to, Norb. Word your shit better next time.
             }
         }
-        else
+        else  // In gamemode selection
         {
-            if (!(selection >= 1 && selection <= 6))
+            if (!(selection >= 1 && selection <= 6))  // Selection value not within 1 and 6
             {
                 switch (selection)
                 {
-                    case 0:
+                    case 0:  // Exit to main menu
                         inLoop = false;
                         break;
 
-                    case 9:
+                    case 9:  // Go back to map selection
                         DefendersUtils::ClearConsole();
                         gamemodeSelection = false;
                         selectedMap = -1;
@@ -246,15 +248,16 @@ static void MapSelection(int& param1, int& param2)
                         break;
                 }
             }
-            else
+            else  // Selection value within 1 and 6, user picked a gamemode
             {
-                selectedGamemode = selection;
+                selectedGamemode = selection;  // Remember the gamemode
                 inLoop = false;
                 break;
             }
         }
     }
 
+    // check if the map and gamemode have been set
     if ( selectedMap != -1 && selectedGamemode != -1 )
     {
         param1 = selectedMap - 1;
@@ -361,7 +364,7 @@ static void KILL(int signum)
     DefendersUtils::ClearConsole();
     // Might as well clear the console.
 
-    GLOBAL.reset();
+    GLOBALDATA.reset();
     USERDATA.reset();
     std::string useless;
     std::cin >> useless;
@@ -382,8 +385,8 @@ int main()
 
     #endif // _NORB_NO_SAVES_
 
-    GLOBAL      = std::make_unique<GlobalData>();
-    USERDATA    = std::make_unique<UserData>();
+    GLOBALDATA      = std::make_unique<GlobalData>();
+    USERDATA        = std::make_unique<UserData>();
 
     // Ah yes, signal handling!
     signal(SIGINT, KILL);
@@ -392,22 +395,22 @@ int main()
     #ifndef _NORB_ENTER_GAME_
     #ifndef _NORB_NO_SAVES_
 
-    if (GLOBAL->GetUser() == "")
+    if (GLOBALDATA->GetUser() == "")
     {
         std::string USERNAME;
         UsernameScreen(USERNAME);
-        GLOBAL->SetUser(USERNAME);
+        GLOBALDATA->SetUser(USERNAME);
     }
 
     // Load user data.
-    if (!SaveFileExists(GLOBAL->GetUser()))
+    if (!SaveFileExists(GLOBALDATA->GetUser()))
     {
-        USERDATA->SetPath(GLOBAL->GetUser());
-        USERDATA->SetUsername(GLOBAL->GetUser());
+        USERDATA->SetPath(GLOBALDATA->GetUser());
+        USERDATA->SetUsername(GLOBALDATA->GetUser());
     }
     else
     {
-        USERDATA->LoadSave(GLOBAL->GetUser());
+        USERDATA->LoadSave(GLOBALDATA->GetUser());
     }
 
     #endif  // _NORB_NO_SAVES_
@@ -415,7 +418,7 @@ int main()
     // i love mf366!!
 
     // Why would anyone not like the welcome screen? :(
-    if ( GLOBAL->Get_WS_option() )
+    if (GLOBALDATA->Get_WS_option())
     {
         WelcomeMessage();
     }
