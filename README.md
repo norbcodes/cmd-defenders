@@ -6,10 +6,16 @@
 | |   | '_ ` _ \ / _` |     | | | / _ \  _/ _ \ '_ \ / _` |/ _ \ '__/ __|
 | \__/\ | | | | | (_| |     | |/ /  __/ ||  __/ | | | (_| |  __/ |  \__ \
  \____/_| |_| |_|\__,_|     |___/ \___|_| \___|_| |_|\__,_|\___|_|  |___/
-	                                    A game by Norb.
+										A game by Norb.
 </b>
 </pre>
-<p>A tower defense games, made entirely out of ASCII characters, running in the CMD!</p>
+<p>
+A tower defense games, made entirely out of ASCII characters, running in the CMD!<br>
+<i>Special thanks to nlohmann for the 
+<a href="https://github.com/nlohmann/json">C++ Json parsing library</a>, 
+and the Fluidsynth team for well... the 
+<a href = "https://github.com/FluidSynth/fluidsynth">Fluidsynth library</a>!</i>
+</p>
 
 <h2>The objective</h2>
 <p>
@@ -23,12 +29,12 @@
   There are 20 maps you can choose.<br>
   On each map, you can select from 6 different gamemodes:<br>
   <ul>
-    <li><b><i>Standard</b></i><br>Default gamemode.</li>
-    <li><b><i>Hard</b></i><br>Enemies have 1.5x more HP and take 1 extra life when they get through.</li>
-    <li><b><i>CMD Pro</b></i><br>Enemies have 2x more HP, move 2x faster and take 2 extra lives when they get through.</li>
-    <li><b><i>Half Cash</b></i><br>After each wave and for each enemy kill, you recieve half of the cash.</li>
-    <li><b><i>Reverse!</b></i><br>Enemies start at the end of track.</li>
-    <li><b><i>Sandbox</b></i><br>Unlimited money and lives. You can also spawn enemies at will.</li>
+	<li><b><i>Standard</b></i><br>Default gamemode.</li>
+	<li><b><i>Hard</b></i><br>Enemies have 1.5x more HP and take 1 extra life when they get through.</li>
+	<li><b><i>CMD Pro</b></i><br>Enemies have 2x more HP, move 2x faster and take 2 extra lives when they get through.</li>
+	<li><b><i>Half Cash</b></i><br>After each wave and for each enemy kill, you recieve half of the cash.</li>
+	<li><b><i>Reverse!</b></i><br>Enemies start at the end of track.</li>
+	<li><b><i>Sandbox</b></i><br>Unlimited money and lives. You can also spawn enemies at will.</li>
   </ul>
   <blockquote>Note that at <i>Hard</i> and <i>CMD Pro</i> gamemodes, you will also recieve 2x more cash.</blockquote>
 </p>
@@ -37,8 +43,10 @@
 <p>
   Please note this <b>project is still in development.</b>
   You can get the latest stable release <a href="https://github.com/norbcodes/cmd-defenders/releases">here</a>.
-  Or you can clone the <b>main</b> branch and compile the code yourself (might, or will be, unstable).
 </p>
+
+<h1>Compile myself?</h1>
+<p><i>I'll release a guide on how to compile the game someday :P</i></p>
 
 <h1>Custom Content</h1>
 <p>
