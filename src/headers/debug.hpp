@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef _NORB_DEBUG_
+#include <iostream>
+#endif // _NORB_DEBUG_
+
 /*
 Debug my stuff please!
 */

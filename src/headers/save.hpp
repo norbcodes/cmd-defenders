@@ -1,7 +1,6 @@
 #pragma once
 
-#define SAVEDIR             "./Users/"
-#define GLOBALJSON          "./global.json"
+#include "headers/resdir.hpp"
 
 #include <fstream>
 #include <string>

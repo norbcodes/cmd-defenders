@@ -41,6 +41,7 @@ void InitializeWorld(std::unique_ptr<WorldClass>& world, const std::string& mapn
         if (std::stoi(mapname) >= 0 && std::stoi(mapname) <= 19)
         {
             MapData = MainMaps[std::stoi(mapname)];
+            DEBUG_PRINT_WAIT(MapData);
         }
     }
     catch (const std::invalid_argument&)
