@@ -55,15 +55,12 @@ and the Fluidsynth team for well... the
 <h2>Map Editor</h2>
 <p>
   Create your own maps, placing down AI nodes and adding decorations and more!
-  Custom maps are stored in <b>{your_game_installation}/Custom_Content/Maps/</b> in json format.
 </p>
 <h2>Tower Editor</h2>
 <p>
   Create your own towers! You can later use these custom towers in-game.
-  Custom towers are stored in <b>{your_game_installation}/Custom_Content/Towers/</b> in json format.
 </p>
 <h2>Enemy Editor</h2>
 <p>
   Create your own enemies and change their stats! These do not spawn in-game, however you can make them spawn by adding them to your custom map!
-  Custom enemies are stored in <b>{your_game_installation}/Custom_Content/Enemies/</b> in json format.
 </p>
