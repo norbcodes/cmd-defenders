@@ -11,7 +11,7 @@
     <li>libnrecycle belongs to this project and to Norb as it was made just specificaly for this project.</li>
     <br>
     <li>Last compiled fluidsynth version: 2.3.3.</li>
-    <li>Last compiled nrecycle at: 1st of September 2023</li>
+    <li>Last compiled nrecycle at: 13/9/2023 (DD/MM/YYYY)</li>
 </ul>
 
 <p><i>Thank your for you patience.</i></p>

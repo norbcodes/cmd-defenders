@@ -1,3 +1,4 @@
+# Folders
 ideas
 ideas/*
 .vscode
@@ -5,10 +6,16 @@ users/
 Resources/
 Resources/*
 Resources/*.*
+build
+build/*
+maps
+maps/*
 
+# Files
 *.exe
 *.json
 *.o
 *.bat
 /*.dll
 *.py
+Makefile

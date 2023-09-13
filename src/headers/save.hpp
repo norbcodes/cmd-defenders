@@ -1,6 +1,6 @@
 #pragma once
 
-#include "headers/resdir.hpp"
+#include "resdir.hpp"
 
 #include <fstream>
 #include <string>
