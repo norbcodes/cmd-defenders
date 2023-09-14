@@ -32,11 +32,29 @@ set(
 
 # Our exe :D
 add_executable(${PROJECT_NAME} ${GAME_SRC})
+
 # Include paths
 target_include_directories(${PROJECT_NAME} PUBLIC ${GAME_HEADERS} ${NRECYCLE_HEADERS})
+
 # Lib paths
 target_link_directories(${PROJECT_NAME} PUBLIC ${GLOBAL_LIB_DIR})
+
 # Link it all together
 target_link_libraries(${PROJECT_NAME} winmm nRecycle fluidsynth-import)
+
+# Define some macros
+if(BUILD_MODE STREQUAL "Release")
+    set(OPTIONS -O2 -static)
+endif()
+
+if(BUILD_MODE STREQUAL "Debug")
+    set(OPTIONS -D_NORB_DEBUG_ -D_NORB_NO_SAVES_ -D_NORB_LOCAL_)
+endif()
+
+if(BUILD_MODE STREQUAL "Debug+")
+    set(OPTIONS -D_NORB_DEBUG_ -D_NORB_NO_SAVES_ -D_NORB_LOCAL_ -g -Og)
+endif()
+
 # Also add our compiler options man
 target_compile_options(${PROJECT_NAME} PUBLIC ${SURPRESS_WARNINGS})
+target_compile_options(${PROJECT_NAME} PUBLIC ${OPTIONS})

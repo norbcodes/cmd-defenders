@@ -392,7 +392,6 @@ int main()
     signal(SIGINT, KILL);
     signal(SIGBREAK, KILL);
 
-    #ifndef _NORB_ENTER_GAME_
     #ifndef _NORB_NO_SAVES_
 
     if (GLOBALDATA->GetUser() == "")
@@ -455,18 +454,4 @@ int main()
         }
     }
     return EXIT_SUCCESS;
-    #endif // _NORB_ENTER_GAME_
-
-    #ifdef _NORB_ENTER_GAME_
-    int selectedMap;
-    int selectedGamemode;
-    MapSelection(selectedMap, selectedGamemode);
-
-    if (selectedMap != -1 && selectedGamemode != -1)
-    {
-        // Enter game!
-        // WOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-        StartGame(std::to_string(selectedMap), selectedGamemode);
-    }
-    #endif // _NORB_ENTER_GAME_
 }
