@@ -44,6 +44,7 @@ static void DetectKeys()
 void StartGame(const std::string& map, int gamemode)
 {
     DefendersUtils::ClearConsole();
+    RestoreCursor();
 
     DEBUG_PRINT(map);
     DEBUG_PRINT(gamemode);
@@ -73,6 +74,11 @@ void StartGame(const std::string& map, int gamemode)
 
     // HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     // calm down Norb
+
+    #ifdef _NORB_DEBUG_
+    Render(*WORLD);
+    DEBUG_PRINT_WAIT("Test render done");
+    #endif // _NORB_DEBUG_
 
     while (GameLoop)
     {

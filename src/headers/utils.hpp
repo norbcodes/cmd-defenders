@@ -1,11 +1,13 @@
 #pragma once
 
+#define GetIndexFromPos(x, y, w) (y * w) + x
+
 namespace DefendersUtils
 {
     bool GetArrowKey(int arrow);
     bool GetEnterKey();
     bool GetNumKey(int which);
-    void SetWindowSize(int width, int height);
+    void SetWindowSize();
     void SetGameTitle();
     void ClearConsole();
     void Sleep(int ms);

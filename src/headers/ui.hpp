@@ -153,3 +153,4 @@ std::string ItalicText();
 std::string Underline();
 void SwitchCursorVisibility(bool b);
 std::string LineSep();
+void MoveCursor(int x, int y);

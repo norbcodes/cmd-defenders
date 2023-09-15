@@ -79,3 +79,8 @@ std::string LineSep()
 {
     return LINESEP;
 }
+
+void MoveCursor(int x, int y)
+{
+    std::cout << "\x1B[" + std::to_string(y) + ";" + std::to_string(x) + "f";
+}

@@ -276,6 +276,7 @@ static void MapSelection(int& param1, int& param2)
 static void MainMenu(int& param1)
 {
     DefendersUtils::ClearConsole();
+    DefendersUtils::SetWindowSize();
     RestoreCursor();
     std::cout << WhiteText(false) << LineSep() << ResetColor();
 

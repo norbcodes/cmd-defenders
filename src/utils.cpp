@@ -53,13 +53,9 @@ namespace DefendersUtils
         }
     }
 
-    void SetWindowSize(int width, int height)
+    void SetWindowSize()
     {
-        HWND Window = GetConsoleWindow();
-        if (Window != NULL)
-        { 
-            SetWindowPos(Window, 0, 0, 0, width, height, SWP_SHOWWINDOW|SWP_NOMOVE); 
-        }
+        std::cout << "\x1B[=19h";
     }
 
     void SetGameTitle()

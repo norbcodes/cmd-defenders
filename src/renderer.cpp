@@ -7,12 +7,18 @@
 #include "headers/node.hpp"
 #include "headers/ui.hpp"
 
+#include "headers/utils.hpp"
+
 #include "headers/debug.hpp"
 
 #define SCREEN_W 97
 #define SCREEN_H 30  // 28 + 2
+#define UiSep       "+-----------------------------------------------------------------+------------------------------+"
+#define UiEmpty     "|                                                                 |                              |"
+#define UiLineSep   "|                                                                 | ---------------------------- |"
 
 static std::string RendererCache;
+static std::string ScreenCache;
 // This is the first image that gets rendered, and it's only the path.
 // Then we draw decorations, towers, enemies over it.
 
@@ -52,9 +58,34 @@ static void InitializeMap()
     CharacterMap[0b10000000] = '+';
 }
 
-static void Blit(std::string& buffer, unsigned int x, unsigned int y, const std::string& txt, const std::string& styles)
+static void Blit(std::string& buffer, unsigned int x, unsigned int y, unsigned int height, unsigned int width, const std::string& txt, const std::string& styles)
 {
     // A handy function that blits text to the screen buffer
+    // or anything really
+    buffer.insert(GetIndexFromPos(x, y, width), styles);
+    unsigned int current_x = 0; unsigned int current_y = 0;
+    unsigned int indx = 0;
+    while (indx != (height * width))
+    {
+        buffer[GetIndexFromPos(current_y + y, current_x + x, width)] = txt[indx];
+        current_x += 1;
+        if (current_x == width) { current_x = 0; current_y += 1; }
+        indx += 1;
+    }
+}
+
+static void GenerateScreenCache()
+{
+    ScreenCache += UiSep + '\n';
+    ScreenCache += UiEmpty + '\n';
+    ScreenCache += UiEmpty + '\n';
+    ScreenCache += UiLineSep + '\n';
+    for (int i = 0; i != 17; i++) { ScreenCache += UiEmpty + '\n'; }
+    ScreenCache += UiLineSep + '\n';
+    for (int i = 0; i != 3; i++) { ScreenCache += UiEmpty + '\n'; }
+    ScreenCache += UiLineSep + '\n';
+    for (int i = 0; i != 3; i++) { ScreenCache += UiEmpty + '\n'; }
+    ScreenCache += UiSep;
 }
 
 void GenerateCache(const WorldClass& world)
@@ -155,6 +186,9 @@ void GenerateCache(const WorldClass& world)
     }
 
     DEBUG_PRINT_WAIT("Done");
+    #ifdef _NORB_DEBUG_
+    DefendersUtils::ClearConsole();
+    #endif // _NORB_DEBUG_
 
     // All done, cache generated, now delete all track markers
     for (int i = 0; i != (MAP_H * MAP_W); i++)
@@ -164,22 +198,15 @@ void GenerateCache(const WorldClass& world)
             RendererCache[i] = ' ';
         }
     }
-
-    #ifdef _NORB_DEBUG_
-    DEBUG_PRINT("Render cache print");
-    for (int i = 0; i != MAP_H * MAP_W; i++)
-    {
-        if (i % MAP_W == 0) { std::cout << std::endl; }
-        std::cout << RendererCache[i];
-    }
-    #endif  // _NORB_DEBUG_
-
     // Cache generated. Can be used by the rendering function now.
+    GenerateScreenCache();
 }
 
 void Render(const WorldClass& world)
 {
     RestoreCursor();
-
-    std::string OUTPUT[SCREEN_H * SCREEN_W];
+    std::string OutputBuff;
+    for (int i = 0; i != SCREEN_W * SCREEN_H; i++) { OutputBuff += ' '; }
+    Blit(OutputBuff, 0, 0, SCREEN_H, SCREEN_W, ScreenCache, BoldText());
+    std::cout << OutputBuff;
 }
