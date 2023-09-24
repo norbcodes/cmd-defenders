@@ -1,4 +1,5 @@
 <h1>CMD Defenders</h1>
+<h1><b><i>This project is currently on hold.</i></b></h1>
 <pre><b>
  _____               _      ______      __               _               
 /  __ \             | |     |  _  \    / _|             | |              
